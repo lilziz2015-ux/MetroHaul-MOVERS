@@ -83,3 +83,29 @@ input, textarea, select{width:100%; padding:0.6rem; border-radius:8px; border:1p
   border-radius: 8px;
   object-fit: cover;
 }
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none; /* hide desktop menu */
+  }
+  .header-cta {
+    flex-direction: column;
+  }
+  .image-column img {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .services-grid {
+    display: block; /* stack services */
+  }
+  .services-grid .service-card {
+    margin-bottom: 1.5rem;
+  }
+  .gallery-grid {
+    display: block;
+  }
+  .gallery-grid img {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
