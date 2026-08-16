@@ -18,6 +18,10 @@
     form.querySelector('button[type="submit"]');
 
 
+  /* =========================================
+     HELPERS
+  ========================================= */
+
   function clean(value) {
     if (typeof value !== "string") {
       return value;
@@ -37,7 +41,8 @@
 
 
   function toInteger(value) {
-    const parsed = Number.parseInt(value, 10);
+    const parsed =
+      Number.parseInt(value, 10);
 
     return Number.isFinite(parsed)
       ? parsed
@@ -58,12 +63,12 @@
 
 
   function showSuccess() {
-    if (!successNotice) {
-      return;
-    }
-
     if (errorNotice) {
       errorNotice.style.display = "none";
+    }
+
+    if (!successNotice) {
+      return;
     }
 
     successNotice.style.display = "block";
@@ -101,25 +106,29 @@
       return;
     }
 
-    submitButton.disabled = isSubmitting;
+    submitButton.disabled =
+      isSubmitting;
 
-    submitButton.textContent = isSubmitting
-      ? "Submitting..."
-      : "Request My Free Quote";
+    submitButton.textContent =
+      isSubmitting
+        ? "Submitting..."
+        : "Request My Free Quote";
   }
 
 
+  /* =========================================
+     SUBMIT FORM
+  ========================================= */
+
   form.addEventListener(
     "submit",
-    async (event) => {
+    async function (event) {
       event.preventDefault();
 
       hideNotices();
 
 
-      /*
-        Use the browser's built-in validation first.
-      */
+      /* Browser validation */
 
       if (!form.checkValidity()) {
         form.reportValidity();
@@ -131,16 +140,11 @@
         new FormData(form);
 
 
-      /*
-        IMPORTANT:
+      /* =====================================
+         BUILD DATABASE PAYLOAD
 
-        These field names match the Metro Haul
-        Supabase public.leads table.
-
-        lead_source MUST remain "website" for
-        anonymous website submissions because
-        the current RLS policy requires it.
-      */
+         These names match public.leads.
+      ===================================== */
 
       const lead = {
         first_name:
@@ -153,14 +157,14 @@
             formData.get("last_name")
           ),
 
-        phone:
-          clean(
-            formData.get("phone")
-          ),
-
         email:
           clean(
             formData.get("email")
+          ),
+
+        phone:
+          clean(
+            formData.get("phone")
           ),
 
         service_type:
@@ -175,42 +179,58 @@
 
         pickup_address:
           clean(
-            formData.get("pickup_address")
+            formData.get(
+              "pickup_address"
+            )
           ),
 
         pickup_city:
           clean(
-            formData.get("pickup_city")
+            formData.get(
+              "pickup_city"
+            )
           ),
 
         pickup_state:
           clean(
-            formData.get("pickup_state")
+            formData.get(
+              "pickup_state"
+            )
           ),
 
         pickup_zip:
           clean(
-            formData.get("pickup_zip")
+            formData.get(
+              "pickup_zip"
+            )
           ),
 
         destination_address:
           clean(
-            formData.get("destination_address")
+            formData.get(
+              "destination_address"
+            )
           ),
 
         destination_city:
           clean(
-            formData.get("destination_city")
+            formData.get(
+              "destination_city"
+            )
           ),
 
         destination_state:
           clean(
-            formData.get("destination_state")
+            formData.get(
+              "destination_state"
+            )
           ),
 
         destination_zip:
           clean(
-            formData.get("destination_zip")
+            formData.get(
+              "destination_zip"
+            )
           ),
 
         home_size:
@@ -220,32 +240,44 @@
 
         pickup_stairs:
           toInteger(
-            formData.get("pickup_stairs")
+            formData.get(
+              "pickup_stairs"
+            )
           ),
 
         destination_stairs:
           toInteger(
-            formData.get("destination_stairs")
+            formData.get(
+              "destination_stairs"
+            )
           ),
 
         pickup_elevator:
           toBoolean(
-            formData.get("pickup_elevator")
+            formData.get(
+              "pickup_elevator"
+            )
           ),
 
         destination_elevator:
           toBoolean(
-            formData.get("destination_elevator")
+            formData.get(
+              "destination_elevator"
+            )
           ),
 
         packing_needed:
           toBoolean(
-            formData.get("packing_needed")
+            formData.get(
+              "packing_needed"
+            )
           ),
 
         specialty_items:
           clean(
-            formData.get("specialty_items")
+            formData.get(
+              "specialty_items"
+            )
           ),
 
         notes:
@@ -253,20 +285,31 @@
             formData.get("notes")
           ),
 
-        lead_source: "website"
+        /*
+          Required by the public RLS policy.
+          Do not replace this with Google Search,
+          Facebook, Referral, etc.
+        */
+        lead_source: "website",
+
+        /*
+          Required by the current RLS rule.
+        */
+        status: "new",
+
+        assigned_to: null
       };
 
 
-      /*
-        Validate required database values before
-        sending the request.
-      */
+      /* =====================================
+         REQUIRED FIELD CHECK
+      ===================================== */
 
       if (
         !lead.first_name ||
         !lead.last_name ||
-        !lead.phone ||
         !lead.email ||
+        !lead.phone ||
         !lead.service_type
       ) {
         showError(
@@ -277,18 +320,37 @@
       }
 
 
+      /* =====================================
+         SUPABASE CONFIG
+      ===================================== */
+
       const config =
-        window.METRO_HAUL_SUPABASE || {};
+        window.METRO_HAUL_SUPABASE;
 
 
       if (
+        !config ||
         !config.url ||
-        !config.publishableKey ||
-        config.url.includes("YOUR_PROJECT") ||
-        config.publishableKey.includes("REPLACE_ME")
+        !config.publishableKey
       ) {
         showError(
-          "The quote system is not configured correctly yet. Please call Metro Haul at 571-719-9575."
+          "The quote system is not configured correctly. Please call Metro Haul at 571-719-9575."
+        );
+
+        return;
+      }
+
+
+      if (
+        config.url.includes(
+          "YOUR_PROJECT"
+        ) ||
+        config.publishableKey.includes(
+          "REPLACE_ME"
+        )
+      ) {
+        showError(
+          "The quote system is not configured correctly. Please call Metro Haul at 571-719-9575."
         );
 
         return;
@@ -299,6 +361,16 @@
 
 
       try {
+
+        /* ===================================
+           SEND TO SUPABASE
+
+           IMPORTANT:
+           sb_publishable keys use apikey.
+           Do NOT send the publishable key
+           as Authorization: Bearer.
+        =================================== */
+
         const response =
           await fetch(
             `${config.url}/rest/v1/leads`,
@@ -308,9 +380,6 @@
               headers: {
                 "apikey":
                   config.publishableKey,
-
-                "Authorization":
-                  `Bearer ${config.publishableKey}`,
 
                 "Content-Type":
                   "application/json",
@@ -325,32 +394,54 @@
           );
 
 
+        /* ===================================
+           HANDLE DATABASE ERROR
+        =================================== */
+
         if (!response.ok) {
-          let errorDetails = "";
+          let errorBody = "";
 
           try {
-            errorDetails =
+            errorBody =
               await response.text();
           } catch {
-            errorDetails = "";
+            errorBody =
+              "No error response returned.";
           }
 
+
           console.error(
-            "Metro Haul Supabase submission failed:",
-            response.status,
-            response.statusText,
-            errorDetails
+            "Metro Haul Supabase error:",
+            {
+              status:
+                response.status,
+
+              statusText:
+                response.statusText,
+
+              response:
+                errorBody,
+
+              payload:
+                lead
+            }
           );
 
+
           throw new Error(
-            `Supabase returned status ${response.status}.`
+            `Quote submission failed with status ${response.status}.`
           );
         }
 
 
-        /*
-          Quote successfully saved.
-        */
+        /* ===================================
+           SUCCESS
+        =================================== */
+
+        console.log(
+          "Metro Haul quote submitted successfully."
+        );
+
 
         form.reset();
 
@@ -358,10 +449,12 @@
 
 
       } catch (error) {
+
         console.error(
           "Metro Haul quote submission error:",
           error
         );
+
 
         showError(
           "We couldn't submit your quote. Please try again or call Metro Haul at 571-719-9575."
@@ -369,8 +462,11 @@
 
 
       } finally {
+
         setSubmitting(false);
+
       }
     }
   );
+
 })();
