@@ -164,9 +164,7 @@
 
       notes:
         clean(f.get("notes")),
-
-      lead_source:
-        clean(f.get("lead_source"))
+lead_source: "website"
     };
 
 
