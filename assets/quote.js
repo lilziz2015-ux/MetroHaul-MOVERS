@@ -3,45 +3,81 @@
 (function () {
   const form = document.getElementById("quoteForm");
 
-  if (!form) return;
+  if (!form) {
+    return;
+  }
 
-  const success =
+  const successNotice =
     document.getElementById("successNotice");
 
   const errorNotice =
     document.getElementById("errorNotice");
 
-  const btn =
+  const submitButton =
     document.getElementById("quoteSubmitButton") ||
     form.querySelector('button[type="submit"]');
 
 
   function clean(value) {
-    if (typeof value !== "string") return value;
+    if (typeof value !== "string") {
+      return value;
+    }
 
     const trimmed = value.trim();
 
-    return trimmed === "" ? null : trimmed;
+    return trimmed === ""
+      ? null
+      : trimmed;
   }
 
 
-  function booleanValue(value) {
+  function toBoolean(value) {
     return value === "true";
   }
 
 
-  function integerValue(value) {
-    const number = parseInt(value, 10);
+  function toInteger(value) {
+    const parsed = Number.parseInt(value, 10);
 
-    return Number.isFinite(number)
-      ? number
+    return Number.isFinite(parsed)
+      ? parsed
       : 0;
   }
 
 
+  function hideNotices() {
+    if (successNotice) {
+      successNotice.style.display = "none";
+    }
+
+    if (errorNotice) {
+      errorNotice.style.display = "none";
+      errorNotice.textContent = "";
+    }
+  }
+
+
+  function showSuccess() {
+    if (!successNotice) {
+      return;
+    }
+
+    if (errorNotice) {
+      errorNotice.style.display = "none";
+    }
+
+    successNotice.style.display = "block";
+
+    successNotice.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+
+
   function showError(message) {
-    if (success) {
-      success.style.display = "none";
+    if (successNotice) {
+      successNotice.style.display = "none";
     }
 
     if (errorNotice) {
@@ -60,200 +96,281 @@
   }
 
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-
-    /* Browser validation */
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
+  function setSubmitting(isSubmitting) {
+    if (!submitButton) {
       return;
     }
 
+    submitButton.disabled = isSubmitting;
 
-    if (success) {
-      success.style.display = "none";
-    }
-
-    if (errorNotice) {
-      errorNotice.style.display = "none";
-    }
+    submitButton.textContent = isSubmitting
+      ? "Submitting..."
+      : "Request My Free Quote";
+  }
 
 
-    btn.disabled = true;
-    btn.textContent = "Submitting…";
+  form.addEventListener(
+    "submit",
+    async (event) => {
+      event.preventDefault();
+
+      hideNotices();
 
 
-    const f = new FormData(form);
+      /*
+        Use the browser's built-in validation first.
+      */
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
 
-    /*
-      IMPORTANT:
-      These names match the Metro Haul
-      Supabase leads table.
-    */
-
-    const lead = {
-      first_name:
-        clean(f.get("first_name")),
-
-      last_name:
-        clean(f.get("last_name")),
-
-      phone:
-        clean(f.get("phone")),
-
-      email:
-        clean(f.get("email")),
-
-      pickup_address:
-        clean(f.get("pickup_address")),
-
-      pickup_city:
-        clean(f.get("pickup_city")),
-
-      pickup_state:
-        clean(f.get("pickup_state")),
-
-      destination_address:
-        clean(f.get("destination_address")),
-
-      destination_city:
-        clean(f.get("destination_city")),
-
-      destination_state:
-        clean(f.get("destination_state")),
-
-      move_date:
-        clean(f.get("move_date")),
-
-      service_type:
-        clean(f.get("service_type")),
-
-      home_size:
-        clean(f.get("home_size")),
-
-      packing_needed:
-        booleanValue(
-          f.get("packing_needed")
-        ),
-
-      pickup_stairs:
-        integerValue(
-          f.get("pickup_stairs")
-        ),
-
-      pickup_elevator:
-        booleanValue(
-          f.get("pickup_elevator")
-        ),
-
-      destination_stairs:
-        integerValue(
-          f.get("destination_stairs")
-        ),
-
-      destination_elevator:
-        booleanValue(
-          f.get("destination_elevator")
-        ),
-
-      specialty_items:
-        clean(f.get("specialty_items")),
-
-      notes:
-        clean(f.get("notes")),
-lead_source: "website"
-    };
+      const formData =
+        new FormData(form);
 
 
-    try {
-      const cfg =
+      /*
+        IMPORTANT:
+
+        These field names match the Metro Haul
+        Supabase public.leads table.
+
+        lead_source MUST remain "website" for
+        anonymous website submissions because
+        the current RLS policy requires it.
+      */
+
+      const lead = {
+        first_name:
+          clean(
+            formData.get("first_name")
+          ),
+
+        last_name:
+          clean(
+            formData.get("last_name")
+          ),
+
+        phone:
+          clean(
+            formData.get("phone")
+          ),
+
+        email:
+          clean(
+            formData.get("email")
+          ),
+
+        service_type:
+          clean(
+            formData.get("service_type")
+          ),
+
+        move_date:
+          clean(
+            formData.get("move_date")
+          ),
+
+        pickup_address:
+          clean(
+            formData.get("pickup_address")
+          ),
+
+        pickup_city:
+          clean(
+            formData.get("pickup_city")
+          ),
+
+        pickup_state:
+          clean(
+            formData.get("pickup_state")
+          ),
+
+        pickup_zip:
+          clean(
+            formData.get("pickup_zip")
+          ),
+
+        destination_address:
+          clean(
+            formData.get("destination_address")
+          ),
+
+        destination_city:
+          clean(
+            formData.get("destination_city")
+          ),
+
+        destination_state:
+          clean(
+            formData.get("destination_state")
+          ),
+
+        destination_zip:
+          clean(
+            formData.get("destination_zip")
+          ),
+
+        home_size:
+          clean(
+            formData.get("home_size")
+          ),
+
+        pickup_stairs:
+          toInteger(
+            formData.get("pickup_stairs")
+          ),
+
+        destination_stairs:
+          toInteger(
+            formData.get("destination_stairs")
+          ),
+
+        pickup_elevator:
+          toBoolean(
+            formData.get("pickup_elevator")
+          ),
+
+        destination_elevator:
+          toBoolean(
+            formData.get("destination_elevator")
+          ),
+
+        packing_needed:
+          toBoolean(
+            formData.get("packing_needed")
+          ),
+
+        specialty_items:
+          clean(
+            formData.get("specialty_items")
+          ),
+
+        notes:
+          clean(
+            formData.get("notes")
+          ),
+
+        lead_source: "website"
+      };
+
+
+      /*
+        Validate required database values before
+        sending the request.
+      */
+
+      if (
+        !lead.first_name ||
+        !lead.last_name ||
+        !lead.phone ||
+        !lead.email ||
+        !lead.service_type
+      ) {
+        showError(
+          "Please complete all required fields before submitting your quote."
+        );
+
+        return;
+      }
+
+
+      const config =
         window.METRO_HAUL_SUPABASE || {};
 
 
       if (
-        !cfg.url ||
-        !cfg.publishableKey ||
-        cfg.url.includes("YOUR_PROJECT") ||
-        cfg.publishableKey.includes("REPLACE_ME")
+        !config.url ||
+        !config.publishableKey ||
+        config.url.includes("YOUR_PROJECT") ||
+        config.publishableKey.includes("REPLACE_ME")
       ) {
-        throw new Error(
-          "Supabase configuration is missing."
+        showError(
+          "The quote system is not configured correctly yet. Please call Metro Haul at 571-719-9575."
         );
+
+        return;
       }
 
 
-      const res = await fetch(
-        `${cfg.url}/rest/v1/leads`,
-        {
-          method: "POST",
+      setSubmitting(true);
 
-          headers: {
-            apikey:
-              cfg.publishableKey,
 
-            Authorization:
-              `Bearer ${cfg.publishableKey}`,
+      try {
+        const response =
+          await fetch(
+            `${config.url}/rest/v1/leads`,
+            {
+              method: "POST",
 
-            "Content-Type":
-              "application/json",
+              headers: {
+                "apikey":
+                  config.publishableKey,
 
-            Prefer:
-              "return=minimal"
-          },
+                "Authorization":
+                  `Bearer ${config.publishableKey}`,
 
-          body:
-            JSON.stringify(lead)
+                "Content-Type":
+                  "application/json",
+
+                "Prefer":
+                  "return=minimal"
+              },
+
+              body:
+                JSON.stringify(lead)
+            }
+          );
+
+
+        if (!response.ok) {
+          let errorDetails = "";
+
+          try {
+            errorDetails =
+              await response.text();
+          } catch {
+            errorDetails = "";
+          }
+
+          console.error(
+            "Metro Haul Supabase submission failed:",
+            response.status,
+            response.statusText,
+            errorDetails
+          );
+
+          throw new Error(
+            `Supabase returned status ${response.status}.`
+          );
         }
-      );
 
 
-      if (!res.ok) {
-        const responseText =
-          await res.text();
+        /*
+          Quote successfully saved.
+        */
 
+        form.reset();
+
+        showSuccess();
+
+
+      } catch (error) {
         console.error(
-          "Supabase response:",
-          responseText
+          "Metro Haul quote submission error:",
+          error
         );
 
-        throw new Error(
-          "We couldn't submit your request."
+        showError(
+          "We couldn't submit your quote. Please try again or call Metro Haul at 571-719-9575."
         );
+
+
+      } finally {
+        setSubmitting(false);
       }
-
-
-      /* Success */
-
-      form.reset();
-
-      if (success) {
-        success.style.display = "block";
-
-        success.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }
-
-
-    } catch (err) {
-      console.error(
-        "Metro Haul quote error:",
-        err
-      );
-
-      showError(
-        "We couldn't submit your quote. Please try again or call Metro Haul at 571-719-9575."
-      );
-
-    } finally {
-      btn.disabled = false;
-
-      btn.textContent =
-        "Request My Free Quote";
     }
-  });
+  );
 })();
