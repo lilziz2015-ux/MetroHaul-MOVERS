@@ -1,0 +1,2122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Jobs | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a href="leads.html">
+          Leads
+        </a>
+
+        <a href="customers.html">
+          Customers
+        </a>
+
+        <a href="estimates.html">
+          Estimates
+        </a>
+
+        <a
+          href="jobs.html"
+          class="active"
+          aria-current="page"
+        >
+          Jobs
+        </a>
+
+        <a href="calendar.html">
+          Calendar
+        </a>
+
+        <a href="payments.html">
+          Payments
+        </a>
+
+        <a href="crew.html">
+          Crew
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            OPERATIONS
+          </div>
+
+          <h1>
+            Jobs
+          </h1>
+
+          <p>
+            Manage scheduled moves, pricing, customers,
+            payments, crew assignments and job status.
+          </p>
+
+        </div>
+
+
+        <button
+          id="newJobButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          + New Job
+        </button>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           STATISTICS
+      ==================================================== -->
+
+      <section
+        class="admin-stat-grid"
+        aria-label="Job statistics"
+      >
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            All Jobs
+          </span>
+
+          <strong id="allJobsCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Scheduled
+          </span>
+
+          <strong id="scheduledJobsCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            In Progress
+          </span>
+
+          <strong id="activeJobsCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Completed
+          </span>
+
+          <strong id="completedJobsCount">
+            0
+          </strong>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           FILTERS
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-toolbar">
+
+
+          <input
+            id="jobSearch"
+            class="admin-input"
+            type="search"
+            placeholder="Search job number, customer, city, service..."
+            autocomplete="off"
+          >
+
+
+          <select
+            id="jobStatusFilter"
+            class="admin-input"
+            aria-label="Filter jobs by status"
+          >
+
+            <option value="">
+              All statuses
+            </option>
+
+            <option value="DRAFT">
+              Draft
+            </option>
+
+            <option value="ESTIMATE">
+              Estimate
+            </option>
+
+            <option value="SCHEDULED">
+              Scheduled
+            </option>
+
+            <option value="CONFIRMED">
+              Confirmed
+            </option>
+
+            <option value="IN_PROGRESS">
+              In Progress
+            </option>
+
+            <option value="COMPLETED">
+              Completed
+            </option>
+
+            <option value="CANCELLED">
+              Cancelled
+            </option>
+
+          </select>
+
+
+          <select
+            id="paymentStatusFilter"
+            class="admin-input"
+            aria-label="Filter jobs by payment status"
+          >
+
+            <option value="">
+              All payments
+            </option>
+
+            <option value="UNPAID">
+              Unpaid
+            </option>
+
+            <option value="PARTIAL">
+              Partial
+            </option>
+
+            <option value="PAID">
+              Paid
+            </option>
+
+            <option value="REFUNDED">
+              Refunded
+            </option>
+
+          </select>
+
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           JOB TABLE
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-panel-header">
+
+          <div>
+
+            <h2>
+              Moving Jobs
+            </h2>
+
+            <p id="jobResultCount">
+              Loading jobs...
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+
+          <table class="admin-table">
+
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Job
+                </th>
+
+                <th>
+                  Customer
+                </th>
+
+                <th>
+                  Date
+                </th>
+
+                <th>
+                  Service
+                </th>
+
+                <th>
+                  Route
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Total
+                </th>
+
+                <th>
+                  Balance
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="jobsTableBody">
+
+              <tr>
+
+                <td colspan="9">
+                  Loading jobs...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+
+          </table>
+
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       CREATE / EDIT JOB MODAL
+  ====================================================== -->
+
+  <div
+    id="jobModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="jobModalBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-job-modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="jobModalTitle"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            METRO HAUL
+          </div>
+
+          <h2 id="jobModalTitle">
+            Create Job
+          </h2>
+
+          <p id="jobNumberDisplay">
+            Job number will be generated automatically.
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeJobModal"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close job form"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <form id="jobForm">
+
+
+        <input
+          id="jobId"
+          type="hidden"
+        >
+
+
+        <div
+          id="jobFormError"
+          class="admin-error"
+          hidden
+        ></div>
+
+
+        <!-- =================================================
+             CUSTOMER
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Customer
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="customer_id">
+                Customer *
+              </label>
+
+              <select
+                id="customer_id"
+                name="customer_id"
+                required
+              >
+
+                <option value="">
+                  Select customer
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="lead_id">
+                Original Lead
+              </label>
+
+              <select
+                id="lead_id"
+                name="lead_id"
+              >
+
+                <option value="">
+                  No linked lead
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             JOB INFORMATION
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Job Information
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="service_type">
+                Service *
+              </label>
+
+              <select
+                id="service_type"
+                name="service_type"
+                required
+              >
+
+                <option value="">
+                  Select service
+                </option>
+
+                <option value="residential">
+                  Residential Moving
+                </option>
+
+                <option value="apartment">
+                  Apartment Moving
+                </option>
+
+                <option value="office">
+                  Office Moving
+                </option>
+
+                <option value="loading_unloading">
+                  Loading / Unloading
+                </option>
+
+                <option value="furniture_delivery">
+                  Furniture Delivery
+                </option>
+
+                <option value="junk_removal">
+                  Junk Removal
+                </option>
+
+                <option value="other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="job_status">
+                Status
+              </label>
+
+              <select
+                id="job_status"
+                name="job_status"
+              >
+
+                <option value="DRAFT">
+                  Draft
+                </option>
+
+                <option value="ESTIMATE">
+                  Estimate
+                </option>
+
+                <option
+                  value="SCHEDULED"
+                  selected
+                >
+                  Scheduled
+                </option>
+
+                <option value="CONFIRMED">
+                  Confirmed
+                </option>
+
+                <option value="IN_PROGRESS">
+                  In Progress
+                </option>
+
+                <option value="COMPLETED">
+                  Completed
+                </option>
+
+                <option value="CANCELLED">
+                  Cancelled
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="move_date">
+                Move Date *
+              </label>
+
+              <input
+                id="move_date"
+                name="move_date"
+                type="date"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="arrival_time">
+                Arrival Time
+              </label>
+
+              <input
+                id="arrival_time"
+                name="arrival_time"
+                type="time"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="estimated_hours">
+                Estimated Hours
+              </label>
+
+              <input
+                id="estimated_hours"
+                name="estimated_hours"
+                type="number"
+                min="0"
+                step="0.25"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="crew_size">
+                Crew Size
+              </label>
+
+              <input
+                id="crew_size"
+                name="crew_size"
+                type="number"
+                min="1"
+                step="1"
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PICKUP
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Pickup
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="pickup_address">
+                Pickup Address *
+              </label>
+
+              <input
+                id="pickup_address"
+                name="pickup_address"
+                type="text"
+                autocomplete="street-address"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="pickup_city">
+                City
+              </label>
+
+              <input
+                id="pickup_city"
+                name="pickup_city"
+                type="text"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="pickup_state">
+                State
+              </label>
+
+              <input
+                id="pickup_state"
+                name="pickup_state"
+                type="text"
+                maxlength="2"
+                placeholder="VA"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="pickup_zip">
+                ZIP
+              </label>
+
+              <input
+                id="pickup_zip"
+                name="pickup_zip"
+                type="text"
+                inputmode="numeric"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="pickup_stairs">
+                Flights of Stairs
+              </label>
+
+              <input
+                id="pickup_stairs"
+                name="pickup_stairs"
+                type="number"
+                min="0"
+                step="1"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="pickup_elevator">
+                Elevator
+              </label>
+
+              <select
+                id="pickup_elevator"
+                name="pickup_elevator"
+              >
+
+                <option value="false">
+                  No
+                </option>
+
+                <option value="true">
+                  Yes
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             DESTINATION
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Destination
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="destination_address">
+                Destination Address *
+              </label>
+
+              <input
+                id="destination_address"
+                name="destination_address"
+                type="text"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="destination_city">
+                City
+              </label>
+
+              <input
+                id="destination_city"
+                name="destination_city"
+                type="text"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="destination_state">
+                State
+              </label>
+
+              <input
+                id="destination_state"
+                name="destination_state"
+                type="text"
+                maxlength="2"
+                placeholder="VA"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="destination_zip">
+                ZIP
+              </label>
+
+              <input
+                id="destination_zip"
+                name="destination_zip"
+                type="text"
+                inputmode="numeric"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="destination_stairs">
+                Flights of Stairs
+              </label>
+
+              <input
+                id="destination_stairs"
+                name="destination_stairs"
+                type="number"
+                min="0"
+                step="1"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="destination_elevator">
+                Elevator
+              </label>
+
+              <select
+                id="destination_elevator"
+                name="destination_elevator"
+              >
+
+                <option value="false">
+                  No
+                </option>
+
+                <option value="true">
+                  Yes
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             MOVE DETAILS
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Move Details
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="home_size">
+                Home Size
+              </label>
+
+              <select
+                id="home_size"
+                name="home_size"
+              >
+
+                <option value="">
+                  Select
+                </option>
+
+                <option value="studio">
+                  Studio
+                </option>
+
+                <option value="1-bedroom">
+                  1 Bedroom
+                </option>
+
+                <option value="2-bedroom">
+                  2 Bedrooms
+                </option>
+
+                <option value="3-bedroom">
+                  3 Bedrooms
+                </option>
+
+                <option value="4-plus-bedroom">
+                  4+ Bedrooms
+                </option>
+
+                <option value="office-commercial">
+                  Office / Commercial
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="packing_needed">
+                Packing Needed
+              </label>
+
+              <select
+                id="packing_needed"
+                name="packing_needed"
+              >
+
+                <option value="false">
+                  No
+                </option>
+
+                <option value="true">
+                  Yes
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="truck_required">
+                Truck Required
+              </label>
+
+              <select
+                id="truck_required"
+                name="truck_required"
+              >
+
+                <option value="true">
+                  Yes
+                </option>
+
+                <option value="false">
+                  No
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="specialty_items">
+                Specialty Items
+              </label>
+
+              <input
+                id="specialty_items"
+                name="specialty_items"
+                type="text"
+                placeholder="Piano, safe, appliances, oversized furniture..."
+              >
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="inventory_notes">
+                Inventory Notes
+              </label>
+
+              <textarea
+                id="inventory_notes"
+                name="inventory_notes"
+                rows="4"
+                placeholder="Furniture, boxes, appliances, special handling..."
+              ></textarea>
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="truck_notes">
+                Truck Notes
+              </label>
+
+              <textarea
+                id="truck_notes"
+                name="truck_notes"
+                rows="3"
+                placeholder="Truck size, trailer, parking or loading requirements..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PRICING
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Pricing
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="pricing_type">
+                Pricing Type
+              </label>
+
+              <select
+                id="pricing_type"
+                name="pricing_type"
+              >
+
+                <option value="HOURLY">
+                  Hourly
+                </option>
+
+                <option value="FLAT_RATE">
+                  Flat Rate
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="hourly_rate">
+                Hourly / Base Rate
+              </label>
+
+              <input
+                id="hourly_rate"
+                name="hourly_rate"
+                type="number"
+                min="0"
+                step="0.01"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="labor_hours">
+                Labor Hours
+              </label>
+
+              <input
+                id="labor_hours"
+                name="labor_hours"
+                type="number"
+                min="0"
+                step="0.25"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="labor_amount_preview">
+                Labor Amount
+              </label>
+
+              <input
+                id="labor_amount_preview"
+                type="text"
+                value="$0.00"
+                readonly
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="travel_fee">
+                Travel Fee
+              </label>
+
+              <input
+                id="travel_fee"
+                name="travel_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="truck_fee">
+                Truck Fee
+              </label>
+
+              <input
+                id="truck_fee"
+                name="truck_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="packing_fee">
+                Packing Fee
+              </label>
+
+              <input
+                id="packing_fee"
+                name="packing_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="specialty_fee">
+                Specialty Fee
+              </label>
+
+              <input
+                id="specialty_fee"
+                name="specialty_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="disposal_fee">
+                Disposal Fee
+              </label>
+
+              <input
+                id="disposal_fee"
+                name="disposal_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="other_fee">
+                Other Fee
+              </label>
+
+              <input
+                id="other_fee"
+                name="other_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="discount">
+                Discount
+              </label>
+
+              <input
+                id="discount"
+                name="discount"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="tax_amount">
+                Tax Amount
+              </label>
+
+              <input
+                id="tax_amount"
+                name="tax_amount"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="deposit_amount">
+                Deposit Required
+              </label>
+
+              <input
+                id="deposit_amount"
+                name="deposit_amount"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+          </div>
+
+
+          <div class="job-price-summary">
+
+
+            <div>
+
+              <span>
+                Labor
+              </span>
+
+              <strong id="laborPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Fees
+              </span>
+
+              <strong id="feesPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Discount
+              </span>
+
+              <strong id="discountPreview">
+                -$0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Subtotal
+              </span>
+
+              <strong id="subtotalPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Tax
+              </span>
+
+              <strong id="taxPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div class="job-price-total">
+
+              <span>
+                Estimated Total
+              </span>
+
+              <strong id="totalPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PAYMENT SUMMARY
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Payment Summary
+          </h3>
+
+          <p class="admin-form-section-note">
+            Payment totals are calculated from payment records.
+            Record new payments from the Payments page.
+          </p>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="amount_paid">
+                Amount Paid
+              </label>
+
+              <input
+                id="amount_paid"
+                name="amount_paid"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+                readonly
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="payment_status">
+                Payment Status
+              </label>
+
+              <select
+                id="payment_status"
+                name="payment_status"
+                disabled
+              >
+
+                <option value="UNPAID">
+                  Unpaid
+                </option>
+
+                <option value="PARTIAL">
+                  Partial
+                </option>
+
+                <option value="PAID">
+                  Paid
+                </option>
+
+                <option value="REFUNDED">
+                  Refunded
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="job-price-summary">
+
+
+            <div>
+
+              <span>
+                Total
+              </span>
+
+              <strong id="paymentTotalPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Paid
+              </span>
+
+              <strong id="paidPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div class="job-price-total">
+
+              <span>
+                Balance Due
+              </span>
+
+              <strong id="balancePreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             NOTES
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Notes
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="customer_notes">
+                Customer Notes
+              </label>
+
+              <textarea
+                id="customer_notes"
+                name="customer_notes"
+                rows="4"
+                placeholder="Notes that may be shared with the customer..."
+              ></textarea>
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="internal_notes">
+                Internal Notes
+              </label>
+
+              <textarea
+                id="internal_notes"
+                name="internal_notes"
+                rows="5"
+                placeholder="Private notes for Metro Haul staff..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FORM ACTIONS
+        ================================================== -->
+
+        <footer class="admin-form-actions">
+
+
+          <button
+            id="cancelJobButton"
+            type="button"
+            class="admin-secondary-button"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            id="saveJobButton"
+            type="submit"
+            class="admin-primary-button"
+          >
+            Save Job
+          </button>
+
+
+        </footer>
+
+
+      </form>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       VIEW JOB MODAL
+  ====================================================== -->
+
+  <div
+    id="viewJobModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="viewJobBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-job-view-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="viewJobNumber"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            JOB DETAILS
+          </div>
+
+          <h2 id="viewJobNumber">
+            Job
+          </h2>
+
+          <p id="viewJobCustomer">
+            Customer
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeViewJob"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close job"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <div
+        id="viewJobContent"
+        class="admin-view-content"
+      ></div>
+
+
+      <!-- ===================================================
+           ASSIGNED CREW
+      ==================================================== -->
+
+      <section class="admin-job-crew-section">
+
+
+        <div class="admin-job-crew-header">
+
+
+          <div>
+
+            <div class="admin-eyebrow">
+              ASSIGNED CREW
+            </div>
+
+            <h3>
+              Job Crew
+            </h3>
+
+          </div>
+
+
+          <button
+            id="assignCrewButton"
+            type="button"
+            class="admin-secondary-button"
+          >
+            + Assign Crew
+          </button>
+
+
+        </div>
+
+
+        <div
+          id="jobCrewList"
+          class="admin-job-crew-list"
+        >
+
+          <div class="admin-loading">
+            Loading crew...
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           JOB ACTIONS
+      ==================================================== -->
+
+      <footer class="admin-form-actions admin-job-action-bar">
+
+
+        <button
+          id="editJobButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Edit Job
+        </button>
+
+
+        <button
+          id="confirmJobButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Confirm
+        </button>
+
+
+        <button
+          id="startJobButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Start Job
+        </button>
+
+
+        <button
+          id="completeJobButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          Complete Job
+        </button>
+
+
+      </footer>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       ASSIGN CREW MODAL
+  ====================================================== -->
+
+  <div
+    id="assignCrewModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="assignCrewBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-assign-crew-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="assignCrewTitle"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            JOB CREW
+          </div>
+
+          <h2 id="assignCrewTitle">
+            Assign Crew
+          </h2>
+
+          <p id="assignCrewJobLabel">
+            Moving job
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeAssignCrew"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close crew assignment form"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <form id="assignCrewForm">
+
+
+        <div
+          id="assignCrewError"
+          class="admin-error"
+          hidden
+        ></div>
+
+
+        <section class="admin-form-section">
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="assignmentCrewMember">
+                Crew Member *
+              </label>
+
+              <select
+                id="assignmentCrewMember"
+                required
+              >
+
+                <option value="">
+                  Select crew member
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="assignmentRole">
+                Assignment Role *
+              </label>
+
+              <select
+                id="assignmentRole"
+                required
+              >
+
+                <option value="mover">
+                  Mover
+                </option>
+
+                <option value="driver">
+                  Driver
+                </option>
+
+                <option value="crew_lead">
+                  Crew Lead
+                </option>
+
+                <option value="dispatcher">
+                  Dispatcher
+                </option>
+
+                <option value="manager">
+                  Manager
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="assignmentStart">
+                Scheduled Start
+              </label>
+
+              <input
+                id="assignmentStart"
+                type="datetime-local"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="assignmentEnd">
+                Scheduled End
+              </label>
+
+              <input
+                id="assignmentEnd"
+                type="datetime-local"
+              >
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="assignmentNotes">
+                Assignment Notes
+              </label>
+
+              <textarea
+                id="assignmentNotes"
+                rows="4"
+                placeholder="Driver truck assignment, arrival instructions, responsibilities..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <footer class="admin-form-actions">
+
+
+          <button
+            id="cancelAssignCrew"
+            type="button"
+            class="admin-secondary-button"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            id="saveCrewAssignment"
+            type="submit"
+            class="admin-primary-button"
+          >
+            Assign Crew Member
+          </button>
+
+
+        </footer>
+
+
+      </form>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/admin-auth.js"></script>
+  <script src="../assets/admin-defaults.js"></script>
+  <script src="../assets/admin-jobs.js"></script>
+
+
+</body>
+
+</html>

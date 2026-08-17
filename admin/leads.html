@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Leads | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a
+          href="leads.html"
+          class="active"
+          aria-current="page"
+        >
+          Leads
+        </a>
+
+        <a href="customers.html">
+          Customers
+        </a>
+
+        <a href="estimates.html">
+          Estimates
+        </a>
+
+        <a href="jobs.html">
+          Jobs
+        </a>
+
+        <a href="calendar.html">
+          Calendar
+        </a>
+
+        <a href="payments.html">
+          Payments
+        </a>
+
+        <a href="crew.html">
+          Crew
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            SALES PIPELINE
+          </div>
+
+          <h1>
+            Leads
+          </h1>
+
+          <p>
+            Review website quote requests, contact customers,
+            create estimates and convert qualified leads into
+            moving jobs.
+          </p>
+
+        </div>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           STATS
+      ==================================================== -->
+
+      <section
+        class="admin-stat-grid"
+        aria-label="Lead statistics"
+      >
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            All Leads
+          </span>
+
+          <strong id="allLeadsCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            New
+          </span>
+
+          <strong id="newLeadsCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Quoted
+          </span>
+
+          <strong id="quotedLeadsCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Booked / Won
+          </span>
+
+          <strong id="bookedLeadsCount">
+            0
+          </strong>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           FILTERS
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-toolbar">
+
+
+          <input
+            id="leadSearch"
+            class="admin-input"
+            type="search"
+            placeholder="Search name, phone, email, city..."
+            autocomplete="off"
+          >
+
+
+          <select
+            id="leadStatusFilter"
+            class="admin-input"
+            aria-label="Filter leads by status"
+          >
+
+            <option value="">
+              All statuses
+            </option>
+
+            <option value="new">
+              New
+            </option>
+
+            <option value="contacted">
+              Contacted
+            </option>
+
+            <option value="estimate_pending">
+              Estimate Pending
+            </option>
+
+            <option value="quoted">
+              Quoted
+            </option>
+
+            <option value="booked">
+              Booked
+            </option>
+
+            <option value="won">
+              Won
+            </option>
+
+            <option value="lost">
+              Lost
+            </option>
+
+            <option value="closed">
+              Closed
+            </option>
+
+            <option value="spam">
+              Spam
+            </option>
+
+          </select>
+
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           LEADS TABLE
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-panel-header">
+
+
+          <div>
+
+            <h2>
+              Quote Requests
+            </h2>
+
+            <p id="leadResultCount">
+              Loading leads...
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+
+          <table class="admin-table">
+
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Customer
+                </th>
+
+                <th>
+                  Service
+                </th>
+
+                <th>
+                  Move Date
+                </th>
+
+                <th>
+                  Route
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  CRM
+                </th>
+
+                <th>
+                  Submitted
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="leadsTableBody">
+
+              <tr>
+
+                <td colspan="8">
+                  Loading leads...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+
+          </table>
+
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       VIEW LEAD MODAL
+  ====================================================== -->
+
+  <div
+    id="viewLeadModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="viewLeadBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-job-view-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="viewLeadName"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            LEAD DETAILS
+          </div>
+
+          <h2 id="viewLeadName">
+            Lead
+          </h2>
+
+          <p id="viewLeadSubtitle">
+            Quote request
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeViewLead"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close lead"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <div
+        id="viewLeadContent"
+        class="admin-view-content"
+      ></div>
+
+
+      <!-- ===================================================
+           LEAD ACTIONS
+      ==================================================== -->
+
+      <footer class="admin-form-actions admin-lead-actions">
+
+
+        <button
+          id="markQuotedButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Mark Quoted
+        </button>
+
+
+        <button
+          id="convertCustomerButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Convert to Customer
+        </button>
+
+
+        <button
+          id="createEstimateButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Create Estimate
+        </button>
+
+
+        <button
+          id="createJobButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          Create Job
+        </button>
+
+
+      </footer>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+
+       Order matters:
+       1. Supabase library
+       2. Shared Supabase client
+       3. Shared admin authentication
+       4. Shared business defaults
+       5. Leads page logic
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+
+  <script src="../assets/admin-auth.js"></script>
+
+  <script src="../assets/admin-defaults.js"></script>
+
+  <script src="../assets/admin-leads.js"></script>
+
+
+</body>
+
+</html>

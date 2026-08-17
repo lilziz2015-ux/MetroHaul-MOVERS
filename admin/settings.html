@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Settings | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a href="leads.html">
+          Leads
+        </a>
+
+        <a href="customers.html">
+          Customers
+        </a>
+
+        <a href="estimates.html">
+          Estimates
+        </a>
+
+        <a href="jobs.html">
+          Jobs
+        </a>
+
+        <a href="calendar.html">
+          Calendar
+        </a>
+
+        <a href="payments.html">
+          Payments
+        </a>
+
+        <a href="crew.html">
+          Crew
+        </a>
+
+        <a
+          href="settings.html"
+          class="active"
+          aria-current="page"
+        >
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            CONFIGURATION
+          </div>
+
+          <h1>
+            Settings
+          </h1>
+
+          <p>
+            Manage company information, pricing defaults,
+            estimate terms and CRM preferences.
+          </p>
+
+        </div>
+
+
+        <button
+          id="saveSettingsTopButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          Save Settings
+        </button>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           SETTINGS FORM
+      ==================================================== -->
+
+      <form id="settingsForm">
+
+
+        <div
+          id="settingsMessage"
+          class="admin-settings-message"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+
+
+        <!-- =================================================
+             BUSINESS INFORMATION
+        ================================================== -->
+
+        <section class="admin-panel admin-settings-section">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Business Information
+              </h2>
+
+              <p>
+                Main company details used throughout the CRM.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="business_name">
+                Business Name *
+              </label>
+
+              <input
+                id="business_name"
+                name="business_name"
+                type="text"
+                autocomplete="organization"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="phone">
+                Business Phone
+              </label>
+
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="email">
+                Business Email
+              </label>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+              >
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="website">
+                Website
+              </label>
+
+              <input
+                id="website"
+                name="website"
+                type="url"
+                autocomplete="url"
+                placeholder="https://example.com"
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             BUSINESS ADDRESS
+        ================================================== -->
+
+        <section class="admin-panel admin-settings-section">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Business Address
+              </h2>
+
+              <p>
+                Internal company address information.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="address">
+                Street Address
+              </label>
+
+              <input
+                id="address"
+                name="address"
+                type="text"
+                autocomplete="street-address"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="city">
+                City
+              </label>
+
+              <input
+                id="city"
+                name="city"
+                type="text"
+                autocomplete="address-level2"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="state">
+                State
+              </label>
+
+              <input
+                id="state"
+                name="state"
+                type="text"
+                maxlength="2"
+                autocomplete="address-level1"
+                placeholder="VA"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="zip">
+                ZIP Code
+              </label>
+
+              <input
+                id="zip"
+                name="zip"
+                type="text"
+                inputmode="numeric"
+                autocomplete="postal-code"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="timezone">
+                Timezone
+              </label>
+
+              <select
+                id="timezone"
+                name="timezone"
+              >
+
+                <option value="America/New_York">
+                  Eastern Time
+                </option>
+
+                <option value="America/Chicago">
+                  Central Time
+                </option>
+
+                <option value="America/Denver">
+                  Mountain Time
+                </option>
+
+                <option value="America/Los_Angeles">
+                  Pacific Time
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PRICING DEFAULTS
+        ================================================== -->
+
+        <section class="admin-panel admin-settings-section">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Pricing Defaults
+              </h2>
+
+              <p>
+                These values can automatically fill new estimates and jobs.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="default_hourly_rate">
+                Default Hourly Rate
+              </label>
+
+              <div class="admin-money-input">
+
+                <span aria-hidden="true">
+                  $
+                </span>
+
+                <input
+                  id="default_hourly_rate"
+                  name="default_hourly_rate"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="default_travel_fee">
+                Default Travel Fee
+              </label>
+
+              <div class="admin-money-input">
+
+                <span aria-hidden="true">
+                  $
+                </span>
+
+                <input
+                  id="default_travel_fee"
+                  name="default_travel_fee"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="default_truck_fee">
+                Default Truck Fee
+              </label>
+
+              <div class="admin-money-input">
+
+                <span aria-hidden="true">
+                  $
+                </span>
+
+                <input
+                  id="default_truck_fee"
+                  name="default_truck_fee"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="default_deposit_amount">
+                Default Deposit
+              </label>
+
+              <div class="admin-money-input">
+
+                <span aria-hidden="true">
+                  $
+                </span>
+
+                <input
+                  id="default_deposit_amount"
+                  name="default_deposit_amount"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="default_tax_rate">
+                Default Tax Rate
+              </label>
+
+              <div class="admin-percent-input">
+
+                <input
+                  id="default_tax_rate"
+                  name="default_tax_rate"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+                <span aria-hidden="true">
+                  %
+                </span>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ESTIMATE TERMS
+        ================================================== -->
+
+        <section class="admin-panel admin-settings-section">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Estimate Terms
+              </h2>
+
+              <p>
+                Default terms added to new estimates.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="estimate_terms">
+                Estimate Terms
+              </label>
+
+              <textarea
+                id="estimate_terms"
+                name="estimate_terms"
+                rows="8"
+                placeholder="Enter your default estimate terms..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             INVOICE NOTES
+        ================================================== -->
+
+        <section class="admin-panel admin-settings-section">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Invoice Notes
+              </h2>
+
+              <p>
+                Default notes available for invoices and receipts.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="invoice_notes">
+                Default Invoice Notes
+              </label>
+
+              <textarea
+                id="invoice_notes"
+                name="invoice_notes"
+                rows="7"
+                placeholder="Enter default invoice or receipt notes..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             SAVE BAR
+        ================================================== -->
+
+        <section class="admin-settings-save-bar">
+
+
+          <div>
+
+            <strong>
+              Save your changes
+            </strong>
+
+            <p
+              id="settingsLastSaved"
+              aria-live="polite"
+            >
+              Loading settings...
+            </p>
+
+          </div>
+
+
+          <button
+            id="saveSettingsButton"
+            type="submit"
+            class="admin-primary-button"
+          >
+            Save Settings
+          </button>
+
+
+        </section>
+
+
+      </form>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/admin-auth.js"></script>
+  <script src="../assets/admin-defaults.js"></script>
+  <script src="../assets/admin-settings.js"></script>
+
+
+</body>
+
+</html>

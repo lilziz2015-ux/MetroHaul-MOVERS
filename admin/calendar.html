@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Calendar | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a href="leads.html">
+          Leads
+        </a>
+
+        <a href="customers.html">
+          Customers
+        </a>
+
+        <a href="estimates.html">
+          Estimates
+        </a>
+
+        <a href="jobs.html">
+          Jobs
+        </a>
+
+        <a
+          href="calendar.html"
+          class="active"
+          aria-current="page"
+        >
+          Calendar
+        </a>
+
+        <a href="payments.html">
+          Payments
+        </a>
+
+        <a href="crew.html">
+          Crew
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            DISPATCH
+          </div>
+
+          <h1>
+            Calendar
+          </h1>
+
+          <p>
+            View scheduled moves, confirmed jobs,
+            active jobs and crew assignments by date.
+          </p>
+
+        </div>
+
+
+        <button
+          id="calendarNewJobButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          + Create Job
+        </button>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           STATS
+      ==================================================== -->
+
+      <section
+        class="admin-stat-grid"
+        aria-label="Calendar statistics"
+      >
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            This Month
+          </span>
+
+          <strong id="calendarMonthJobCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Confirmed
+          </span>
+
+          <strong id="calendarConfirmedCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            In Progress
+          </span>
+
+          <strong id="calendarActiveCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Assigned Crew
+          </span>
+
+          <strong id="calendarCrewCount">
+            0
+          </strong>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           CALENDAR CONTROLS
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-calendar-toolbar">
+
+
+          <div class="admin-calendar-nav">
+
+
+            <button
+              id="calendarPreviousButton"
+              type="button"
+              class="admin-secondary-button"
+              aria-label="Previous month"
+            >
+              ←
+            </button>
+
+
+            <button
+              id="calendarTodayButton"
+              type="button"
+              class="admin-secondary-button"
+            >
+              Today
+            </button>
+
+
+            <button
+              id="calendarNextButton"
+              type="button"
+              class="admin-secondary-button"
+              aria-label="Next month"
+            >
+              →
+            </button>
+
+
+          </div>
+
+
+          <div class="admin-calendar-heading">
+
+            <h2 id="calendarMonthTitle">
+              Calendar
+            </h2>
+
+            <p id="calendarRangeLabel">
+              Loading schedule...
+            </p>
+
+          </div>
+
+
+          <div class="admin-calendar-filters">
+
+
+            <select
+              id="calendarStatusFilter"
+              class="admin-input"
+              aria-label="Filter calendar by job status"
+            >
+
+              <option value="">
+                All job statuses
+              </option>
+
+              <option value="DRAFT">
+                Draft
+              </option>
+
+              <option value="ESTIMATE">
+                Estimate
+              </option>
+
+              <option value="SCHEDULED">
+                Scheduled
+              </option>
+
+              <option value="CONFIRMED">
+                Confirmed
+              </option>
+
+              <option value="IN_PROGRESS">
+                In Progress
+              </option>
+
+              <option value="COMPLETED">
+                Completed
+              </option>
+
+              <option value="CANCELLED">
+                Cancelled
+              </option>
+
+            </select>
+
+
+            <select
+              id="calendarServiceFilter"
+              class="admin-input"
+              aria-label="Filter calendar by service"
+            >
+
+              <option value="">
+                All services
+              </option>
+
+              <option value="residential">
+                Residential Moving
+              </option>
+
+              <option value="apartment">
+                Apartment Moving
+              </option>
+
+              <option value="office">
+                Office Moving
+              </option>
+
+              <option value="loading_unloading">
+                Loading / Unloading
+              </option>
+
+              <option value="furniture_delivery">
+                Furniture Delivery
+              </option>
+
+              <option value="junk_removal">
+                Junk Removal
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+
+            </select>
+
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           MONTH CALENDAR
+      ==================================================== -->
+
+      <section class="admin-panel admin-calendar-panel">
+
+
+        <div
+          class="admin-calendar-weekdays"
+          aria-hidden="true"
+        >
+
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+
+        </div>
+
+
+        <div
+          id="calendarGrid"
+          class="admin-calendar-grid"
+        >
+
+          <div class="admin-loading">
+            Loading calendar...
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           UPCOMING JOBS
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-panel-header">
+
+
+          <div>
+
+            <h2>
+              Upcoming Jobs
+            </h2>
+
+            <p id="upcomingJobCount">
+              Loading upcoming jobs...
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+        <div
+          id="upcomingJobsList"
+          class="admin-calendar-upcoming-list"
+        >
+
+          <div class="admin-loading">
+            Loading jobs...
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       DAY DETAILS MODAL
+  ====================================================== -->
+
+  <div
+    id="calendarDayModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="calendarDayBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-calendar-day-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="calendarDayTitle"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            DAILY SCHEDULE
+          </div>
+
+          <h2 id="calendarDayTitle">
+            Schedule
+          </h2>
+
+          <p id="calendarDaySubtitle">
+            Jobs scheduled for this date.
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeCalendarDay"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close schedule"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <div
+        id="calendarDayJobs"
+        class="admin-calendar-day-jobs"
+      >
+
+        <div class="admin-loading">
+          Loading jobs...
+        </div>
+
+      </div>
+
+
+      <footer class="admin-form-actions">
+
+
+        <button
+          id="calendarDayCreateJobButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          + Create Job This Day
+        </button>
+
+
+      </footer>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/admin-auth.js"></script>
+  <script src="../assets/admin-defaults.js"></script>
+  <script src="../assets/admin-calendar.js"></script>
+
+
+</body>
+
+</html>

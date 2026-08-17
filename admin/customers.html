@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Customers | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a href="leads.html">
+          Leads
+        </a>
+
+        <a
+          href="customers.html"
+          class="active"
+          aria-current="page"
+        >
+          Customers
+        </a>
+
+        <a href="estimates.html">
+          Estimates
+        </a>
+
+        <a href="jobs.html">
+          Jobs
+        </a>
+
+        <a href="calendar.html">
+          Calendar
+        </a>
+
+        <a href="payments.html">
+          Payments
+        </a>
+
+        <a href="crew.html">
+          Crew
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            CRM
+          </div>
+
+          <h1>
+            Customers
+          </h1>
+
+          <p>
+            Manage customer contact information, billing
+            addresses and linked leads.
+          </p>
+
+        </div>
+
+
+        <button
+          id="newCustomerButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          + New Customer
+        </button>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           STATS
+      ==================================================== -->
+
+      <section
+        class="admin-stat-grid"
+        aria-label="Customer statistics"
+      >
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Total Customers
+          </span>
+
+          <strong id="customerCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            With Email
+          </span>
+
+          <strong id="customersWithEmailCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            From Leads
+          </span>
+
+          <strong id="customersFromLeadCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            New This Month
+          </span>
+
+          <strong id="customersThisMonthCount">
+            0
+          </strong>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           SEARCH
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-toolbar">
+
+          <input
+            id="customerSearch"
+            class="admin-input"
+            type="search"
+            placeholder="Search name, company, phone, email or address..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           TABLE
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-panel-header">
+
+
+          <div>
+
+            <h2>
+              Customer Directory
+            </h2>
+
+            <p id="customerResultCount">
+              Loading customers...
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+
+          <table class="admin-table">
+
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Customer
+                </th>
+
+                <th>
+                  Phone
+                </th>
+
+                <th>
+                  Email
+                </th>
+
+                <th>
+                  Billing Address
+                </th>
+
+                <th>
+                  Source
+                </th>
+
+                <th>
+                  Created
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="customersTableBody">
+
+              <tr>
+
+                <td colspan="7">
+                  Loading customers...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+
+          </table>
+
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       CREATE / EDIT CUSTOMER MODAL
+  ====================================================== -->
+
+  <div
+    id="customerModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="customerModalBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="customerModalTitle"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            CUSTOMER
+          </div>
+
+          <h2 id="customerModalTitle">
+            New Customer
+          </h2>
+
+          <p id="customerModalSubtitle">
+            Add customer information.
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeCustomerModal"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close customer form"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <form id="customerForm">
+
+
+        <input
+          id="customerId"
+          type="hidden"
+        >
+
+
+        <div
+          id="customerFormError"
+          class="admin-error"
+          hidden
+        ></div>
+
+
+        <!-- =================================================
+             CUSTOMER INFORMATION
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Customer Information
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="first_name">
+                First Name *
+              </label>
+
+              <input
+                id="first_name"
+                name="first_name"
+                type="text"
+                autocomplete="given-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="last_name">
+                Last Name *
+              </label>
+
+              <input
+                id="last_name"
+                name="last_name"
+                type="text"
+                autocomplete="family-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="company_name">
+                Company Name
+              </label>
+
+              <input
+                id="company_name"
+                name="company_name"
+                type="text"
+                autocomplete="organization"
+                placeholder="Optional business or organization"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="phone">
+                Phone *
+              </label>
+
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="alternate_phone">
+                Alternate Phone
+              </label>
+
+              <input
+                id="alternate_phone"
+                name="alternate_phone"
+                type="tel"
+              >
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="email">
+                Email
+              </label>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             BILLING ADDRESS
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Billing Address
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="billing_address">
+                Street Address
+              </label>
+
+              <input
+                id="billing_address"
+                name="billing_address"
+                type="text"
+                autocomplete="street-address"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="billing_city">
+                City
+              </label>
+
+              <input
+                id="billing_city"
+                name="billing_city"
+                type="text"
+                autocomplete="address-level2"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="billing_state">
+                State
+              </label>
+
+              <input
+                id="billing_state"
+                name="billing_state"
+                type="text"
+                maxlength="2"
+                autocomplete="address-level1"
+                placeholder="VA"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="billing_zip">
+                ZIP
+              </label>
+
+              <input
+                id="billing_zip"
+                name="billing_zip"
+                type="text"
+                inputmode="numeric"
+                autocomplete="postal-code"
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             SOURCE
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Source
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="source_lead_id">
+                Linked Lead
+              </label>
+
+              <select
+                id="source_lead_id"
+                name="source_lead_id"
+              >
+
+                <option value="">
+                  No linked lead
+                </option>
+
+              </select>
+
+              <small class="admin-field-help">
+                A lead can only be linked to one customer.
+              </small>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             NOTES
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Notes
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="notes">
+                Customer Notes
+              </label>
+
+              <textarea
+                id="notes"
+                name="notes"
+                rows="5"
+                placeholder="Access information, preferences, special instructions..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <footer class="admin-form-actions">
+
+
+          <button
+            id="cancelCustomerButton"
+            type="button"
+            class="admin-secondary-button"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            id="saveCustomerButton"
+            type="submit"
+            class="admin-primary-button"
+          >
+            Save Customer
+          </button>
+
+
+        </footer>
+
+
+      </form>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       VIEW CUSTOMER MODAL
+  ====================================================== -->
+
+  <div
+    id="viewCustomerModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="viewCustomerBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-job-view-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="viewCustomerName"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            CUSTOMER PROFILE
+          </div>
+
+          <h2 id="viewCustomerName">
+            Customer
+          </h2>
+
+          <p id="viewCustomerCompany"></p>
+
+        </div>
+
+
+        <button
+          id="closeViewCustomer"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close customer"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <div
+        id="viewCustomerContent"
+        class="admin-view-content"
+      ></div>
+
+
+      <footer class="admin-form-actions">
+
+
+        <button
+          id="editCustomerButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Edit
+        </button>
+
+
+        <button
+          id="newEstimateForCustomerButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          New Estimate
+        </button>
+
+
+        <button
+          id="newJobForCustomerButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          New Job
+        </button>
+
+
+      </footer>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/admin-auth.js"></script>
+  <script src="../assets/admin-defaults.js"></script>
+  <script src="../assets/admin-customers.js"></script>
+
+
+</body>
+
+</html>

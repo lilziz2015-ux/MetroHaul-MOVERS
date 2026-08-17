@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Dashboard | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a
+          href="index.html"
+          class="active"
+          aria-current="page"
+        >
+          Dashboard
+        </a>
+
+        <a href="leads.html">
+          Leads
+        </a>
+
+        <a href="customers.html">
+          Customers
+        </a>
+
+        <a href="estimates.html">
+          Estimates
+        </a>
+
+        <a href="jobs.html">
+          Jobs
+        </a>
+
+        <a href="calendar.html">
+          Calendar
+        </a>
+
+        <a href="payments.html">
+          Payments
+        </a>
+
+        <a href="crew.html">
+          Crew
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            OPERATIONS
+          </div>
+
+          <h1>
+            Dashboard
+          </h1>
+
+          <p id="dashboardGreeting">
+            Loading Metro Haul operations...
+          </p>
+
+        </div>
+
+
+        <div class="admin-dashboard-header-actions">
+
+          <button
+            id="dashboardNewLeadButton"
+            type="button"
+            class="admin-secondary-button"
+          >
+            + Lead
+          </button>
+
+          <button
+            id="dashboardNewEstimateButton"
+            type="button"
+            class="admin-secondary-button"
+          >
+            + Estimate
+          </button>
+
+          <button
+            id="dashboardNewJobButton"
+            type="button"
+            class="admin-primary-button"
+          >
+            + Job
+          </button>
+
+        </div>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           PRIMARY STATS
+      ==================================================== -->
+
+      <section
+        class="admin-stat-grid"
+        aria-label="Primary dashboard statistics"
+      >
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            New Leads
+          </span>
+
+          <strong id="dashboardNewLeads">
+            0
+          </strong>
+
+          <small>
+            Waiting for follow-up
+          </small>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Upcoming Jobs
+          </span>
+
+          <strong id="dashboardUpcomingJobs">
+            0
+          </strong>
+
+          <small>
+            Scheduled ahead
+          </small>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Collected
+          </span>
+
+          <strong id="dashboardCollected">
+            $0.00
+          </strong>
+
+          <small>
+            Paid payment records
+          </small>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Outstanding
+          </span>
+
+          <strong id="dashboardOutstanding">
+            $0.00
+          </strong>
+
+          <small>
+            Open job balances
+          </small>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           SECONDARY STATS
+      ==================================================== -->
+
+      <section
+        class="admin-dashboard-mini-grid"
+        aria-label="Secondary dashboard statistics"
+      >
+
+
+        <article class="admin-dashboard-mini-card">
+
+          <span>
+            Customers
+          </span>
+
+          <strong id="dashboardCustomerCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-dashboard-mini-card">
+
+          <span>
+            Estimates
+          </span>
+
+          <strong id="dashboardEstimateCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-dashboard-mini-card">
+
+          <span>
+            Active Jobs
+          </span>
+
+          <strong id="dashboardActiveJobs">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-dashboard-mini-card">
+
+          <span>
+            Active Crew
+          </span>
+
+          <strong id="dashboardActiveCrew">
+            0
+          </strong>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           MAIN DASHBOARD GRID
+      ==================================================== -->
+
+      <section class="admin-dashboard-grid">
+
+
+        <!-- ===============================================
+             TODAY
+        ================================================ -->
+
+        <section class="admin-panel admin-dashboard-panel">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Today
+              </h2>
+
+              <p id="dashboardTodaySubtitle">
+                Today's moving schedule
+              </p>
+
+            </div>
+
+
+            <a
+              href="calendar.html"
+              class="admin-table-action"
+            >
+              Calendar
+            </a>
+
+          </div>
+
+
+          <div
+            id="dashboardTodayJobs"
+            class="admin-dashboard-list"
+          >
+
+            <div class="admin-loading">
+              Loading today's jobs...
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+        <!-- ===============================================
+             NEW LEADS
+        ================================================ -->
+
+        <section class="admin-panel admin-dashboard-panel">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                New Leads
+              </h2>
+
+              <p>
+                Recent quote requests needing attention
+              </p>
+
+            </div>
+
+
+            <a
+              href="leads.html"
+              class="admin-table-action"
+            >
+              View All
+            </a>
+
+          </div>
+
+
+          <div
+            id="dashboardLeadList"
+            class="admin-dashboard-list"
+          >
+
+            <div class="admin-loading">
+              Loading leads...
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+        <!-- ===============================================
+             UPCOMING JOBS
+        ================================================ -->
+
+        <section class="admin-panel admin-dashboard-panel admin-dashboard-wide">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Upcoming Jobs
+              </h2>
+
+              <p>
+                Next scheduled and confirmed moves
+              </p>
+
+            </div>
+
+
+            <a
+              href="jobs.html"
+              class="admin-table-action"
+            >
+              View Jobs
+            </a>
+
+          </div>
+
+
+          <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Job
+                  </th>
+
+                  <th>
+                    Customer
+                  </th>
+
+                  <th>
+                    Date
+                  </th>
+
+                  <th>
+                    Service
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                  <th>
+                    Total
+                  </th>
+
+                  <th>
+                    Balance
+                  </th>
+
+                  <th>
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="dashboardUpcomingTable">
+
+                <tr>
+
+                  <td colspan="8">
+                    Loading upcoming jobs...
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+
+        </section>
+
+
+        <!-- ===============================================
+             PAYMENTS
+        ================================================ -->
+
+        <section class="admin-panel admin-dashboard-panel">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Payments
+              </h2>
+
+              <p>
+                Recent customer payments
+              </p>
+
+            </div>
+
+
+            <a
+              href="payments.html"
+              class="admin-table-action"
+            >
+              View Payments
+            </a>
+
+          </div>
+
+
+          <div
+            id="dashboardPaymentList"
+            class="admin-dashboard-list"
+          >
+
+            <div class="admin-loading">
+              Loading payments...
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+        <!-- ===============================================
+             CREW
+        ================================================ -->
+
+        <section class="admin-panel admin-dashboard-panel">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Crew
+              </h2>
+
+              <p>
+                Active team members
+              </p>
+
+            </div>
+
+
+            <a
+              href="crew.html"
+              class="admin-table-action"
+            >
+              Manage Crew
+            </a>
+
+          </div>
+
+
+          <div
+            id="dashboardCrewList"
+            class="admin-dashboard-list"
+          >
+
+            <div class="admin-loading">
+              Loading crew...
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+        <!-- ===============================================
+             QUICK ACTIONS
+        ================================================ -->
+
+        <section class="admin-panel admin-dashboard-panel admin-dashboard-wide">
+
+
+          <div class="admin-panel-header">
+
+            <div>
+
+              <h2>
+                Quick Actions
+              </h2>
+
+              <p>
+                Common Metro Haul admin tasks
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-dashboard-actions">
+
+
+            <a
+              href="leads.html"
+              class="admin-dashboard-action-card"
+            >
+
+              <strong>
+                Leads
+              </strong>
+
+              <span>
+                Review quote requests and convert customers
+              </span>
+
+            </a>
+
+
+            <a
+              href="customers.html?new=1"
+              class="admin-dashboard-action-card"
+            >
+
+              <strong>
+                New Customer
+              </strong>
+
+              <span>
+                Add a customer directly to the CRM
+              </span>
+
+            </a>
+
+
+            <a
+              href="estimates.html?new=1"
+              class="admin-dashboard-action-card"
+            >
+
+              <strong>
+                New Estimate
+              </strong>
+
+              <span>
+                Build a moving estimate
+              </span>
+
+            </a>
+
+
+            <a
+              href="jobs.html?new=1"
+              class="admin-dashboard-action-card"
+            >
+
+              <strong>
+                New Job
+              </strong>
+
+              <span>
+                Schedule a moving job
+              </span>
+
+            </a>
+
+
+            <a
+              href="payments.html?new=1"
+              class="admin-dashboard-action-card"
+            >
+
+              <strong>
+                Record Payment
+              </strong>
+
+              <span>
+                Add money received from a customer
+              </span>
+
+            </a>
+
+
+            <a
+              href="calendar.html"
+              class="admin-dashboard-action-card"
+            >
+
+              <strong>
+                Dispatch Calendar
+              </strong>
+
+              <span>
+                View jobs by date and schedule
+              </span>
+
+            </a>
+
+
+          </div>
+
+
+        </section>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+
+       Order matters:
+       1. Supabase library
+       2. Shared Supabase client
+       3. Shared admin auth
+       4. Shared business defaults
+       5. Dashboard page logic
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+
+  <script src="../assets/admin-auth.js"></script>
+
+  <script src="../assets/admin-defaults.js"></script>
+
+  <script src="../assets/admin-dashboard.js"></script>
+
+
+</body>
+
+</html>

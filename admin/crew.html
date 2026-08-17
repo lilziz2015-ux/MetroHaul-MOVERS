@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Crew | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a href="leads.html">
+          Leads
+        </a>
+
+        <a href="customers.html">
+          Customers
+        </a>
+
+        <a href="estimates.html">
+          Estimates
+        </a>
+
+        <a href="jobs.html">
+          Jobs
+        </a>
+
+        <a href="calendar.html">
+          Calendar
+        </a>
+
+        <a href="payments.html">
+          Payments
+        </a>
+
+        <a
+          href="crew.html"
+          class="active"
+          aria-current="page"
+        >
+          Crew
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            OPERATIONS
+          </div>
+
+          <h1>
+            Crew
+          </h1>
+
+          <p>
+            Manage movers, drivers, crew leads,
+            dispatchers and managers.
+          </p>
+
+        </div>
+
+
+        <button
+          id="newCrewButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          + Add Crew Member
+        </button>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           STATISTICS
+      ==================================================== -->
+
+      <section
+        class="admin-stat-grid"
+        aria-label="Crew statistics"
+      >
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Total Crew
+          </span>
+
+          <strong id="totalCrewCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Active
+          </span>
+
+          <strong id="activeCrewCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Drivers
+          </span>
+
+          <strong id="driverCrewCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Crew Leads
+          </span>
+
+          <strong id="crewLeadCount">
+            0
+          </strong>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           FILTERS
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-toolbar">
+
+
+          <input
+            id="crewSearch"
+            class="admin-input"
+            type="search"
+            placeholder="Search crew member, phone or email..."
+            autocomplete="off"
+          >
+
+
+          <select
+            id="crewRoleFilter"
+            class="admin-input"
+            aria-label="Filter crew by role"
+          >
+
+            <option value="">
+              All roles
+            </option>
+
+            <option value="mover">
+              Mover
+            </option>
+
+            <option value="driver">
+              Driver
+            </option>
+
+            <option value="crew_lead">
+              Crew Lead
+            </option>
+
+            <option value="dispatcher">
+              Dispatcher
+            </option>
+
+            <option value="manager">
+              Manager
+            </option>
+
+          </select>
+
+
+          <select
+            id="crewStatusFilter"
+            class="admin-input"
+            aria-label="Filter crew by status"
+          >
+
+            <option value="">
+              All statuses
+            </option>
+
+            <option value="active">
+              Active
+            </option>
+
+            <option value="inactive">
+              Inactive
+            </option>
+
+          </select>
+
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           CREW TABLE
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-panel-header">
+
+          <div>
+
+            <h2>
+              Crew Directory
+            </h2>
+
+            <p id="crewResultCount">
+              Loading crew...
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+
+          <table class="admin-table">
+
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Crew Member
+                </th>
+
+                <th>
+                  Role
+                </th>
+
+                <th>
+                  Phone
+                </th>
+
+                <th>
+                  Email
+                </th>
+
+                <th>
+                  Hourly Cost
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Added
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="crewTableBody">
+
+              <tr>
+
+                <td colspan="8">
+                  Loading crew...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+
+          </table>
+
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       CREATE / EDIT CREW MODAL
+  ====================================================== -->
+
+  <div
+    id="crewModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="crewModalBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="crewModalTitle"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            CREW MEMBER
+          </div>
+
+          <h2 id="crewModalTitle">
+            Add Crew Member
+          </h2>
+
+          <p id="crewModalSubtitle">
+            Add a mover, driver or operations team member.
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeCrewModal"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close crew form"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <form id="crewForm">
+
+
+        <input
+          id="crewId"
+          type="hidden"
+        >
+
+
+        <div
+          id="crewFormError"
+          class="admin-error"
+          hidden
+        ></div>
+
+
+        <!-- =================================================
+             CREW INFORMATION
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Crew Information
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="first_name">
+                First Name *
+              </label>
+
+              <input
+                id="first_name"
+                name="first_name"
+                type="text"
+                autocomplete="given-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="last_name">
+                Last Name *
+              </label>
+
+              <input
+                id="last_name"
+                name="last_name"
+                type="text"
+                autocomplete="family-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="phone">
+                Phone
+              </label>
+
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="email">
+                Email
+              </label>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ROLE & PAY
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Role & Pay
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="role">
+                Role *
+              </label>
+
+              <select
+                id="role"
+                name="role"
+                required
+              >
+
+                <option value="mover">
+                  Mover
+                </option>
+
+                <option value="driver">
+                  Driver
+                </option>
+
+                <option value="crew_lead">
+                  Crew Lead
+                </option>
+
+                <option value="dispatcher">
+                  Dispatcher
+                </option>
+
+                <option value="manager">
+                  Manager
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="hourly_cost">
+                Hourly Cost
+              </label>
+
+              <input
+                id="hourly_cost"
+                name="hourly_cost"
+                type="number"
+                min="0"
+                step="0.01"
+                inputmode="decimal"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="active">
+                Status
+              </label>
+
+              <select
+                id="active"
+                name="active"
+              >
+
+                <option value="true">
+                  Active
+                </option>
+
+                <option value="false">
+                  Inactive
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ACCOUNT CONNECTION
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Account Connection
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="auth_user_id">
+                Supabase Auth User ID
+              </label>
+
+              <input
+                id="auth_user_id"
+                name="auth_user_id"
+                type="text"
+                autocomplete="off"
+                placeholder="Optional"
+              >
+
+              <small class="admin-field-help">
+                Leave blank unless this crew member already has a Supabase login account.
+              </small>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             NOTES
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Notes
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="notes">
+                Internal Notes
+              </label>
+
+              <textarea
+                id="notes"
+                name="notes"
+                rows="5"
+                placeholder="Availability, driving restrictions, skills, responsibilities..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <footer class="admin-form-actions">
+
+
+          <button
+            id="cancelCrewButton"
+            type="button"
+            class="admin-secondary-button"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            id="saveCrewButton"
+            type="submit"
+            class="admin-primary-button"
+          >
+            Save Crew Member
+          </button>
+
+
+        </footer>
+
+
+      </form>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       VIEW CREW MEMBER
+  ====================================================== -->
+
+  <div
+    id="viewCrewModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="viewCrewBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-job-view-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="viewCrewName"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            CREW PROFILE
+          </div>
+
+          <h2 id="viewCrewName">
+            Crew Member
+          </h2>
+
+          <p id="viewCrewRole">
+            Mover
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeViewCrew"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close crew profile"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <div
+        id="viewCrewContent"
+        class="admin-view-content"
+      ></div>
+
+
+      <!-- ===================================================
+           ASSIGNMENTS
+      ==================================================== -->
+
+      <section class="admin-job-crew-section">
+
+
+        <div class="admin-job-crew-header">
+
+
+          <div>
+
+            <div class="admin-eyebrow">
+              ASSIGNMENTS
+            </div>
+
+            <h3>
+              Job Assignments
+            </h3>
+
+          </div>
+
+
+        </div>
+
+
+        <div
+          id="crewAssignmentsList"
+          class="admin-job-crew-list"
+        >
+
+          <div class="admin-loading">
+            Loading assignments...
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           ACTIONS
+      ==================================================== -->
+
+      <footer class="admin-form-actions">
+
+
+        <button
+          id="editCrewButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Edit
+        </button>
+
+
+        <button
+          id="toggleCrewStatusButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Deactivate
+        </button>
+
+
+        <button
+          id="viewCrewJobsButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          View Jobs
+        </button>
+
+
+      </footer>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/admin-auth.js"></script>
+  <script src="../assets/admin-defaults.js"></script>
+  <script src="../assets/admin-crew.js"></script>
+
+
+</body>
+
+</html>

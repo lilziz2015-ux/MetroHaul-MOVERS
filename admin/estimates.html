@@ -1,0 +1,1291 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Estimates | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a href="leads.html">
+          Leads
+        </a>
+
+        <a href="customers.html">
+          Customers
+        </a>
+
+        <a
+          href="estimates.html"
+          class="active"
+          aria-current="page"
+        >
+          Estimates
+        </a>
+
+        <a href="jobs.html">
+          Jobs
+        </a>
+
+        <a href="calendar.html">
+          Calendar
+        </a>
+
+        <a href="payments.html">
+          Payments
+        </a>
+
+        <a href="crew.html">
+          Crew
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            SALES
+          </div>
+
+          <h1>
+            Estimates
+          </h1>
+
+          <p>
+            Create moving estimates, calculate pricing,
+            track customer decisions and convert accepted
+            estimates into jobs.
+          </p>
+
+        </div>
+
+
+        <button
+          id="newEstimateButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          + New Estimate
+        </button>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           STATISTICS
+      ==================================================== -->
+
+      <section
+        class="admin-stat-grid"
+        aria-label="Estimate statistics"
+      >
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            All Estimates
+          </span>
+
+          <strong id="allEstimatesCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Draft
+          </span>
+
+          <strong id="draftEstimatesCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Sent
+          </span>
+
+          <strong id="sentEstimatesCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Accepted
+          </span>
+
+          <strong id="acceptedEstimatesCount">
+            0
+          </strong>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           FILTERS
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-toolbar">
+
+
+          <input
+            id="estimateSearch"
+            class="admin-input"
+            type="search"
+            placeholder="Search estimate, customer, phone, service..."
+            autocomplete="off"
+          >
+
+
+          <select
+            id="estimateStatusFilter"
+            class="admin-input"
+            aria-label="Filter estimates by status"
+          >
+
+            <option value="">
+              All statuses
+            </option>
+
+            <option value="draft">
+              Draft
+            </option>
+
+            <option value="sent">
+              Sent
+            </option>
+
+            <option value="accepted">
+              Accepted
+            </option>
+
+            <option value="declined">
+              Declined
+            </option>
+
+            <option value="expired">
+              Expired
+            </option>
+
+            <option value="converted">
+              Converted
+            </option>
+
+          </select>
+
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           TABLE
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-panel-header">
+
+
+          <div>
+
+            <h2>
+              Customer Estimates
+            </h2>
+
+            <p id="estimateResultCount">
+              Loading estimates...
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+
+          <table class="admin-table">
+
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Estimate
+                </th>
+
+                <th>
+                  Customer
+                </th>
+
+                <th>
+                  Move Date
+                </th>
+
+                <th>
+                  Service
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Total
+                </th>
+
+                <th>
+                  Deposit
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="estimatesTableBody">
+
+              <tr>
+
+                <td colspan="8">
+                  Loading estimates...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+
+          </table>
+
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       CREATE / EDIT ESTIMATE
+  ====================================================== -->
+
+  <div
+    id="estimateModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="estimateModalBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-job-modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="estimateModalTitle"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            METRO HAUL
+          </div>
+
+          <h2 id="estimateModalTitle">
+            Create Estimate
+          </h2>
+
+          <p id="estimateNumberDisplay">
+            Estimate number will be generated automatically.
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeEstimateModal"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close estimate"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <form id="estimateForm">
+
+
+        <input
+          id="estimateId"
+          type="hidden"
+        >
+
+
+        <div
+          id="estimateFormError"
+          class="admin-error"
+          hidden
+        ></div>
+
+
+        <!-- =================================================
+             CUSTOMER
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Customer
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="customer_id">
+                Customer *
+              </label>
+
+              <select
+                id="customer_id"
+                name="customer_id"
+                required
+              >
+
+                <option value="">
+                  Select customer
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="lead_id">
+                Original Lead
+              </label>
+
+              <select
+                id="lead_id"
+                name="lead_id"
+              >
+
+                <option value="">
+                  No linked lead
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ESTIMATE INFORMATION
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Estimate Information
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="service_type">
+                Service *
+              </label>
+
+              <select
+                id="service_type"
+                name="service_type"
+                required
+              >
+
+                <option value="">
+                  Select service
+                </option>
+
+                <option value="residential">
+                  Residential Moving
+                </option>
+
+                <option value="apartment">
+                  Apartment Moving
+                </option>
+
+                <option value="office">
+                  Office Moving
+                </option>
+
+                <option value="loading_unloading">
+                  Loading / Unloading
+                </option>
+
+                <option value="furniture_delivery">
+                  Furniture Delivery
+                </option>
+
+                <option value="junk_removal">
+                  Junk Removal
+                </option>
+
+                <option value="other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="status">
+                Status
+              </label>
+
+              <select
+                id="status"
+                name="status"
+              >
+
+                <option value="draft">
+                  Draft
+                </option>
+
+                <option value="sent">
+                  Sent
+                </option>
+
+                <option value="accepted">
+                  Accepted
+                </option>
+
+                <option value="declined">
+                  Declined
+                </option>
+
+                <option value="expired">
+                  Expired
+                </option>
+
+                <option value="converted">
+                  Converted
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="move_date">
+                Move Date
+              </label>
+
+              <input
+                id="move_date"
+                name="move_date"
+                type="date"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="expires_at">
+                Estimate Expires
+              </label>
+
+              <input
+                id="expires_at"
+                name="expires_at"
+                type="datetime-local"
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ROUTE
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Route
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="pickup_address">
+                Pickup Address
+              </label>
+
+              <input
+                id="pickup_address"
+                name="pickup_address"
+                type="text"
+                autocomplete="street-address"
+              >
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="destination_address">
+                Destination Address
+              </label>
+
+              <input
+                id="destination_address"
+                name="destination_address"
+                type="text"
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             LABOR
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Labor
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="crew_size">
+                Crew Size
+              </label>
+
+              <input
+                id="crew_size"
+                name="crew_size"
+                type="number"
+                min="1"
+                step="1"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="estimated_hours">
+                Estimated Hours
+              </label>
+
+              <input
+                id="estimated_hours"
+                name="estimated_hours"
+                type="number"
+                min="0"
+                step="0.25"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="hourly_rate">
+                Hourly Rate
+              </label>
+
+              <input
+                id="hourly_rate"
+                name="hourly_rate"
+                type="number"
+                min="0"
+                step="0.01"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="laborAmountPreview">
+                Estimated Labor
+              </label>
+
+              <input
+                id="laborAmountPreview"
+                type="text"
+                value="$0.00"
+                readonly
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FEES
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Fees & Pricing
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="travel_fee">
+                Travel Fee
+              </label>
+
+              <input
+                id="travel_fee"
+                name="travel_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="truck_fee">
+                Truck Fee
+              </label>
+
+              <input
+                id="truck_fee"
+                name="truck_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="materials_fee">
+                Materials Fee
+              </label>
+
+              <input
+                id="materials_fee"
+                name="materials_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="junk_fee">
+                Junk / Disposal Fee
+              </label>
+
+              <input
+                id="junk_fee"
+                name="junk_fee"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="discount">
+                Discount
+              </label>
+
+              <input
+                id="discount"
+                name="discount"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="tax">
+                Tax Amount
+              </label>
+
+              <input
+                id="tax"
+                name="tax"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="deposit_required">
+                Deposit Required
+              </label>
+
+              <input
+                id="deposit_required"
+                name="deposit_required"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0"
+              >
+
+            </div>
+
+
+          </div>
+
+
+          <!-- ===============================================
+               PRICE SUMMARY
+          ================================================ -->
+
+          <div class="job-price-summary">
+
+
+            <div>
+
+              <span>
+                Labor
+              </span>
+
+              <strong id="laborPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Fees
+              </span>
+
+              <strong id="estimateFeesPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Discount
+              </span>
+
+              <strong id="estimateDiscountPreview">
+                -$0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Subtotal
+              </span>
+
+              <strong id="estimateSubtotalPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Tax
+              </span>
+
+              <strong id="estimateTaxPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div class="job-price-total">
+
+              <span>
+                Estimate Total
+              </span>
+
+              <strong id="estimateTotalPreview">
+                $0.00
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             NOTES / TERMS
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Customer Information
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="customer_notes">
+                Customer Notes
+              </label>
+
+              <textarea
+                id="customer_notes"
+                name="customer_notes"
+                rows="4"
+                placeholder="Information that can be included with the estimate..."
+              ></textarea>
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="terms">
+                Estimate Terms
+              </label>
+
+              <textarea
+                id="terms"
+                name="terms"
+                rows="7"
+                placeholder="Estimate terms and conditions..."
+              ></textarea>
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="internal_notes">
+                Internal Notes
+              </label>
+
+              <textarea
+                id="internal_notes"
+                name="internal_notes"
+                rows="5"
+                placeholder="Private notes for Metro Haul staff..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <footer class="admin-form-actions">
+
+
+          <button
+            id="cancelEstimateButton"
+            type="button"
+            class="admin-secondary-button"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            id="saveEstimateButton"
+            type="submit"
+            class="admin-primary-button"
+          >
+            Save Estimate
+          </button>
+
+
+        </footer>
+
+
+      </form>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       VIEW ESTIMATE
+  ====================================================== -->
+
+  <div
+    id="viewEstimateModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="viewEstimateBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-job-view-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="viewEstimateNumber"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            ESTIMATE DETAILS
+          </div>
+
+          <h2 id="viewEstimateNumber">
+            Estimate
+          </h2>
+
+          <p id="viewEstimateCustomer">
+            Customer
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeViewEstimate"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close estimate"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <div
+        id="viewEstimateContent"
+        class="admin-view-content"
+      ></div>
+
+
+      <footer class="admin-form-actions">
+
+
+        <button
+          id="editEstimateButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Edit
+        </button>
+
+
+        <button
+          id="markEstimateSentButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Mark Sent
+        </button>
+
+
+        <button
+          id="acceptEstimateButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Accept
+        </button>
+
+
+        <button
+          id="convertEstimateButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          Convert to Job
+        </button>
+
+
+      </footer>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/admin-auth.js"></script>
+  <script src="../assets/admin-defaults.js"></script>
+  <script src="../assets/admin-estimates.js"></script>
+
+
+</body>
+
+</html>

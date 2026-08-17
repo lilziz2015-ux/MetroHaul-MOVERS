@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Payments | Metro Haul Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-body">
+
+
+  <div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="admin-logo"
+        aria-label="Metro Haul Admin Dashboard"
+      >
+
+        <img
+          src="../assets/metro-haul-logo.png"
+          alt="Metro Haul Moving & Junk Removal"
+        >
+
+      </a>
+
+
+      <nav
+        class="admin-menu"
+        aria-label="Admin navigation"
+      >
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a href="leads.html">
+          Leads
+        </a>
+
+        <a href="customers.html">
+          Customers
+        </a>
+
+        <a href="estimates.html">
+          Estimates
+        </a>
+
+        <a href="jobs.html">
+          Jobs
+        </a>
+
+        <a href="calendar.html">
+          Calendar
+        </a>
+
+        <a
+          href="payments.html"
+          class="active"
+          aria-current="page"
+        >
+          Payments
+        </a>
+
+        <a href="crew.html">
+          Crew
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <div id="adminName">
+          Metro Haul Admin
+        </div>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-page-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            ACCOUNTING
+          </div>
+
+          <h1>
+            Payments
+          </h1>
+
+          <p>
+            Record customer payments, track balances and keep
+            job payment totals synchronized.
+          </p>
+
+        </div>
+
+
+        <button
+          id="newPaymentButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          + Record Payment
+        </button>
+
+
+      </header>
+
+
+      <!-- ===================================================
+           STATS
+      ==================================================== -->
+
+      <section
+        class="admin-stat-grid"
+        aria-label="Payment statistics"
+      >
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Total Collected
+          </span>
+
+          <strong id="totalCollectedAmount">
+            $0.00
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Paid Payments
+          </span>
+
+          <strong id="paidPaymentCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Pending
+          </span>
+
+          <strong id="pendingPaymentCount">
+            0
+          </strong>
+
+        </article>
+
+
+        <article class="admin-stat-card">
+
+          <span>
+            Refunded
+          </span>
+
+          <strong id="refundedPaymentCount">
+            0
+          </strong>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           FILTERS
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-toolbar">
+
+
+          <input
+            id="paymentSearch"
+            class="admin-input"
+            type="search"
+            placeholder="Search customer, job, estimate, reference..."
+            autocomplete="off"
+          >
+
+
+          <select
+            id="paymentStatusFilter"
+            class="admin-input"
+            aria-label="Filter payments by status"
+          >
+
+            <option value="">
+              All statuses
+            </option>
+
+            <option value="pending">
+              Pending
+            </option>
+
+            <option value="paid">
+              Paid
+            </option>
+
+            <option value="failed">
+              Failed
+            </option>
+
+            <option value="refunded">
+              Refunded
+            </option>
+
+            <option value="partially_refunded">
+              Partially Refunded
+            </option>
+
+          </select>
+
+
+          <select
+            id="paymentMethodFilter"
+            class="admin-input"
+            aria-label="Filter payments by method"
+          >
+
+            <option value="">
+              All methods
+            </option>
+
+            <option value="cash">
+              Cash
+            </option>
+
+            <option value="card">
+              Card
+            </option>
+
+            <option value="zelle">
+              Zelle
+            </option>
+
+            <option value="check">
+              Check
+            </option>
+
+            <option value="ach">
+              ACH
+            </option>
+
+            <option value="other">
+              Other
+            </option>
+
+          </select>
+
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           PAYMENT TABLE
+      ==================================================== -->
+
+      <section class="admin-panel">
+
+
+        <div class="admin-panel-header">
+
+
+          <div>
+
+            <h2>
+              Payment History
+            </h2>
+
+            <p id="paymentResultCount">
+              Loading payments...
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+
+          <table class="admin-table">
+
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Customer
+                </th>
+
+                <th>
+                  Job
+                </th>
+
+                <th>
+                  Amount
+                </th>
+
+                <th>
+                  Method
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Paid / Received
+                </th>
+
+                <th>
+                  Reference
+                </th>
+
+                <th>
+                  Created
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="paymentsTableBody">
+
+              <tr>
+
+                <td colspan="9">
+                  Loading payments...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+
+          </table>
+
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       CREATE / EDIT PAYMENT MODAL
+  ====================================================== -->
+
+  <div
+    id="paymentModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="paymentModalBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="paymentModalTitle"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            PAYMENT
+          </div>
+
+          <h2 id="paymentModalTitle">
+            Record Payment
+          </h2>
+
+          <p id="paymentModalSubtitle">
+            Add a customer payment to the CRM.
+          </p>
+
+        </div>
+
+
+        <button
+          id="closePaymentModal"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close payment form"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <form id="paymentForm">
+
+
+        <input
+          id="paymentId"
+          type="hidden"
+        >
+
+
+        <div
+          id="paymentFormError"
+          class="admin-error"
+          hidden
+        ></div>
+
+
+        <!-- =================================================
+             PAYMENT FOR
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Payment For
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="customer_id">
+                Customer *
+              </label>
+
+              <select
+                id="customer_id"
+                name="customer_id"
+                required
+              >
+
+                <option value="">
+                  Select customer
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="job_id">
+                Job
+              </label>
+
+              <select
+                id="job_id"
+                name="job_id"
+              >
+
+                <option value="">
+                  No linked job
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field full">
+
+              <label for="estimate_id">
+                Estimate
+              </label>
+
+              <select
+                id="estimate_id"
+                name="estimate_id"
+              >
+
+                <option value="">
+                  No linked estimate
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PAYMENT DETAILS
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Payment Details
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="amount">
+                Amount *
+              </label>
+
+              <input
+                id="amount"
+                name="amount"
+                type="number"
+                min="0.01"
+                step="0.01"
+                inputmode="decimal"
+                required
+                placeholder="0.00"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="method">
+                Method
+              </label>
+
+              <select
+                id="method"
+                name="method"
+              >
+
+                <option value="">
+                  Not specified
+                </option>
+
+                <option value="cash">
+                  Cash
+                </option>
+
+                <option value="card">
+                  Card
+                </option>
+
+                <option value="zelle">
+                  Zelle
+                </option>
+
+                <option value="check">
+                  Check
+                </option>
+
+                <option value="ach">
+                  ACH
+                </option>
+
+                <option value="other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="status">
+                Status *
+              </label>
+
+              <select
+                id="status"
+                name="status"
+                required
+              >
+
+                <option value="pending">
+                  Pending
+                </option>
+
+                <option value="paid">
+                  Paid
+                </option>
+
+                <option value="failed">
+                  Failed
+                </option>
+
+                <option value="refunded">
+                  Refunded
+                </option>
+
+                <option value="partially_refunded">
+                  Partially Refunded
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="external_reference">
+                Reference
+              </label>
+
+              <input
+                id="external_reference"
+                name="external_reference"
+                type="text"
+                placeholder="Zelle confirmation, check #, transaction ID..."
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             DATES
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Dates
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field">
+
+              <label for="paid_at">
+                Paid At
+              </label>
+
+              <input
+                id="paid_at"
+                name="paid_at"
+                type="datetime-local"
+              >
+
+            </div>
+
+
+            <div class="admin-field">
+
+              <label for="received_at">
+                Received At
+              </label>
+
+              <input
+                id="received_at"
+                name="received_at"
+                type="datetime-local"
+              >
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             NOTES
+        ================================================== -->
+
+        <section class="admin-form-section">
+
+
+          <h3>
+            Notes
+          </h3>
+
+
+          <div class="admin-form-grid">
+
+
+            <div class="admin-field full">
+
+              <label for="notes">
+                Internal Notes
+              </label>
+
+              <textarea
+                id="notes"
+                name="notes"
+                rows="5"
+                placeholder="Payment notes, receipt information, refund details..."
+              ></textarea>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             JOB BALANCE PREVIEW
+        ================================================== -->
+
+        <section
+          id="paymentJobSummary"
+          class="admin-form-section"
+          hidden
+        >
+
+
+          <h3>
+            Job Balance
+          </h3>
+
+
+          <div class="admin-price-summary">
+
+
+            <div>
+
+              <span>
+                Job Total
+              </span>
+
+              <strong id="paymentJobTotal">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Currently Paid
+              </span>
+
+              <strong id="paymentJobPaid">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Current Balance
+              </span>
+
+              <strong id="paymentJobBalance">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                After This Payment
+              </span>
+
+              <strong id="paymentNewBalance">
+                $0.00
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <footer class="admin-form-actions">
+
+
+          <button
+            id="cancelPaymentButton"
+            type="button"
+            class="admin-secondary-button"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            id="savePaymentButton"
+            type="submit"
+            class="admin-primary-button"
+          >
+            Save Payment
+          </button>
+
+
+        </footer>
+
+
+      </form>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       VIEW PAYMENT MODAL
+  ====================================================== -->
+
+  <div
+    id="viewPaymentModal"
+    class="admin-modal"
+    hidden
+  >
+
+
+    <div
+      id="viewPaymentBackdrop"
+      class="admin-modal-backdrop"
+    ></div>
+
+
+    <section
+      class="admin-modal-card admin-job-view-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="viewPaymentAmount"
+    >
+
+
+      <header class="admin-modal-header">
+
+
+        <div>
+
+          <div class="admin-eyebrow">
+            PAYMENT DETAILS
+          </div>
+
+          <h2 id="viewPaymentAmount">
+            $0.00
+          </h2>
+
+          <p id="viewPaymentCustomer">
+            Customer
+          </p>
+
+        </div>
+
+
+        <button
+          id="closeViewPayment"
+          type="button"
+          class="admin-icon-button"
+          aria-label="Close payment"
+        >
+          ×
+        </button>
+
+
+      </header>
+
+
+      <div
+        id="viewPaymentContent"
+        class="admin-view-content"
+      ></div>
+
+
+      <footer class="admin-form-actions">
+
+
+        <button
+          id="editPaymentButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Edit
+        </button>
+
+
+        <button
+          id="markPaymentPaidButton"
+          type="button"
+          class="admin-secondary-button"
+        >
+          Mark Paid
+        </button>
+
+
+        <button
+          id="viewPaymentJobButton"
+          type="button"
+          class="admin-primary-button"
+        >
+          View Job
+        </button>
+
+
+      </footer>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ======================================================
+       SCRIPTS
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/admin-auth.js"></script>
+  <script src="../assets/admin-defaults.js"></script>
+  <script src="../assets/admin-payments.js"></script>
+
+
+</body>
+
+</html>

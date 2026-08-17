@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080808"
+  >
+
+  <title>Admin Login | Metro Haul</title>
+
+  <link
+    rel="stylesheet"
+    href="../assets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/admin.css"
+  >
+
+</head>
+
+
+<body class="admin-login-body">
+
+
+  <!-- =====================================================
+       LOGIN SHELL
+  ====================================================== -->
+
+  <main class="admin-login-shell">
+
+
+    <!-- ===================================================
+         BRAND SIDE
+    ==================================================== -->
+
+    <section
+      class="admin-login-brand"
+      aria-label="Metro Haul admin"
+    >
+
+
+      <div class="admin-login-brand-inner">
+
+
+        <a
+          href="../index.html"
+          class="admin-login-logo"
+          aria-label="Return to Metro Haul website"
+        >
+
+          <img
+            src="../assets/metro-haul-logo.png"
+            alt="Metro Haul Moving & Junk Removal"
+          >
+
+        </a>
+
+
+        <div class="admin-eyebrow">
+          METRO HAUL OPERATIONS
+        </div>
+
+
+        <h1>
+          Run your moving business from one place.
+        </h1>
+
+
+        <p>
+          Secure access to leads, estimates, jobs,
+          dispatch, payments, customers and crew.
+        </p>
+
+
+        <div class="admin-login-feature-list">
+
+
+          <div class="admin-login-feature">
+
+            <span aria-hidden="true">
+              01
+            </span>
+
+            <div>
+
+              <strong>
+                Manage Leads
+              </strong>
+
+              <p>
+                Review quote requests and convert customers.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-login-feature">
+
+            <span aria-hidden="true">
+              02
+            </span>
+
+            <div>
+
+              <strong>
+                Schedule Jobs
+              </strong>
+
+              <p>
+                Track moving dates, routes and crew assignments.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-login-feature">
+
+            <span aria-hidden="true">
+              03
+            </span>
+
+            <div>
+
+              <strong>
+                Track Payments
+              </strong>
+
+              <p>
+                Monitor money collected and outstanding balances.
+              </p>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+    <!-- ===================================================
+         LOGIN FORM SIDE
+    ==================================================== -->
+
+    <section
+      class="admin-login-form-side"
+      aria-labelledby="adminLoginTitle"
+    >
+
+
+      <div class="admin-login-card">
+
+
+        <div class="admin-login-mobile-logo">
+
+          <a
+            href="../index.html"
+            aria-label="Return to Metro Haul website"
+          >
+
+            <img
+              src="../assets/metro-haul-logo.png"
+              alt="Metro Haul Moving & Junk Removal"
+            >
+
+          </a>
+
+        </div>
+
+
+        <div class="admin-eyebrow">
+          ADMIN ACCESS
+        </div>
+
+
+        <h2 id="adminLoginTitle">
+          Sign In
+        </h2>
+
+
+        <p class="admin-login-intro">
+          Enter your Metro Haul administrator credentials.
+        </p>
+
+
+        <form
+          id="adminLoginForm"
+          novalidate
+        >
+
+
+          <!-- =============================================
+               MESSAGE
+          ============================================== -->
+
+          <div
+            id="adminLoginMessage"
+            class="admin-login-message"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+
+          <!-- =============================================
+               EMAIL
+          ============================================== -->
+
+          <div class="admin-field">
+
+            <label for="adminEmail">
+              Email Address
+            </label>
+
+            <input
+              id="adminEmail"
+              name="email"
+              type="email"
+              autocomplete="username"
+              inputmode="email"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+              placeholder="you@example.com"
+            >
+
+          </div>
+
+
+          <!-- =============================================
+               PASSWORD
+          ============================================== -->
+
+          <div class="admin-field">
+
+
+            <div class="admin-login-label-row">
+
+              <label for="adminPassword">
+                Password
+              </label>
+
+            </div>
+
+
+            <div class="admin-password-wrap">
+
+              <input
+                id="adminPassword"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+                minlength="6"
+                placeholder="Enter your password"
+              >
+
+              <button
+                id="toggleAdminPassword"
+                type="button"
+                class="admin-password-toggle"
+                aria-label="Show password"
+                aria-pressed="false"
+              >
+                Show
+              </button>
+
+            </div>
+
+
+          </div>
+
+
+          <!-- =============================================
+               REMEMBER
+          ============================================== -->
+
+          <label class="admin-login-checkbox">
+
+            <input
+              id="rememberAdmin"
+              name="remember"
+              type="checkbox"
+              checked
+            >
+
+            <span>
+              Keep me signed in on this device
+            </span>
+
+          </label>
+
+
+          <!-- =============================================
+               LOGIN BUTTON
+          ============================================== -->
+
+          <button
+            id="adminLoginButton"
+            type="submit"
+            class="admin-primary-button admin-login-submit"
+          >
+            Sign In to Dashboard
+          </button>
+
+
+        </form>
+
+
+        <!-- =================================================
+             SECURITY NOTE
+        ================================================== -->
+
+        <div class="admin-login-security">
+
+          <strong>
+            Secure admin area
+          </strong>
+
+          <p>
+            Access is restricted to active Metro Haul
+            administrator accounts.
+          </p>
+
+        </div>
+
+
+        <!-- =================================================
+             PUBLIC WEBSITE
+        ================================================== -->
+
+        <a
+          href="../index.html"
+          class="admin-login-back-link"
+        >
+          ← Return to Metro Haul website
+        </a>
+
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =====================================================
+       SCRIPTS
+
+       Login page intentionally does NOT load admin-auth.js.
+       admin-login.js handles authentication here.
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/admin-login.js"></script>
+
+
+</body>
+
+</html>
