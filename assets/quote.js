@@ -1,472 +1,300 @@
-"use strict";
-
 (function () {
   const form = document.getElementById("quoteForm");
+  if (!form) return;
 
-  if (!form) {
-    return;
-  }
+  const successNotice = document.getElementById("successNotice");
 
-  const successNotice =
-    document.getElementById("successNotice");
+  const validServiceTypes = new Set([
+    "residential",
+    "apartment",
+    "office",
+    "loading_unloading",
+    "furniture_delivery",
+    "junk_removal",
+    "other"
+  ]);
 
-  const errorNotice =
-    document.getElementById("errorNotice");
-
-  const submitButton =
-    document.getElementById("quoteSubmitButton") ||
-    form.querySelector('button[type="submit"]');
-
-
-  /* =========================================
-     HELPERS
-  ========================================= */
-
-  function clean(value) {
-    if (typeof value !== "string") {
-      return value;
-    }
-
-    const trimmed = value.trim();
-
-    return trimmed === ""
-      ? null
-      : trimmed;
-  }
-
+  const serviceTypeAliases = {
+    loading: "loading_unloading",
+    loading_unloading: "loading_unloading",
+    furniture: "furniture_delivery",
+    furniture_delivery: "furniture_delivery",
+    delivery: "furniture_delivery",
+    junk: "junk_removal",
+    junk_removal: "junk_removal",
+    residential: "residential",
+    apartment: "apartment",
+    office: "office",
+    other: "other"
+  };
 
   function toBoolean(value) {
-    return value === "true";
+    return value === true ||
+      value === "true" ||
+      value === "on" ||
+      value === "yes" ||
+      value === "1";
   }
 
+  function toNonNegativeInteger(value) {
+    const number = Number.parseInt(value, 10);
 
-  function toInteger(value) {
-    const parsed =
-      Number.parseInt(value, 10);
+    if (!Number.isFinite(number) || number < 0) {
+      return 0;
+    }
 
-    return Number.isFinite(parsed)
-      ? parsed
-      : 0;
+    return number;
   }
 
+  function cleanText(value) {
+    if (value === undefined || value === null) return null;
 
-  function hideNotices() {
-    if (successNotice) {
-      successNotice.style.display = "none";
-    }
-
-    if (errorNotice) {
-      errorNotice.style.display = "none";
-      errorNotice.textContent = "";
-    }
+    const cleaned = String(value).trim();
+    return cleaned === "" ? null : cleaned;
   }
 
+  function normalizeServiceType(value) {
+    const raw = cleanText(value);
 
-  function showSuccess() {
-    if (errorNotice) {
-      errorNotice.style.display = "none";
+    if (!raw) {
+      throw new Error("Please select a service type.");
     }
 
-    if (!successNotice) {
-      return;
+    const normalized = serviceTypeAliases[raw.toLowerCase()] || raw.toLowerCase();
+
+    if (!validServiceTypes.has(normalized)) {
+      throw new Error("Please select a valid moving service.");
     }
 
-    successNotice.style.display = "block";
-
-    successNotice.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+    return normalized;
   }
 
-
-  function showError(message) {
-    if (successNotice) {
-      successNotice.style.display = "none";
-    }
-
-    if (errorNotice) {
-      errorNotice.textContent = message;
-      errorNotice.style.display = "block";
-
-      errorNotice.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
-
-      return;
-    }
-
-    alert(message);
-  }
-
-
-  function setSubmitting(isSubmitting) {
-    if (!submitButton) {
-      return;
-    }
-
-    submitButton.disabled =
-      isSubmitting;
-
-    submitButton.textContent =
-      isSubmitting
-        ? "Submitting..."
-        : "Request My Free Quote";
-  }
-
-
-  /* =========================================
-     SUBMIT FORM
-  ========================================= */
-
-  form.addEventListener(
-    "submit",
-    async function (event) {
-      event.preventDefault();
-
-      hideNotices();
-
-
-      /* Browser validation */
-
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
+  function getFormValue(formData, ...names) {
+    for (const name of names) {
+      if (formData.has(name)) {
+        return formData.get(name);
       }
+    }
 
+    return null;
+  }
 
-      const formData =
-        new FormData(form);
+  function buildLeadPayload(formData) {
+    const firstName = cleanText(
+      getFormValue(formData, "first_name", "firstName")
+    );
 
+    const lastName = cleanText(
+      getFormValue(formData, "last_name", "lastName")
+    );
 
-      /* =====================================
-         BUILD DATABASE PAYLOAD
+    const email = cleanText(
+      getFormValue(formData, "email")
+    );
 
-         These names match public.leads.
-      ===================================== */
+    const phone = cleanText(
+      getFormValue(formData, "phone")
+    );
 
-      const lead = {
-        first_name:
-          clean(
-            formData.get("first_name")
-          ),
+    const serviceType = normalizeServiceType(
+      getFormValue(formData, "service_type", "serviceType")
+    );
 
-        last_name:
-          clean(
-            formData.get("last_name")
-          ),
+    if (!firstName) {
+      throw new Error("First name is required.");
+    }
 
-        email:
-          clean(
-            formData.get("email")
-          ),
+    if (!lastName) {
+      throw new Error("Last name is required.");
+    }
 
-        phone:
-          clean(
-            formData.get("phone")
-          ),
+    if (!email) {
+      throw new Error("Email is required.");
+    }
 
-        service_type:
-          clean(
-            formData.get("service_type")
-          ),
+    if (!phone) {
+      throw new Error("Phone number is required.");
+    }
 
-        move_date:
-          clean(
-            formData.get("move_date")
-          ),
+    return {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      phone,
+      service_type: serviceType,
 
-        pickup_address:
-          clean(
-            formData.get(
-              "pickup_address"
-            )
-          ),
+      move_date: cleanText(
+        getFormValue(formData, "move_date", "moveDate")
+      ),
 
-        pickup_city:
-          clean(
-            formData.get(
-              "pickup_city"
-            )
-          ),
+      pickup_address: cleanText(
+        getFormValue(formData, "pickup_address", "pickupAddress")
+      ),
 
-        pickup_state:
-          clean(
-            formData.get(
-              "pickup_state"
-            )
-          ),
+      pickup_city: cleanText(
+        getFormValue(formData, "pickup_city", "pickupCity")
+      ),
 
-        pickup_zip:
-          clean(
-            formData.get(
-              "pickup_zip"
-            )
-          ),
+      pickup_state: cleanText(
+        getFormValue(formData, "pickup_state", "pickupState")
+      ),
 
-        destination_address:
-          clean(
-            formData.get(
-              "destination_address"
-            )
-          ),
+      pickup_zip: cleanText(
+        getFormValue(formData, "pickup_zip", "pickupZip")
+      ),
 
-        destination_city:
-          clean(
-            formData.get(
-              "destination_city"
-            )
-          ),
-
-        destination_state:
-          clean(
-            formData.get(
-              "destination_state"
-            )
-          ),
-
-        destination_zip:
-          clean(
-            formData.get(
-              "destination_zip"
-            )
-          ),
-
-        home_size:
-          clean(
-            formData.get("home_size")
-          ),
-
-        pickup_stairs:
-          toInteger(
-            formData.get(
-              "pickup_stairs"
-            )
-          ),
-
-        destination_stairs:
-          toInteger(
-            formData.get(
-              "destination_stairs"
-            )
-          ),
-
-        pickup_elevator:
-          toBoolean(
-            formData.get(
-              "pickup_elevator"
-            )
-          ),
-
-        destination_elevator:
-          toBoolean(
-            formData.get(
-              "destination_elevator"
-            )
-          ),
-
-        packing_needed:
-          toBoolean(
-            formData.get(
-              "packing_needed"
-            )
-          ),
-
-        specialty_items:
-          clean(
-            formData.get(
-              "specialty_items"
-            )
-          ),
-
-        notes:
-          clean(
-            formData.get("notes")
-          ),
-
-        /*
-          Required by the public RLS policy.
-          Do not replace this with Google Search,
-          Facebook, Referral, etc.
-        */
-        lead_source: "website",
-
-        /*
-          Required by the current RLS rule.
-        */
-        status: "new",
-
-        assigned_to: null
-      };
-
-
-      /* =====================================
-         REQUIRED FIELD CHECK
-      ===================================== */
-
-      if (
-        !lead.first_name ||
-        !lead.last_name ||
-        !lead.email ||
-        !lead.phone ||
-        !lead.service_type
-      ) {
-        showError(
-          "Please complete all required fields before submitting your quote."
-        );
-
-        return;
-      }
-
-
-      /* =====================================
-         SUPABASE CONFIG
-      ===================================== */
-
-      const config =
-        window.METRO_HAUL_SUPABASE;
-
-
-      if (
-        !config ||
-        !config.url ||
-        !config.publishableKey
-      ) {
-        showError(
-          "The quote system is not configured correctly. Please call Metro Haul at 571-719-9575."
-        );
-
-        return;
-      }
-
-
-      if (
-        config.url.includes(
-          "YOUR_PROJECT"
-        ) ||
-        config.publishableKey.includes(
-          "REPLACE_ME"
+      destination_address: cleanText(
+        getFormValue(
+          formData,
+          "destination_address",
+          "destinationAddress"
         )
-      ) {
-        showError(
-          "The quote system is not configured correctly. Please call Metro Haul at 571-719-9575."
-        );
+      ),
 
-        return;
-      }
+      destination_city: cleanText(
+        getFormValue(
+          formData,
+          "destination_city",
+          "destinationCity"
+        )
+      ),
 
+      destination_state: cleanText(
+        getFormValue(
+          formData,
+          "destination_state",
+          "destinationState"
+        )
+      ),
 
-      setSubmitting(true);
+      destination_zip: cleanText(
+        getFormValue(
+          formData,
+          "destination_zip",
+          "destinationZip"
+        )
+      ),
 
+      home_size: cleanText(
+        getFormValue(formData, "home_size", "homeSize")
+      ),
 
-      try {
+      pickup_stairs: toNonNegativeInteger(
+        getFormValue(formData, "pickup_stairs", "pickupStairs")
+      ),
 
-        /* ===================================
-           SEND TO SUPABASE
+      destination_stairs: toNonNegativeInteger(
+        getFormValue(
+          formData,
+          "destination_stairs",
+          "destinationStairs"
+        )
+      ),
 
-           IMPORTANT:
-           sb_publishable keys use apikey.
-           Do NOT send the publishable key
-           as Authorization: Bearer.
-        =================================== */
+      pickup_elevator: toBoolean(
+        getFormValue(
+          formData,
+          "pickup_elevator",
+          "pickupElevator"
+        )
+      ),
 
-        const response =
-          await fetch(
-            `${config.url}/rest/v1/leads`,
-            {
-              method: "POST",
+      destination_elevator: toBoolean(
+        getFormValue(
+          formData,
+          "destination_elevator",
+          "destinationElevator"
+        )
+      ),
 
-              headers: {
-                "apikey":
-                  config.publishableKey,
+      packing_needed: toBoolean(
+        getFormValue(formData, "packing_needed", "packingNeeded")
+      ),
 
-                "Content-Type":
-                  "application/json",
+      specialty_items: cleanText(
+        getFormValue(
+          formData,
+          "specialty_items",
+          "specialtyItems"
+        )
+      ),
 
-                "Prefer":
-                  "return=minimal"
-              },
+      notes: cleanText(
+        getFormValue(formData, "notes")
+      ),
 
-              body:
-                JSON.stringify(lead)
-            }
-          );
+      lead_source: "website",
+      status: "new",
+      assigned_to: null
+    };
+  }
 
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-        /* ===================================
-           HANDLE DATABASE ERROR
-        =================================== */
+    const submitButton = form.querySelector('button[type="submit"]');
 
-        if (!response.ok) {
-          let errorBody = "";
+    if (!submitButton) return;
 
-          try {
-            errorBody =
-              await response.text();
-          } catch {
-            errorBody =
-              "No error response returned.";
-          }
+    const originalButtonText = submitButton.textContent;
 
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting…";
 
-          console.error(
-            "Metro Haul Supabase error:",
-            {
-              status:
-                response.status,
-
-              statusText:
-                response.statusText,
-
-              response:
-                errorBody,
-
-              payload:
-                lead
-            }
-          );
-
-
-          throw new Error(
-            `Quote submission failed with status ${response.status}.`
-          );
-        }
-
-
-        /* ===================================
-           SUCCESS
-        =================================== */
-
-        console.log(
-          "Metro Haul quote submitted successfully."
-        );
-
-
-        form.reset();
-
-        showSuccess();
-
-
-      } catch (error) {
-
-        console.error(
-          "Metro Haul quote submission error:",
-          error
-        );
-
-
-        showError(
-          "We couldn't submit your quote. Please try again or call Metro Haul at 571-719-9575."
-        );
-
-
-      } finally {
-
-        setSubmitting(false);
-
-      }
+    if (successNotice) {
+      successNotice.style.display = "none";
     }
-  );
 
+    try {
+      const config = window.METRO_HAUL_SUPABASE || {};
+
+      if (!config.url || !config.publishableKey) {
+        throw new Error("Supabase is not configured.");
+      }
+
+      const formData = new FormData(form);
+      const lead = buildLeadPayload(formData);
+
+      const response = await fetch(
+        `${config.url}/rest/v1/leads`,
+        {
+          method: "POST",
+          headers: {
+            apikey: config.publishableKey,
+            "Content-Type": "application/json",
+            Prefer: "return=minimal"
+          },
+          body: JSON.stringify(lead)
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Supabase quote error:", errorText);
+
+        throw new Error("We could not submit your quote request.");
+      }
+
+      form.reset();
+
+      if (successNotice) {
+        successNotice.style.display = "block";
+        successNotice.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+    } catch (error) {
+      console.error("Quote form error:", error);
+
+      alert(
+        error.message ||
+        "Something went wrong while submitting your quote. Please try again."
+      );
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent =
+        originalButtonText || "Request My Free Quote";
+    }
+  });
 })();

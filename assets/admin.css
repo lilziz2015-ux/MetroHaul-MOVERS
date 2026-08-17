@@ -1,0 +1,7513 @@
+/* =========================================================
+   METRO HAUL ADMIN DASHBOARD
+   ========================================================= */
+
+
+/* ---------- Layout ---------- */
+
+.admin-dashboard-layout {
+  min-height: 100vh;
+}
+
+
+.admin-dashboard-main {
+  min-height: 100vh;
+  margin-left: 275px;
+}
+
+
+/* ---------- Sidebar ---------- */
+
+.admin-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+
+  z-index: 1000;
+
+  width: 275px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+
+  background: #080808;
+
+  border-right: 1px solid var(--border);
+}
+
+
+.admin-sidebar-top {
+  min-height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px 22px;
+}
+
+
+.admin-sidebar-logo img {
+  display: block;
+  width: 185px;
+  height: auto;
+}
+
+
+.admin-sidebar-close {
+  display: none;
+
+  border: 0;
+  background: transparent;
+
+  color: white;
+
+  font-size: 30px;
+  cursor: pointer;
+}
+
+
+.admin-sidebar-section-label {
+  padding: 15px 24px 8px;
+
+  color: #5f5f5f;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: .15em;
+}
+
+
+.admin-sidebar-nav {
+  padding: 0 12px 10px;
+}
+
+
+.admin-sidebar-link {
+  min-height: 47px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 4px;
+
+  padding: 0 13px;
+
+  border-radius: 11px;
+
+  color: #999;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    color .2s,
+    background .2s;
+}
+
+
+.admin-sidebar-link:hover {
+  color: white;
+  background: #141414;
+}
+
+
+.admin-sidebar-link.active {
+  color: #ff4d47;
+
+  background:
+    rgba(255, 27, 27, .12);
+}
+
+
+.admin-nav-icon {
+  width: 24px;
+
+  display: inline-flex;
+  justify-content: center;
+
+  font-size: 17px;
+}
+
+
+.admin-nav-count {
+  margin-left: auto;
+
+  min-width: 23px;
+  height: 23px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 6px;
+
+  border-radius: 999px;
+
+  background: var(--red);
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+.admin-sidebar-user {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  margin:
+    auto
+    18px
+    12px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #222;
+}
+
+
+.admin-sidebar-avatar {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--red);
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 900;
+}
+
+
+.admin-sidebar-user-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.admin-sidebar-user-info strong {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: 13px;
+}
+
+
+.admin-sidebar-user-info span {
+  color: #777;
+
+  font-size: 11px;
+
+  text-transform: capitalize;
+}
+
+
+.admin-sidebar-logout {
+  min-height: 42px;
+
+  margin:
+    0
+    18px
+    20px;
+
+  border: 1px solid #333;
+
+  border-radius: 10px;
+
+  background: #111;
+
+  color: #aaa;
+
+  cursor: pointer;
+
+  font-weight: 700;
+}
+
+
+.admin-sidebar-logout:hover {
+  color: white;
+  border-color: var(--red);
+}
+
+
+/* ---------- Top bar ---------- */
+
+.admin-dashboard-topbar {
+  position: sticky;
+  top: 0;
+
+  z-index: 500;
+
+  min-height: 88px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 15px 30px;
+
+  background:
+    rgba(7, 7, 7, .94);
+
+  backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid var(--border);
+}
+
+
+.admin-topbar-left {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+.admin-topbar-eyebrow {
+  display: block;
+
+  color: var(--red);
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: .15em;
+}
+
+
+.admin-dashboard-topbar h1 {
+  margin: 2px 0 0;
+
+  font-size: 24px;
+
+  letter-spacing: -.03em;
+}
+
+
+.admin-topbar-right {
+  display: flex;
+  gap: 9px;
+}
+
+
+.admin-topbar-button {
+  min-height: 41px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 14px;
+
+  border: 1px solid #333;
+
+  border-radius: 9px;
+
+  background: #111;
+
+  color: #ddd;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+.admin-topbar-button:hover {
+  border-color: var(--red);
+  color: white;
+}
+
+
+.admin-mobile-menu {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid #333;
+
+  border-radius: 9px;
+
+  background: #111;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+
+/* ---------- Content ---------- */
+
+.admin-dashboard-content {
+  width:
+    min(
+      1450px,
+      calc(100% - 50px)
+    );
+
+  margin: auto;
+
+  padding: 35px 0 70px;
+}
+
+
+.admin-dashboard-welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 30px;
+
+  margin-bottom: 30px;
+}
+
+
+.admin-dashboard-eyebrow {
+  color: #ff514b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: .15em;
+}
+
+
+.admin-dashboard-welcome h2 {
+  margin: 6px 0;
+
+  font-size:
+    clamp(28px, 4vw, 42px);
+
+  letter-spacing: -.045em;
+}
+
+
+.admin-dashboard-welcome h2 span {
+  color: var(--red);
+}
+
+
+.admin-dashboard-welcome p {
+  margin: 0;
+
+  color: var(--muted);
+}
+
+
+.admin-dashboard-date {
+  min-width: 170px;
+
+  padding: 13px 17px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  background: var(--surface);
+}
+
+
+.admin-dashboard-date span {
+  display: block;
+
+  color: #666;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+}
+
+
+.admin-dashboard-date strong {
+  font-size: 13px;
+}
+
+
+/* ---------- Main statistics ---------- */
+
+.admin-dashboard-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 14px;
+}
+
+
+.admin-dashboard-stat {
+  padding: 21px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #121212,
+      #0b0b0b
+    );
+}
+
+
+.admin-stat-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+
+  color: #999;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+.admin-stat-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background:
+    rgba(255,27,27,.12);
+
+  color: #ff4a44;
+}
+
+
+.admin-stat-number {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 34px;
+  line-height: 1;
+
+  letter-spacing: -.04em;
+}
+
+
+.admin-dashboard-stat small {
+  color: #666;
+}
+
+
+/* ---------- Mini stats ---------- */
+
+.admin-dashboard-mini-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 12px;
+
+  margin-top: 13px;
+}
+
+
+.admin-dashboard-mini-stats article {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 14px 16px;
+
+  border: 1px solid #242424;
+
+  border-radius: 12px;
+
+  background: #0d0d0d;
+}
+
+
+.admin-dashboard-mini-stats span {
+  color: #777;
+
+  font-size: 11px;
+}
+
+
+.admin-dashboard-mini-stats strong {
+  font-size: 15px;
+}
+
+
+/* ---------- Sections ---------- */
+
+.admin-dashboard-section {
+  margin-top: 45px;
+}
+
+
+.admin-dashboard-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 17px;
+}
+
+
+.admin-dashboard-section-header h2 {
+  margin: 5px 0 0;
+
+  font-size: 23px;
+
+  letter-spacing: -.03em;
+}
+
+
+.admin-dashboard-view-all {
+  color: #ff4a44;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+/* ---------- Quick actions ---------- */
+
+.admin-quick-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 13px;
+}
+
+
+.admin-quick-action {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 17px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  background: var(--surface);
+
+  color: white;
+
+  text-decoration: none;
+
+  transition:
+    transform .2s,
+    border-color .2s;
+}
+
+
+.admin-quick-action:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--red);
+}
+
+
+.admin-quick-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    rgba(255,27,27,.12);
+
+  color: #ff4a44;
+
+  font-weight: 900;
+}
+
+
+.admin-quick-action div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.admin-quick-action strong {
+  font-size: 13px;
+}
+
+
+.admin-quick-action span {
+  margin-top: 2px;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+
+/* ---------- Panels / tables ---------- */
+
+.admin-dashboard-panel {
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+
+  border-radius: 16px;
+
+  background: var(--surface);
+}
+
+
+.admin-dashboard-table-wrap {
+  overflow-x: auto;
+}
+
+
+.admin-dashboard-table {
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+}
+
+
+.admin-dashboard-table th {
+  padding: 13px 17px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: #121212;
+
+  color: #666;
+
+  text-align: left;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .09em;
+
+  text-transform: uppercase;
+}
+
+
+.admin-dashboard-table td {
+  padding: 16px 17px;
+
+  border-bottom: 1px solid #202020;
+
+  color: #bbb;
+
+  font-size: 12px;
+}
+
+
+.admin-dashboard-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+.admin-dashboard-table tbody tr:hover {
+  background: #121212;
+}
+
+
+.admin-dashboard-loading {
+  padding: 38px;
+
+  color: #777;
+
+  text-align: center;
+}
+
+
+.admin-dashboard-empty {
+  padding: 50px 25px;
+
+  text-align: center;
+}
+
+
+.admin-empty-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 14px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,27,27,.12);
+
+  color: #ff4a44;
+
+  font-size: 20px;
+}
+
+
+.admin-dashboard-empty h3 {
+  margin: 0 0 6px;
+}
+
+
+.admin-dashboard-empty p {
+  color: #777;
+}
+
+
+/* ---------- Status ---------- */
+
+.admin-status-badge {
+  display: inline-flex;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,27,27,.12);
+
+  color: #ff514b;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .05em;
+
+  text-transform: uppercase;
+}
+
+
+.admin-dashboard-contact {
+  display: flex;
+
+  gap: 6px;
+}
+
+
+.admin-dashboard-contact a {
+  display: inline-flex;
+
+  min-height: 29px;
+
+  align-items: center;
+
+  padding: 0 8px;
+
+  border: 1px solid #333;
+
+  border-radius: 7px;
+
+  background: #151515;
+
+  color: #ddd;
+
+  text-decoration: none;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+
+/* ---------- Upcoming jobs ---------- */
+
+.admin-upcoming-jobs {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 13px;
+}
+
+
+.admin-upcoming-job {
+  padding: 18px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  background: var(--surface);
+}
+
+
+.admin-upcoming-job-date {
+  color: #ff4a44;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: .07em;
+
+  text-transform: uppercase;
+}
+
+
+.admin-upcoming-job h3 {
+  margin: 7px 0 5px;
+
+  font-size: 15px;
+}
+
+
+.admin-upcoming-job p {
+  margin: 3px 0;
+
+  color: #777;
+
+  font-size: 11px;
+}
+
+
+/* ---------- Finance ---------- */
+
+.admin-finance-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 13px;
+}
+
+
+.admin-finance-card {
+  padding: 21px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  background: var(--surface);
+}
+
+
+.admin-finance-card > span {
+  color: #777;
+
+  font-size: 11px;
+}
+
+
+.admin-finance-card strong {
+  display: block;
+
+  margin: 7px 0 4px;
+
+  font-size: 27px;
+}
+
+
+.admin-finance-card small {
+  color: #666;
+}
+
+
+/* ---------- Footer ---------- */
+
+.admin-dashboard-footer {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 24px 30px;
+
+  border-top: 1px solid #222;
+
+  color: #666;
+
+  font-size: 10px;
+}
+
+
+/* ---------- Sidebar overlay ---------- */
+
+.admin-sidebar-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 900;
+
+  background:
+    rgba(0,0,0,.75);
+}
+
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1150px) {
+
+  .admin-dashboard-stats,
+  .admin-dashboard-mini-stats {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .admin-quick-actions {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .admin-upcoming-jobs {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+/* ---------- Mobile navigation ---------- */
+
+@media (max-width: 850px) {
+
+  .admin-sidebar {
+    transform: translateX(-100%);
+
+    transition: transform .25s ease;
+
+    box-shadow:
+      20px 0 60px
+      rgba(0,0,0,.55);
+  }
+
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+
+  .admin-sidebar-close,
+  .admin-mobile-menu {
+    display: block;
+  }
+
+
+  .admin-dashboard-main {
+    margin-left: 0;
+  }
+
+
+  .admin-dashboard-content {
+    width:
+      calc(100% - 30px);
+  }
+
+}
+
+
+/* ---------- Phones ---------- */
+
+@media (max-width: 620px) {
+
+  .admin-dashboard-topbar {
+    padding: 12px 15px;
+  }
+
+
+  .admin-hide-mobile {
+    display: none;
+  }
+
+
+  .admin-dashboard-welcome {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  .admin-dashboard-date {
+    width: 100%;
+  }
+
+
+  .admin-dashboard-stats {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .admin-dashboard-mini-stats {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .admin-quick-actions,
+  .admin-upcoming-jobs,
+  .admin-finance-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .admin-dashboard-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .admin-dashboard-footer {
+    flex-direction: column;
+  }
+
+}
+
+
+@media (max-width: 420px) {
+
+  .admin-dashboard-stats {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .admin-dashboard-mini-stats {
+    grid-template-columns:
+      1fr;
+  }
+
+}
+/* =========================================================
+   CUSTOMERS
+   ========================================================= */
+
+.admin-customer-form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 14px;
+}
+
+
+.admin-customer-form-grid .full {
+  grid-column:
+    1 / -1;
+}
+
+
+.admin-customer-form-grid
+.admin-field input,
+.admin-customer-form-grid
+.admin-field select,
+.admin-customer-form-grid
+.admin-field textarea {
+  width: 100%;
+
+  border: 1px solid #333;
+
+  border-radius: 10px;
+
+  background: #101010;
+
+  color: white;
+}
+
+
+@media (max-width: 560px) {
+
+  .admin-customer-form-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .admin-customer-form-grid .full {
+    grid-column: auto;
+  }
+
+}
+/* =========================================================
+   ESTIMATES
+   ========================================================= */
+
+.admin-estimate-panel {
+  width: min(760px, 100%);
+}
+
+
+.admin-estimate-view-panel {
+  width: min(650px, 100%);
+}
+
+
+.admin-estimate-form-section {
+  padding: 24px 0;
+
+  border-bottom: 1px solid #272727;
+}
+
+
+.admin-estimate-form-section:first-child {
+  padding-top: 0;
+}
+
+
+.admin-estimate-form-section h3 {
+  margin: 5px 0 18px;
+
+  font-size: 18px;
+}
+
+
+.admin-estimate-summary {
+  margin-top: 22px;
+
+  border: 1px solid #2c2c2c;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  background: #0d0d0d;
+}
+
+
+.admin-estimate-summary > div {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 12px 15px;
+
+  border-bottom: 1px solid #222;
+}
+
+
+.admin-estimate-summary > div:last-child {
+  border-bottom: 0;
+}
+
+
+.admin-estimate-summary span {
+  color: #888;
+
+  font-size: 12px;
+}
+
+
+.admin-estimate-summary strong {
+  font-size: 13px;
+}
+
+
+.admin-estimate-summary-total {
+  background:
+    rgba(255,27,27,.08);
+}
+
+
+.admin-estimate-summary-total span,
+.admin-estimate-summary-total strong {
+  color: #fff;
+
+  font-size: 16px;
+}
+
+
+.admin-estimate-summary-total strong {
+  color: #ff4f49;
+}
+
+
+.admin-estimate-actions,
+.admin-estimate-view-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding-top: 22px;
+}
+
+
+.admin-estimate-secondary {
+  border: 1px solid #333;
+
+  background: #151515;
+
+  color: #eee;
+}
+
+
+.admin-estimate-secondary:hover {
+  border-color: var(--red);
+
+  background: #1a1a1a;
+}
+
+
+.admin-estimate-price-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr auto;
+
+  gap: 10px 20px;
+
+  padding: 18px;
+
+  margin-top: 16px;
+
+  border: 1px solid #292929;
+
+  border-radius: 13px;
+
+  background: #101010;
+}
+
+
+.admin-estimate-price-grid span {
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+.admin-estimate-price-grid strong {
+  text-align: right;
+
+  font-size: 12px;
+}
+
+
+.admin-estimate-price-grid .total-label,
+.admin-estimate-price-grid .total-value {
+  padding-top: 12px;
+
+  border-top: 1px solid #2c2c2c;
+
+  color: white;
+
+  font-size: 16px;
+}
+
+
+.admin-estimate-price-grid .total-value {
+  color: #ff4f49;
+}
+
+
+.admin-estimate-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,27,27,.12);
+
+  color: #ff514b;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: .06em;
+}
+
+
+@media (max-width: 600px) {
+
+  .admin-estimate-actions,
+  .admin-estimate-view-actions {
+    flex-direction: column;
+  }
+
+
+  .admin-estimate-actions .admin-button,
+  .admin-estimate-view-actions .admin-button {
+    width: 100%;
+  }
+
+}/* =========================================================
+   JOBS
+   ========================================================= */
+
+.admin-job-panel {
+  width: min(820px, 100%);
+}
+
+
+.admin-job-view-panel {
+  width: min(680px, 100%);
+}
+
+
+.admin-job-route {
+  display: grid;
+
+  grid-template-columns:
+    1fr auto 1fr;
+
+  gap: 12px;
+
+  align-items: center;
+
+  margin-top: 16px;
+
+  padding: 16px;
+
+  border: 1px solid #292929;
+
+  border-radius: 13px;
+
+  background: #101010;
+}
+
+
+.admin-job-route > div {
+  min-width: 0;
+}
+
+
+.admin-job-route span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #666;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+
+.admin-job-route strong {
+  display: block;
+
+  overflow-wrap: anywhere;
+
+  font-size: 12px;
+}
+
+
+.admin-job-route-arrow {
+  color: var(--red);
+
+  font-size: 20px;
+
+  font-weight: 900;
+}
+
+
+.admin-job-payment-badge {
+  display: inline-flex;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  background: rgba(255,27,27,.12);
+
+  color: #ff514b;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: .05em;
+
+  text-transform: uppercase;
+}
+
+
+.admin-job-financials {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 16px;
+}
+
+
+.admin-job-financials > div {
+  padding: 14px;
+
+  border: 1px solid #292929;
+
+  border-radius: 11px;
+
+  background: #111;
+}
+
+
+.admin-job-financials span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #666;
+
+  font-size: 9px;
+
+  text-transform: uppercase;
+
+  letter-spacing: .07em;
+}
+
+
+.admin-job-financials strong {
+  font-size: 15px;
+}
+
+
+@media (max-width: 600px) {
+
+  .admin-job-route {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-job-route-arrow {
+    transform: rotate(90deg);
+
+    text-align: center;
+  }
+
+
+  .admin-job-financials {
+    grid-template-columns: 1fr;
+  }
+
+}/* =========================================================
+   PAYMENTS
+   ========================================================= */
+
+.admin-payment-panel {
+  width: min(720px, 100%);
+}
+
+
+.admin-payment-view-panel {
+  width: min(620px, 100%);
+}
+
+
+/* ---------------------------------------------------------
+   BALANCE CARDS
+   --------------------------------------------------------- */
+
+.admin-payment-balances {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 14px;
+}
+
+
+.admin-payment-balance-card {
+  padding: 19px;
+
+  border: 1px solid #292929;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #121212,
+      #0c0c0c
+    );
+}
+
+
+.admin-payment-balance-card-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 16px;
+}
+
+
+.admin-payment-balance-card h3 {
+  margin: 0;
+
+  font-size: 15px;
+}
+
+
+.admin-payment-balance-card p {
+  margin: 4px 0 0;
+
+  color: #777;
+
+  font-size: 11px;
+}
+
+
+.admin-payment-balance-money {
+  color: #ff514b;
+
+  font-size: 20px;
+
+  font-weight: 900;
+}
+
+
+.admin-payment-balance-route {
+  padding-top: 13px;
+
+  border-top: 1px solid #242424;
+
+  color: #888;
+
+  font-size: 11px;
+}
+
+
+.admin-payment-balance-actions {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 14px;
+}
+
+
+.admin-payment-balance-actions button,
+.admin-payment-balance-actions a {
+  min-height: 36px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex: 1;
+
+  padding: 0 11px;
+
+  border: 1px solid #333;
+
+  border-radius: 8px;
+
+  background: #141414;
+
+  color: #eee;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+
+.admin-payment-balance-actions
+.admin-payment-record {
+  border-color: var(--red);
+
+  background:
+    rgba(255,27,27,.13);
+
+  color: #ff514b;
+}
+
+
+/* ---------------------------------------------------------
+   JOB PAYMENT PREVIEW
+   --------------------------------------------------------- */
+
+.admin-payment-job-preview {
+  margin-top: 20px;
+
+  padding: 19px;
+
+  border: 1px solid #303030;
+
+  border-radius: 14px;
+
+  background: #0e0e0e;
+}
+
+
+.admin-payment-preview-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 10px;
+
+  margin-top: 13px;
+}
+
+
+.admin-payment-preview-grid > div {
+  padding: 13px;
+
+  border: 1px solid #282828;
+
+  border-radius: 10px;
+
+  background: #121212;
+}
+
+
+.admin-payment-preview-grid span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #666;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: .06em;
+
+  text-transform: uppercase;
+}
+
+
+.admin-payment-preview-grid strong {
+  font-size: 14px;
+}
+
+
+/* ---------------------------------------------------------
+   PAYMENT STATUS
+   --------------------------------------------------------- */
+
+.admin-payment-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,27,27,.12);
+
+  color: #ff514b;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: .05em;
+}
+
+
+.admin-payment-status.status-paid {
+  background:
+    rgba(45,185,85,.12);
+
+  color: #69df89;
+}
+
+
+.admin-payment-status.status-pending {
+  background:
+    rgba(255,180,0,.12);
+
+  color: #ffc34d;
+}
+
+
+.admin-payment-status.status-failed,
+.admin-payment-status.status-refunded {
+  background:
+    rgba(255,65,65,.12);
+
+  color: #ff7171;
+}
+
+
+/* ---------------------------------------------------------
+   PAYMENT DETAIL
+   --------------------------------------------------------- */
+
+.admin-payment-detail-amount {
+  margin: 17px 0;
+
+  padding: 24px;
+
+  text-align: center;
+
+  border: 1px solid #292929;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #151515,
+      #0c0c0c
+    );
+}
+
+
+.admin-payment-detail-amount span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #777;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+
+.admin-payment-detail-amount strong {
+  color: #fff;
+
+  font-size: 38px;
+
+  letter-spacing: -.04em;
+}
+
+
+/* ---------------------------------------------------------
+   TABLE AMOUNT
+   --------------------------------------------------------- */
+
+.admin-payment-table-amount {
+  color: #fff;
+
+  font-weight: 900;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+  .admin-payment-balances {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .admin-payment-preview-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .admin-payment-balances {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .admin-payment-preview-grid {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .admin-payment-preview-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .admin-payment-balance-actions {
+    flex-direction: column;
+  }
+
+}/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+.admin-calendar-toolbar {
+  display: grid;
+
+  grid-template-columns:
+    1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 18px;
+}
+
+
+.admin-calendar-toolbar h2 {
+  margin: 0;
+
+  text-align: center;
+
+  font-size: 24px;
+}
+
+
+.admin-calendar-navigation {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.admin-calendar-nav-button,
+.admin-calendar-today {
+  min-height: 40px;
+
+  padding: 0 13px;
+
+  border: 1px solid #333;
+
+  border-radius: 9px;
+
+  background: #121212;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 800;
+}
+
+
+.admin-calendar-nav-button:hover,
+.admin-calendar-today:hover {
+  border-color: var(--red);
+}
+
+
+.admin-calendar-filter {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+
+.admin-calendar-filter select {
+  min-height: 42px;
+
+  padding: 0 13px;
+
+  border: 1px solid #333;
+
+  border-radius: 9px;
+
+  background: #101010;
+
+  color: white;
+}
+
+
+/* ---------------------------------------------------------
+   MONTH SUMMARY
+   --------------------------------------------------------- */
+
+.admin-calendar-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+
+.admin-calendar-summary > div {
+  padding: 17px;
+
+  border: 1px solid #292929;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #121212,
+      #0c0c0c
+    );
+}
+
+
+.admin-calendar-summary span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #737373;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: .07em;
+}
+
+
+.admin-calendar-summary strong {
+  font-size: 22px;
+}
+
+
+/* ---------------------------------------------------------
+   CALENDAR GRID
+   --------------------------------------------------------- */
+
+.admin-calendar-card {
+  overflow: hidden;
+
+  border: 1px solid #292929;
+
+  border-radius: 16px;
+
+  background: #0d0d0d;
+}
+
+
+.admin-calendar-weekdays {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  border-bottom: 1px solid #292929;
+
+  background: #111;
+}
+
+
+.admin-calendar-weekdays > div {
+  padding: 12px;
+
+  text-align: center;
+
+  color: #666;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+
+.admin-calendar-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+}
+
+
+.admin-calendar-day {
+  min-height: 135px;
+
+  padding: 10px;
+
+  border-right: 1px solid #222;
+
+  border-bottom: 1px solid #222;
+
+  background: #0d0d0d;
+
+  cursor: pointer;
+
+  transition:
+    background .15s ease;
+}
+
+
+.admin-calendar-day:hover {
+  background: #121212;
+}
+
+
+.admin-calendar-day.other-month {
+  opacity: .35;
+}
+
+
+.admin-calendar-day.today {
+  background:
+    rgba(255,27,27,.045);
+}
+
+
+.admin-calendar-date-number {
+  width: 28px;
+
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 8px;
+
+  border-radius: 999px;
+
+  color: #aaa;
+
+  font-size: 11px;
+
+  font-weight: 900;
+}
+
+
+.admin-calendar-day.today
+.admin-calendar-date-number {
+  background: var(--red);
+
+  color: white;
+}
+
+
+/* ---------------------------------------------------------
+   JOB EVENT
+   --------------------------------------------------------- */
+
+.admin-calendar-event {
+  display: block;
+
+  width: 100%;
+
+  margin-bottom: 5px;
+
+  padding: 6px 7px;
+
+  overflow: hidden;
+
+  border: 1px solid #303030;
+
+  border-radius: 7px;
+
+  background: #151515;
+
+  color: white;
+
+  text-align: left;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+
+.admin-calendar-event:hover {
+  border-color: var(--red);
+}
+
+
+.admin-calendar-event-time {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #ff514b;
+
+  font-size: 8px;
+
+  font-weight: 900;
+}
+
+
+.admin-calendar-event-name {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+
+  font-size: 9px;
+
+  font-weight: 800;
+}
+
+
+.admin-calendar-more {
+  margin-top: 5px;
+
+  color: #777;
+
+  font-size: 9px;
+
+  font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   UPCOMING JOBS
+   --------------------------------------------------------- */
+
+.admin-calendar-upcoming {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 13px;
+}
+
+
+.admin-calendar-upcoming-card {
+  padding: 17px;
+
+  border: 1px solid #292929;
+
+  border-radius: 13px;
+
+  background: #101010;
+}
+
+
+.admin-calendar-upcoming-date {
+  margin-bottom: 9px;
+
+  color: #ff514b;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+}
+
+
+.admin-calendar-upcoming-card h3 {
+  margin: 0 0 5px;
+
+  font-size: 14px;
+}
+
+
+.admin-calendar-upcoming-card p {
+  margin: 4px 0;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+
+.admin-calendar-upcoming-card a {
+  display: inline-flex;
+
+  margin-top: 10px;
+
+  color: #ff514b;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  font-weight: 900;
+}
+
+
+/* ---------------------------------------------------------
+   DAY DETAILS
+   --------------------------------------------------------- */
+
+.admin-calendar-day-panel {
+  width: min(600px, 100%);
+}
+
+
+.admin-calendar-day-job {
+  padding: 16px;
+
+  margin-bottom: 12px;
+
+  border: 1px solid #292929;
+
+  border-radius: 12px;
+
+  background: #111;
+}
+
+
+.admin-calendar-day-job-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 10px;
+}
+
+
+.admin-calendar-day-job h3 {
+  margin: 0;
+
+  font-size: 14px;
+}
+
+
+.admin-calendar-day-job p {
+  margin: 4px 0;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+
+.admin-calendar-day-job a {
+  display: inline-flex;
+
+  margin-top: 9px;
+
+  padding: 8px 11px;
+
+  border: 1px solid var(--red);
+
+  border-radius: 8px;
+
+  color: #ff514b;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  font-weight: 900;
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------- */
+
+@media (max-width: 1050px) {
+
+  .admin-calendar-summary {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .admin-calendar-upcoming {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 760px) {
+
+  .admin-calendar-toolbar {
+    grid-template-columns:
+      1fr;
+
+    text-align: center;
+  }
+
+
+  .admin-calendar-navigation,
+  .admin-calendar-filter {
+    justify-content: center;
+  }
+
+
+  .admin-calendar-toolbar h2 {
+    order: -1;
+  }
+
+
+  .admin-calendar-day {
+    min-height: 95px;
+
+    padding: 6px;
+  }
+
+
+  .admin-calendar-event {
+    padding: 4px;
+  }
+
+
+  .admin-calendar-event-time {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 560px) {
+
+  .admin-calendar-summary {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .admin-calendar-upcoming {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .admin-calendar-weekdays > div {
+    padding: 8px 2px;
+
+    font-size: 7px;
+  }
+
+
+  .admin-calendar-date-number {
+    width: 23px;
+
+    height: 23px;
+
+    font-size: 9px;
+  }
+
+
+  .admin-calendar-day {
+    min-height: 75px;
+  }
+
+
+  .admin-calendar-event-name {
+    font-size: 7px;
+  }
+
+}/* =========================================================
+   CREW MANAGEMENT
+   ========================================================= */
+
+.admin-crew-panel {
+  width: min(680px, 100%);
+}
+
+
+.admin-crew-view-panel {
+  width: min(580px, 100%);
+}
+
+
+/* ---------------------------------------------------------
+   CREW ROLE
+   --------------------------------------------------------- */
+
+.admin-crew-role {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  border: 1px solid #333;
+
+  background: #151515;
+
+  color: #ddd;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: .05em;
+}
+
+
+.admin-crew-role.role-crew_lead,
+.admin-crew-role.role-manager {
+  border-color:
+    rgba(255,27,27,.45);
+
+  background:
+    rgba(255,27,27,.1);
+
+  color: #ff615c;
+}
+
+
+/* ---------------------------------------------------------
+   STATUS
+   --------------------------------------------------------- */
+
+.admin-crew-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+}
+
+
+.admin-crew-status.active {
+  background:
+    rgba(45,185,85,.12);
+
+  color: #6cdf8a;
+}
+
+
+.admin-crew-status.inactive {
+  background:
+    rgba(255,70,70,.1);
+
+  color: #ff7373;
+}
+
+
+.admin-crew-status-dot {
+  width: 6px;
+
+  height: 6px;
+
+  border-radius: 999px;
+
+  background: currentColor;
+}
+
+
+/* ---------------------------------------------------------
+   CREW DETAIL HERO
+   --------------------------------------------------------- */
+
+.admin-crew-profile {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 18px;
+
+  margin-bottom: 18px;
+
+  border: 1px solid #292929;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #141414,
+      #0d0d0d
+    );
+}
+
+
+.admin-crew-profile-avatar {
+  width: 58px;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,27,27,.13);
+
+  color: #ff514b;
+
+  font-size: 18px;
+
+  font-weight: 900;
+}
+
+
+.admin-crew-profile h3 {
+  margin: 0 0 4px;
+
+  font-size: 17px;
+}
+
+
+.admin-crew-profile p {
+  margin: 3px 0;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+
+/* ---------------------------------------------------------
+   CREW COST
+   --------------------------------------------------------- */
+
+.admin-crew-cost {
+  margin-top: 15px;
+
+  padding: 15px;
+
+  border: 1px solid #292929;
+
+  border-radius: 12px;
+
+  background: #101010;
+}
+
+
+.admin-crew-cost span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #777;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: .07em;
+}
+
+
+.admin-crew-cost strong {
+  color: white;
+
+  font-size: 22px;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 520px) {
+
+  .admin-crew-profile {
+    align-items: flex-start;
+  }
+
+}/* =========================================================
+   METRO HAUL ADMIN — JOBS PAGE
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE LAYOUT
+   ========================================================= */
+
+.admin-body {
+  margin: 0;
+  min-height: 100vh;
+  background: #070707;
+  color: #f5f5f5;
+}
+
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  padding: 30px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(180, 20, 20, .08),
+      transparent 32%
+    ),
+    #080808;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.admin-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+
+.admin-page-header h1 {
+  margin: 5px 0 8px;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+
+
+.admin-page-header p {
+  max-width: 700px;
+  margin: 0;
+  color: #8f8f8f;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+.admin-eyebrow {
+  color: #e92727;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.admin-primary-button,
+.admin-secondary-button,
+.admin-icon-button,
+.admin-table-action {
+  font: inherit;
+}
+
+
+.admin-primary-button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid #e22525;
+  border-radius: 9px;
+  background: #d91f1f;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    transform .16s ease,
+    background .16s ease,
+    border-color .16s ease;
+}
+
+
+.admin-primary-button:hover {
+  background: #ef2a2a;
+  border-color: #ef2a2a;
+  transform: translateY(-1px);
+}
+
+
+.admin-primary-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+.admin-secondary-button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid #333;
+  border-radius: 9px;
+  background: #131313;
+  color: #e8e8e8;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    border-color .16s ease,
+    background .16s ease;
+}
+
+
+.admin-secondary-button:hover {
+  border-color: #555;
+  background: #181818;
+}
+
+
+.admin-secondary-button:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+}
+
+
+.admin-icon-button {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 38px;
+  border: 1px solid #333;
+  border-radius: 9px;
+  background: #121212;
+  color: #ccc;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+
+.admin-icon-button:hover {
+  border-color: #e22525;
+  color: #ff5d58;
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.admin-stat-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+
+.admin-stat-card {
+  padding: 18px;
+  border: 1px solid #252525;
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      145deg,
+      #111,
+      #0d0d0d
+    );
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, .16);
+}
+
+
+.admin-stat-card span {
+  display: block;
+  margin-bottom: 10px;
+  color: #777;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+
+.admin-stat-card strong {
+  display: block;
+  font-size: 28px;
+  line-height: 1;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.admin-panel {
+  margin-bottom: 18px;
+  overflow: hidden;
+  border: 1px solid #252525;
+  border-radius: 14px;
+  background: #0e0e0e;
+}
+
+
+.admin-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  border-bottom: 1px solid #232323;
+}
+
+
+.admin-panel-header h2 {
+  margin: 0 0 5px;
+  font-size: 18px;
+}
+
+
+.admin-panel-header p {
+  margin: 0;
+  color: #777;
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   TOOLBAR / FILTERS
+   ========================================================= */
+
+.admin-toolbar {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 1fr)
+    190px
+    190px;
+  gap: 10px;
+  padding: 14px;
+}
+
+
+.admin-input,
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #303030;
+  border-radius: 9px;
+  outline: none;
+  background: #0b0b0b;
+  color: #f3f3f3;
+  font: inherit;
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    background .15s ease;
+}
+
+
+.admin-input {
+  min-height: 42px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+
+.admin-field input,
+.admin-field select {
+  min-height: 43px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+
+.admin-field textarea {
+  min-height: 105px;
+  padding: 12px;
+  resize: vertical;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+
+.admin-input:focus,
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  border-color: #d92b2b;
+  background: #101010;
+  box-shadow:
+    0 0 0 3px rgba(217, 43, 43, .09);
+}
+
+
+.admin-field input[readonly] {
+  color: #aaa;
+  background: #111;
+  cursor: default;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.admin-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+
+.admin-table {
+  width: 100%;
+  min-width: 1050px;
+  border-collapse: collapse;
+}
+
+
+.admin-table thead th {
+  padding: 12px 14px;
+  border-bottom: 1px solid #292929;
+  background: #111;
+  color: #777;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+
+.admin-table tbody td {
+  padding: 14px;
+  border-bottom: 1px solid #202020;
+  color: #ddd;
+  font-size: 11px;
+  vertical-align: middle;
+}
+
+
+.admin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+.admin-table tbody tr {
+  transition: background .15s ease;
+}
+
+
+.admin-table tbody tr:hover {
+  background: #111;
+}
+
+
+.admin-table strong {
+  color: #fff;
+  font-size: 11px;
+}
+
+
+.admin-table-muted {
+  margin-top: 4px;
+  color: #6f6f6f;
+  font-size: 9px;
+}
+
+
+.admin-table-action {
+  min-height: 32px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #333;
+  border-radius: 7px;
+  background: #141414;
+  color: #ddd;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+
+.admin-table-action:hover {
+  border-color: #d72a2a;
+  color: #ff5b56;
+}
+
+
+/* =========================================================
+   JOB STATUS
+   ========================================================= */
+
+.admin-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+
+.status-draft {
+  background: rgba(120, 120, 120, .13);
+  color: #aaa;
+}
+
+
+.status-estimate {
+  background: rgba(159, 99, 255, .12);
+  color: #bc8cff;
+}
+
+
+.status-scheduled {
+  background: rgba(55, 129, 255, .13);
+  color: #6aa3ff;
+}
+
+
+.status-confirmed {
+  background: rgba(39, 185, 91, .12);
+  color: #67dd8a;
+}
+
+
+.status-in_progress {
+  background: rgba(255, 167, 38, .13);
+  color: #ffb84d;
+}
+
+
+.status-completed {
+  background: rgba(35, 190, 117, .13);
+  color: #61db9d;
+}
+
+
+.status-cancelled {
+  background: rgba(231, 56, 56, .12);
+  color: #ff7474;
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+
+.admin-modal[hidden] {
+  display: none !important;
+}
+
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+
+.admin-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .78);
+  backdrop-filter: blur(4px);
+}
+
+
+.admin-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(720px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+  border: 1px solid #2b2b2b;
+  border-radius: 16px;
+  background: #0c0c0c;
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, .7);
+}
+
+
+.admin-job-modal-card {
+  width: min(920px, calc(100vw - 30px));
+}
+
+
+.admin-job-view-card {
+  width: min(780px, calc(100vw - 30px));
+}
+
+
+.admin-assign-crew-card {
+  width: min(650px, calc(100vw - 30px));
+}
+
+
+.admin-modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #252525;
+  background:
+    rgba(12, 12, 12, .96);
+  backdrop-filter: blur(10px);
+}
+
+
+.admin-modal-header h2 {
+  margin: 5px 0 0;
+  font-size: 22px;
+}
+
+
+#jobNumberDisplay,
+#viewJobCustomer,
+#assignCrewJobLabel {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   FORM SECTIONS
+   ========================================================= */
+
+.admin-form-section {
+  padding: 22px;
+  border-bottom: 1px solid #232323;
+}
+
+
+.admin-form-section:last-of-type {
+  border-bottom: 0;
+}
+
+
+.admin-form-section h3 {
+  margin: 0 0 16px;
+  font-size: 15px;
+}
+
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+
+.admin-field {
+  min-width: 0;
+}
+
+
+.admin-field.full {
+  grid-column: 1 / -1;
+}
+
+
+.admin-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #9a9a9a;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+
+.admin-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px 22px;
+  background: #0a0a0a;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.admin-error {
+  margin: 18px 22px 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(230, 50, 50, .35);
+  border-radius: 9px;
+  background: rgba(230, 50, 50, .09);
+  color: #ff7772;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   PRICE SUMMARY
+   ========================================================= */
+
+.job-price-summary {
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  background: #0a0a0a;
+}
+
+
+.job-price-summary > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 11px 14px;
+  border-bottom: 1px solid #222;
+}
+
+
+.job-price-summary > div:last-child {
+  border-bottom: 0;
+}
+
+
+.job-price-summary span {
+  color: #7c7c7c;
+  font-size: 10px;
+}
+
+
+.job-price-summary strong {
+  color: #f5f5f5;
+  font-size: 12px;
+}
+
+
+.job-price-summary .job-price-total {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(210, 30, 30, .08),
+      rgba(210, 30, 30, .02)
+    );
+}
+
+
+.job-price-summary .job-price-total span {
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+
+.job-price-summary .job-price-total strong {
+  color: #ff514c;
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   VIEW JOB DETAILS
+   ========================================================= */
+
+.admin-view-content {
+  padding: 22px;
+}
+
+
+.admin-job-detail-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+
+.admin-job-detail {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #282828;
+  border-radius: 10px;
+  background: #101010;
+}
+
+
+.admin-job-detail.full {
+  grid-column: 1 / -1;
+}
+
+
+.admin-job-detail span {
+  display: block;
+  margin-bottom: 6px;
+  color: #6f6f6f;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+
+.admin-job-detail strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   ROUTE
+   ========================================================= */
+
+.admin-job-route {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  background: #101010;
+}
+
+
+.admin-job-route span {
+  display: block;
+  margin-bottom: 5px;
+  color: #747474;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+
+.admin-job-route strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+
+.admin-job-route-arrow {
+  color: #e22626;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   FINANCIAL CARDS
+   ========================================================= */
+
+.admin-job-financials {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  margin-top: 14px;
+}
+
+
+.admin-job-financials > div {
+  padding: 14px;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  background:
+    linear-gradient(
+      145deg,
+      #111,
+      #0d0d0d
+    );
+}
+
+
+.admin-job-financials span {
+  display: block;
+  margin-bottom: 6px;
+  color: #747474;
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+
+.admin-job-financials strong {
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   CREW SECTION
+   ========================================================= */
+
+.admin-job-crew-section {
+  padding: 22px;
+  border-top: 1px solid #252525;
+}
+
+
+.admin-job-crew-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 14px;
+}
+
+
+.admin-job-crew-header h3 {
+  margin: 4px 0 0;
+  font-size: 16px;
+}
+
+
+.admin-job-crew-list {
+  display: grid;
+  gap: 10px;
+}
+
+
+.admin-job-crew-card {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+  gap: 13px;
+  align-items: center;
+  padding: 13px;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  background: #101010;
+}
+
+
+.admin-job-crew-avatar {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background:
+    rgba(220, 30, 30, .12);
+  color: #ff5650;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+
+.admin-job-crew-info {
+  min-width: 0;
+}
+
+
+.admin-job-crew-info h4 {
+  margin: 0 0 5px;
+  color: #fff;
+  font-size: 12px;
+}
+
+
+.admin-job-crew-info p {
+  margin: 4px 0 0;
+  color: #777;
+  font-size: 9px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+
+.admin-job-crew-role {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background:
+    rgba(220, 30, 30, .10);
+  color: #ff5b55;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+
+.admin-job-crew-remove {
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #151515;
+  color: #aaa;
+  font-size: 9px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+
+.admin-job-crew-remove:hover {
+  border-color: #d92d2d;
+  color: #ff625d;
+}
+
+
+.admin-job-crew-empty,
+.admin-loading {
+  padding: 20px;
+  text-align: center;
+  border: 1px dashed #303030;
+  border-radius: 10px;
+  color: #777;
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   JOB ACTION BAR
+   ========================================================= */
+
+.admin-job-action-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  padding: 16px 22px;
+  border-top: 1px solid #252525;
+  background:
+    rgba(10, 10, 10, .96);
+  backdrop-filter: blur(10px);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.admin-modal-card::-webkit-scrollbar,
+.admin-table-wrap::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+
+.admin-modal-card::-webkit-scrollbar-track,
+.admin-table-wrap::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+
+.admin-modal-card::-webkit-scrollbar-thumb,
+.admin-table-wrap::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #303030;
+}
+
+
+.admin-modal-card::-webkit-scrollbar-thumb:hover,
+.admin-table-wrap::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .admin-stat-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .admin-toolbar {
+    grid-template-columns:
+      minmax(0, 1fr)
+      1fr
+      1fr;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .admin-main {
+    padding: 18px 14px;
+  }
+
+
+  .admin-page-header {
+    flex-direction: column;
+  }
+
+
+  .admin-page-header .admin-primary-button {
+    width: 100%;
+  }
+
+
+  .admin-stat-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+
+  .admin-stat-card {
+    padding: 14px;
+  }
+
+
+  .admin-stat-card strong {
+    font-size: 23px;
+  }
+
+
+  .admin-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-field.full {
+    grid-column: auto;
+  }
+
+
+  .admin-job-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-job-detail.full {
+    grid-column: auto;
+  }
+
+
+  .admin-job-route {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-job-route-arrow {
+    text-align: center;
+    transform: rotate(90deg);
+  }
+
+
+  .admin-job-financials {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-job-crew-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+
+  .admin-job-crew-header .admin-secondary-button {
+    width: 100%;
+  }
+
+
+  .admin-job-crew-card {
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+  }
+
+
+  .admin-job-crew-remove {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+
+  .admin-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+
+  .admin-form-actions button,
+  .admin-form-actions a {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 460px) {
+
+  .admin-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-modal {
+    padding: 8px;
+  }
+
+
+  .admin-modal-card,
+  .admin-job-modal-card,
+  .admin-job-view-card,
+  .admin-assign-crew-card {
+    width: calc(100vw - 16px);
+    max-height: 96vh;
+    border-radius: 12px;
+  }
+
+
+  .admin-modal-header,
+  .admin-form-section,
+  .admin-view-content,
+  .admin-job-crew-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+
+  .admin-form-actions,
+  .admin-job-action-bar {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}
+/* =========================================================
+   METRO HAUL ADMIN — ESTIMATES
+   ========================================================= */
+
+
+/* =========================================================
+   ESTIMATE MODAL
+   ========================================================= */
+
+#estimateModal .admin-modal-card {
+  width: min(920px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+#viewEstimateModal .admin-modal-card {
+  width: min(780px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   ESTIMATE HEADER TEXT
+   ========================================================= */
+
+#estimateNumberDisplay,
+#viewEstimateCustomer {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   ESTIMATE STATUS COLORS
+   ========================================================= */
+
+.status-draft {
+  background: rgba(120, 120, 120, .13);
+  color: #aaa;
+}
+
+
+.status-sent {
+  background: rgba(48, 119, 255, .13);
+  color: #72a5ff;
+}
+
+
+.status-accepted {
+  background: rgba(39, 185, 91, .13);
+  color: #69df8c;
+}
+
+
+.status-declined {
+  background: rgba(230, 58, 58, .13);
+  color: #ff7474;
+}
+
+
+.status-expired {
+  background: rgba(255, 153, 35, .12);
+  color: #ffb15a;
+}
+
+
+.status-converted {
+  background: rgba(159, 99, 255, .13);
+  color: #be91ff;
+}
+
+
+/* =========================================================
+   ESTIMATE TABLE
+   ========================================================= */
+
+#estimatesTableBody td {
+  vertical-align: middle;
+}
+
+
+#estimatesTableBody strong {
+  color: #fff;
+}
+
+
+#estimatesTableBody .admin-table-action {
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ESTIMATE PRICING SECTION
+   ========================================================= */
+
+#estimateModal .job-price-summary {
+  margin-top: 20px;
+}
+
+
+#estimateModal .job-price-summary > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 15px;
+  border-bottom: 1px solid #222;
+}
+
+
+#estimateModal .job-price-summary > div:last-child {
+  border-bottom: 0;
+}
+
+
+#estimateModal .job-price-summary span {
+  color: #818181;
+  font-size: 10px;
+}
+
+
+#estimateModal .job-price-summary strong {
+  color: #eee;
+  font-size: 12px;
+}
+
+
+#estimateModal .job-price-total {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(216, 30, 30, .1),
+      rgba(216, 30, 30, .02)
+    );
+}
+
+
+#estimateModal .job-price-total span {
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+
+#estimateModal .job-price-total strong {
+  color: #ff504b;
+  font-size: 21px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   ESTIMATE READONLY FIELDS
+   ========================================================= */
+
+#laborAmountPreview[readonly] {
+  color: #ff5c57;
+  font-weight: 900;
+  background: #111;
+}
+
+
+/* =========================================================
+   ESTIMATE DETAILS
+   ========================================================= */
+
+#viewEstimateContent {
+  padding: 22px;
+}
+
+
+#viewEstimateContent .admin-job-detail-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+
+#viewEstimateContent .admin-job-detail {
+  padding: 13px;
+  border: 1px solid #292929;
+  border-radius: 10px;
+  background: #101010;
+}
+
+
+#viewEstimateContent .admin-job-detail.full {
+  grid-column: 1 / -1;
+}
+
+
+#viewEstimateContent .admin-job-detail span {
+  display: block;
+  margin-bottom: 5px;
+  color: #707070;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+
+#viewEstimateContent .admin-job-detail strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   ESTIMATE ROUTE
+   ========================================================= */
+
+#viewEstimateContent .admin-job-route {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+  gap: 15px;
+  align-items: center;
+  margin-top: 15px;
+  padding: 16px;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  background: #101010;
+}
+
+
+#viewEstimateContent .admin-job-route span {
+  display: block;
+  margin-bottom: 5px;
+  color: #777;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+
+#viewEstimateContent .admin-job-route strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+
+#viewEstimateContent .admin-job-route-arrow {
+  color: #e42525;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   ESTIMATE FINANCIAL SUMMARY
+   ========================================================= */
+
+#viewEstimateContent .admin-job-financials {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  margin-top: 15px;
+}
+
+
+#viewEstimateContent .admin-job-financials > div {
+  padding: 15px;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  background:
+    linear-gradient(
+      145deg,
+      #111,
+      #0d0d0d
+    );
+}
+
+
+#viewEstimateContent .admin-job-financials span {
+  display: block;
+  margin-bottom: 6px;
+  color: #777;
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+
+#viewEstimateContent .admin-job-financials strong {
+  color: #fff;
+  font-size: 18px;
+}
+
+
+/* Highlight estimate total */
+
+#viewEstimateContent
+.admin-job-financials
+> div:last-child {
+  border-color:
+    rgba(220, 32, 32, .32);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(215, 30, 30, .11),
+      #0e0e0e
+    );
+}
+
+
+#viewEstimateContent
+.admin-job-financials
+> div:last-child
+strong {
+  color: #ff514b;
+}
+
+
+/* =========================================================
+   ESTIMATE ACTIONS
+   ========================================================= */
+
+#viewEstimateModal .admin-form-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  border-top: 1px solid #252525;
+  background:
+    rgba(10, 10, 10, .96);
+  backdrop-filter: blur(10px);
+}
+
+
+#markEstimateSentButton,
+#acceptEstimateButton,
+#convertEstimateButton,
+#editEstimateButton {
+  min-width: 110px;
+}
+
+
+/* =========================================================
+   DISABLED ACTIONS
+   ========================================================= */
+
+#viewEstimateModal button:disabled {
+  opacity: .38;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* =========================================================
+   ESTIMATE FORM SECTIONS
+   ========================================================= */
+
+#estimateForm .admin-form-section {
+  position: relative;
+}
+
+
+#estimateForm .admin-form-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+#estimateForm .admin-form-section h3::before {
+  content: "";
+  width: 3px;
+  height: 16px;
+  border-radius: 999px;
+  background: #db2424;
+}
+
+
+/* =========================================================
+   TERMS / NOTES
+   ========================================================= */
+
+#estimateForm textarea {
+  line-height: 1.55;
+}
+
+
+#terms {
+  min-height: 150px;
+}
+
+
+#internal_notes {
+  min-height: 115px;
+}
+
+
+/* =========================================================
+   ESTIMATE CUSTOMER SELECT
+   ========================================================= */
+
+#estimateForm
+#customer_id,
+#estimateForm
+#lead_id {
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   EMPTY / LOADING STATE
+   ========================================================= */
+
+#estimatesTableBody td[colspan] {
+  padding: 30px 18px;
+  color: #777;
+  text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  #estimateModal .admin-modal-card,
+  #viewEstimateModal .admin-modal-card {
+    width: calc(100vw - 20px);
+  }
+
+
+  #viewEstimateContent
+  .admin-job-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  #viewEstimateContent
+  .admin-job-detail.full {
+    grid-column: auto;
+  }
+
+
+  #viewEstimateContent
+  .admin-job-route {
+    grid-template-columns: 1fr;
+  }
+
+
+  #viewEstimateContent
+  .admin-job-route-arrow {
+    text-align: center;
+    transform: rotate(90deg);
+  }
+
+
+  #viewEstimateContent
+  .admin-job-financials {
+    grid-template-columns: 1fr;
+  }
+
+
+  #viewEstimateModal
+  .admin-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+
+  #viewEstimateModal
+  .admin-form-actions button {
+    width: 100%;
+  }
+
+
+  #markEstimateSentButton,
+  #acceptEstimateButton,
+  #convertEstimateButton,
+  #editEstimateButton {
+    min-width: 0;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 460px) {
+
+  #estimateModal .admin-modal-card,
+  #viewEstimateModal .admin-modal-card {
+    width: calc(100vw - 14px);
+    max-height: 96vh;
+    border-radius: 12px;
+  }
+
+
+  #estimateModal .admin-form-section,
+  #viewEstimateContent {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}/* =========================================================
+   METRO HAUL ADMIN — CUSTOMERS
+   ========================================================= */
+
+
+/* =========================================================
+   CUSTOMER MODALS
+   ========================================================= */
+
+#customerModal .admin-modal-card {
+  width: min(760px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+#viewCustomerModal .admin-modal-card {
+  width: min(760px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   CUSTOMER HEADER TEXT
+   ========================================================= */
+
+#customerModalSubtitle,
+#viewCustomerCompany {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   CUSTOMER TABLE
+   ========================================================= */
+
+#customersTableBody td {
+  vertical-align: middle;
+}
+
+
+#customersTableBody strong {
+  color: #fff;
+}
+
+
+#customersTableBody a {
+  color: inherit;
+  transition: color .15s ease;
+}
+
+
+#customersTableBody a:hover {
+  color: #ff5b56;
+}
+
+
+/* =========================================================
+   CUSTOMER DIRECTORY ROW
+   ========================================================= */
+
+#customersTableBody tr {
+  transition:
+    background .15s ease,
+    transform .15s ease;
+}
+
+
+#customersTableBody tr:hover {
+  background: #111;
+}
+
+
+/* =========================================================
+   CUSTOMER VIEW
+   ========================================================= */
+
+#viewCustomerContent {
+  padding: 22px;
+}
+
+
+#viewCustomerContent .admin-job-detail-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+
+#viewCustomerContent .admin-job-detail {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  background:
+    linear-gradient(
+      145deg,
+      #111,
+      #0d0d0d
+    );
+}
+
+
+#viewCustomerContent .admin-job-detail.full {
+  grid-column: 1 / -1;
+}
+
+
+#viewCustomerContent .admin-job-detail span {
+  display: block;
+  margin-bottom: 6px;
+  color: #717171;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+
+#viewCustomerContent .admin-job-detail strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   CUSTOMER CONTACT ACTIONS
+   ========================================================= */
+
+#viewCustomerContent
+.admin-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  border: 0;
+  background: transparent;
+}
+
+
+#viewCustomerContent
+.admin-form-actions
+.admin-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+}
+
+
+/* =========================================================
+   CUSTOMER VIEW FOOTER
+   ========================================================= */
+
+#viewCustomerModal
+> .admin-modal-card
+> .admin-form-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  border-top: 1px solid #252525;
+  background:
+    rgba(10, 10, 10, .96);
+  backdrop-filter: blur(10px);
+}
+
+
+/* =========================================================
+   CUSTOMER FORM SECTIONS
+   ========================================================= */
+
+#customerForm .admin-form-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+#customerForm .admin-form-section h3::before {
+  content: "";
+  width: 3px;
+  height: 16px;
+  border-radius: 999px;
+  background: #db2424;
+}
+
+
+/* =========================================================
+   CUSTOMER NAME FIELDS
+   ========================================================= */
+
+#first_name,
+#last_name {
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CUSTOMER PHONE / EMAIL
+   ========================================================= */
+
+#phone,
+#alternate_phone,
+#email {
+  letter-spacing: .01em;
+}
+
+
+/* =========================================================
+   BILLING ADDRESS
+   ========================================================= */
+
+#billing_address,
+#billing_city,
+#billing_state,
+#billing_zip {
+  background: #0b0b0b;
+}
+
+
+/* =========================================================
+   SOURCE LEAD
+   ========================================================= */
+
+#source_lead_id {
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CUSTOMER NOTES
+   ========================================================= */
+
+#notes {
+  min-height: 125px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   CUSTOMER ACTION BUTTONS
+   ========================================================= */
+
+#editCustomerButton,
+#newEstimateForCustomerButton,
+#newJobForCustomerButton {
+  min-width: 120px;
+}
+
+
+/* =========================================================
+   CUSTOMER SOURCE BADGES
+   ========================================================= */
+
+#customersTableBody
+.admin-status {
+  min-width: 54px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+#customersTableBody td[colspan] {
+  padding: 30px 18px;
+  color: #777;
+  text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  #customerModal .admin-modal-card,
+  #viewCustomerModal .admin-modal-card {
+    width: calc(100vw - 20px);
+  }
+
+
+  #viewCustomerContent
+  .admin-job-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  #viewCustomerContent
+  .admin-job-detail.full {
+    grid-column: auto;
+  }
+
+
+  #viewCustomerModal
+  > .admin-modal-card
+  > .admin-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+
+  #viewCustomerModal
+  > .admin-modal-card
+  > .admin-form-actions
+  button {
+    width: 100%;
+  }
+
+
+  #editCustomerButton,
+  #newEstimateForCustomerButton,
+  #newJobForCustomerButton {
+    min-width: 0;
+  }
+
+
+  #viewCustomerContent
+  .admin-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  #viewCustomerContent
+  .admin-form-actions
+  .admin-secondary-button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 460px) {
+
+  #customerModal .admin-modal-card,
+  #viewCustomerModal .admin-modal-card {
+    width: calc(100vw - 14px);
+    max-height: 96vh;
+    border-radius: 12px;
+  }
+
+
+  #customerModal
+  .admin-form-section,
+  #viewCustomerContent {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}/* =========================================================
+   METRO HAUL ADMIN — LEADS
+   ========================================================= */
+
+
+/* =========================================================
+   LEAD MODAL
+   ========================================================= */
+
+#viewLeadModal .admin-modal-card {
+  width: min(820px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   LEAD HEADER
+   ========================================================= */
+
+#viewLeadSubtitle {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   LEADS TABLE
+   ========================================================= */
+
+#leadsTableBody td {
+  vertical-align: middle;
+}
+
+
+#leadsTableBody strong {
+  color: #fff;
+}
+
+
+#leadsTableBody tr {
+  transition: background .15s ease;
+}
+
+
+#leadsTableBody tr:hover {
+  background: #111;
+}
+
+
+#leadsTableBody .admin-table-action {
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   LEAD STATUS COLORS
+   ========================================================= */
+
+.status-new {
+  background: rgba(59, 130, 246, .13);
+  color: #72a7ff;
+}
+
+
+.status-quoted {
+  background: rgba(245, 158, 11, .13);
+  color: #ffba55;
+}
+
+
+.status-booked {
+  background: rgba(34, 197, 94, .13);
+  color: #69df8b;
+}
+
+
+.status-closed {
+  background: rgba(120, 120, 120, .13);
+  color: #aaa;
+}
+
+
+/* =========================================================
+   LEAD VIEW CONTENT
+   ========================================================= */
+
+#viewLeadContent {
+  padding: 22px;
+}
+
+
+#viewLeadContent .admin-job-detail-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+
+#viewLeadContent .admin-job-detail {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  background:
+    linear-gradient(
+      145deg,
+      #111,
+      #0d0d0d
+    );
+}
+
+
+#viewLeadContent .admin-job-detail.full {
+  grid-column: 1 / -1;
+}
+
+
+#viewLeadContent .admin-job-detail span {
+  display: block;
+  margin-bottom: 6px;
+  color: #717171;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+
+#viewLeadContent .admin-job-detail strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   LEAD ROUTE
+   ========================================================= */
+
+#viewLeadContent .admin-job-route {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+  gap: 15px;
+  align-items: center;
+  margin-top: 15px;
+  padding: 16px;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  background: #101010;
+}
+
+
+#viewLeadContent .admin-job-route span {
+  display: block;
+  margin-bottom: 5px;
+  color: #777;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+
+#viewLeadContent .admin-job-route strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+
+#viewLeadContent .admin-job-route-arrow {
+  color: #e42525;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   LEAD CONTACT ACTIONS
+   ========================================================= */
+
+#viewLeadContent .admin-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  border: 0;
+  background: transparent;
+}
+
+
+#viewLeadContent .admin-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+}
+
+
+/* =========================================================
+   LEAD FOOTER ACTIONS
+   ========================================================= */
+
+#viewLeadModal .admin-lead-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  border-top: 1px solid #252525;
+  background:
+    rgba(10, 10, 10, .96);
+  backdrop-filter: blur(10px);
+}
+
+
+#markQuotedButton,
+#convertCustomerButton,
+#createEstimateButton,
+#createJobButton {
+  min-width: 125px;
+}
+
+
+/* =========================================================
+   CRM BADGES
+   ========================================================= */
+
+#leadsTableBody .status-accepted {
+  background: rgba(34, 197, 94, .13);
+  color: #69df8b;
+}
+
+
+#leadsTableBody .status-draft {
+  background: rgba(120, 120, 120, .13);
+  color: #aaa;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+#leadsTableBody td[colspan] {
+  padding: 30px 18px;
+  color: #777;
+  text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  #viewLeadModal .admin-modal-card {
+    width: calc(100vw - 20px);
+  }
+
+
+  #viewLeadContent .admin-job-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  #viewLeadContent .admin-job-detail.full {
+    grid-column: auto;
+  }
+
+
+  #viewLeadContent .admin-job-route {
+    grid-template-columns: 1fr;
+  }
+
+
+  #viewLeadContent .admin-job-route-arrow {
+    text-align: center;
+    transform: rotate(90deg);
+  }
+
+
+  #viewLeadContent .admin-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  #viewLeadContent .admin-form-actions a {
+    width: 100%;
+  }
+
+
+  #viewLeadModal .admin-lead-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+
+  #viewLeadModal .admin-lead-actions button {
+    width: 100%;
+  }
+
+
+  #markQuotedButton,
+  #convertCustomerButton,
+  #createEstimateButton,
+  #createJobButton {
+    min-width: 0;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 460px) {
+
+  #viewLeadModal .admin-modal-card {
+    width: calc(100vw - 14px);
+    max-height: 96vh;
+    border-radius: 12px;
+  }
+
+
+  #viewLeadContent {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}/* =========================================================
+   METRO HAUL ADMIN — CREW
+   ========================================================= */
+
+
+/* =========================================================
+   CREW MODALS
+   ========================================================= */
+
+#crewModal .admin-modal-card {
+  width: min(760px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+#viewCrewModal .admin-modal-card {
+  width: min(820px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   CREW HEADER TEXT
+   ========================================================= */
+
+#crewModalSubtitle,
+#viewCrewRole {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   CREW TABLE
+   ========================================================= */
+
+#crewTableBody td {
+  vertical-align: middle;
+}
+
+
+#crewTableBody strong {
+  color: #fff;
+}
+
+
+#crewTableBody tr {
+  transition: background .15s ease;
+}
+
+
+#crewTableBody tr:hover {
+  background: #111;
+}
+
+
+#crewTableBody a {
+  color: inherit;
+  transition: color .15s ease;
+}
+
+
+#crewTableBody a:hover {
+  color: #ff5d58;
+}
+
+
+/* =========================================================
+   CREW MEMBER AVATAR
+   ========================================================= */
+
+#crewTableBody .admin-job-crew-avatar,
+#viewCrewModal .admin-job-crew-avatar {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(225, 40, 40, .20);
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(220, 30, 30, .16),
+      rgba(220, 30, 30, .06)
+    );
+  color: #ff5a55;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .03em;
+}
+
+
+/* =========================================================
+   CREW VIEW
+   ========================================================= */
+
+#viewCrewContent {
+  padding: 22px;
+}
+
+
+#viewCrewContent .admin-job-detail-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+
+#viewCrewContent .admin-job-detail {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  background:
+    linear-gradient(
+      145deg,
+      #111,
+      #0d0d0d
+    );
+}
+
+
+#viewCrewContent .admin-job-detail.full {
+  grid-column: 1 / -1;
+}
+
+
+#viewCrewContent .admin-job-detail span {
+  display: block;
+  margin-bottom: 6px;
+  color: #717171;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+
+#viewCrewContent .admin-job-detail strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   CREW CONTACT ACTIONS
+   ========================================================= */
+
+#viewCrewContent .admin-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  border: 0;
+  background: transparent;
+}
+
+
+#viewCrewContent .admin-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+}
+
+
+/* =========================================================
+   CREW ASSIGNMENTS
+   ========================================================= */
+
+#viewCrewModal .admin-job-crew-section {
+  padding: 22px;
+  border-top: 1px solid #252525;
+}
+
+
+#viewCrewModal .admin-job-crew-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 14px;
+}
+
+
+#viewCrewModal .admin-job-crew-header h3 {
+  margin: 4px 0 0;
+  font-size: 16px;
+}
+
+
+#viewCrewModal .admin-job-crew-list {
+  display: grid;
+  gap: 10px;
+}
+
+
+#viewCrewModal .admin-job-crew-card {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+  gap: 13px;
+  align-items: center;
+  padding: 13px;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  background: #101010;
+}
+
+
+#viewCrewModal .admin-job-crew-info {
+  min-width: 0;
+}
+
+
+#viewCrewModal .admin-job-crew-info h4 {
+  margin: 0 0 5px;
+  color: #fff;
+  font-size: 12px;
+}
+
+
+#viewCrewModal .admin-job-crew-info p {
+  margin: 4px 0 0;
+  color: #777;
+  font-size: 9px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+
+#viewCrewModal .admin-job-crew-role {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: rgba(220, 30, 30, .10);
+  color: #ff5b55;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   CREW ASSIGNMENT BUTTON
+   ========================================================= */
+
+#viewCrewModal [data-open-job] {
+  min-width: 58px;
+}
+
+
+/* =========================================================
+   CREW STATUS
+   ========================================================= */
+
+#crewTableBody .status-accepted {
+  background: rgba(34, 197, 94, .13);
+  color: #69df8b;
+}
+
+
+#crewTableBody .status-cancelled {
+  background: rgba(230, 58, 58, .13);
+  color: #ff7474;
+}
+
+
+/* =========================================================
+   CREW ROLE BADGES
+   ========================================================= */
+
+#crewTableBody .status-scheduled {
+  background: rgba(59, 130, 246, .13);
+  color: #72a7ff;
+}
+
+
+#crewTableBody .status-quoted {
+  background: rgba(245, 158, 11, .13);
+  color: #ffba55;
+}
+
+
+#crewTableBody .status-draft {
+  background: rgba(120, 120, 120, .13);
+  color: #aaa;
+}
+
+
+/* =========================================================
+   CREW FORM SECTIONS
+   ========================================================= */
+
+#crewForm .admin-form-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+#crewForm .admin-form-section h3::before {
+  content: "";
+  width: 3px;
+  height: 16px;
+  border-radius: 999px;
+  background: #db2424;
+}
+
+
+/* =========================================================
+   CREW NAME FIELDS
+   ========================================================= */
+
+#crewForm #first_name,
+#crewForm #last_name {
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   HOURLY COST
+   ========================================================= */
+
+#hourly_cost {
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   AUTH USER FIELD
+   ========================================================= */
+
+#auth_user_id {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   FIELD HELP
+   ========================================================= */
+
+.admin-field-help {
+  display: block;
+  margin-top: 7px;
+  color: #666;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   NOTES
+   ========================================================= */
+
+#crewForm #notes {
+  min-height: 125px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   CREW VIEW FOOTER
+   ========================================================= */
+
+#viewCrewModal
+> .admin-modal-card
+> .admin-form-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  border-top: 1px solid #252525;
+  background:
+    rgba(10, 10, 10, .96);
+  backdrop-filter: blur(10px);
+}
+
+
+#editCrewButton,
+#toggleCrewStatusButton,
+#viewCrewJobsButton {
+  min-width: 120px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+#crewTableBody td[colspan] {
+  padding: 30px 18px;
+  color: #777;
+  text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  #crewModal .admin-modal-card,
+  #viewCrewModal .admin-modal-card {
+    width: calc(100vw - 20px);
+  }
+
+
+  #viewCrewContent .admin-job-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  #viewCrewContent .admin-job-detail.full {
+    grid-column: auto;
+  }
+
+
+  #viewCrewModal .admin-job-crew-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+
+  #viewCrewModal .admin-job-crew-card {
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+  }
+
+
+  #viewCrewModal [data-open-job] {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+
+  #viewCrewContent .admin-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  #viewCrewContent .admin-form-actions a {
+    width: 100%;
+  }
+
+
+  #viewCrewModal
+  > .admin-modal-card
+  > .admin-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+
+  #viewCrewModal
+  > .admin-modal-card
+  > .admin-form-actions
+  button {
+    width: 100%;
+  }
+
+
+  #editCrewButton,
+  #toggleCrewStatusButton,
+  #viewCrewJobsButton {
+    min-width: 0;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 460px) {
+
+  #crewModal .admin-modal-card,
+  #viewCrewModal .admin-modal-card {
+    width: calc(100vw - 14px);
+    max-height: 96vh;
+    border-radius: 12px;
+  }
+
+
+  #crewModal .admin-form-section,
+  #viewCrewContent,
+  #viewCrewModal .admin-job-crew-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}/* =========================================================
+   METRO HAUL — CREW CHECK IN / CHECK OUT
+   ========================================================= */
+
+
+/* =========================================================
+   CREW SHIFT ACTION AREA
+   ========================================================= */
+
+.admin-crew-shift-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.admin-crew-shift-actions .admin-table-action,
+.admin-crew-shift-actions .admin-job-crew-remove {
+  min-height: 34px;
+  min-width: 82px;
+  padding: 0 11px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   CHECK IN BUTTON
+   ========================================================= */
+
+.admin-crew-shift-actions [data-check-in] {
+  border:
+    1px solid rgba(34, 197, 94, .38);
+
+  background:
+    rgba(34, 197, 94, .07);
+
+  color:
+    #69df8b;
+}
+
+
+.admin-crew-shift-actions [data-check-in]:hover {
+  border-color:
+    #32c75d;
+
+  background:
+    rgba(34, 197, 94, .14);
+
+  color:
+    #89efa4;
+}
+
+
+/* =========================================================
+   CHECK OUT BUTTON
+   ========================================================= */
+
+.admin-crew-shift-actions [data-check-out] {
+  border:
+    1px solid rgba(245, 158, 11, .38);
+
+  background:
+    rgba(245, 158, 11, .07);
+
+  color:
+    #ffb94d;
+}
+
+
+.admin-crew-shift-actions [data-check-out]:hover {
+  border-color:
+    #e7a025;
+
+  background:
+    rgba(245, 158, 11, .14);
+
+  color:
+    #ffc96f;
+}
+
+
+/* =========================================================
+   REMOVE CREW BUTTON
+   ========================================================= */
+
+.admin-crew-shift-actions .admin-job-crew-remove {
+  border:
+    1px solid rgba(239, 68, 68, .25);
+
+  background:
+    rgba(239, 68, 68, .05);
+
+  color:
+    #c97979;
+}
+
+
+.admin-crew-shift-actions .admin-job-crew-remove:hover {
+  border-color:
+    #dc3c3c;
+
+  background:
+    rgba(239, 68, 68, .10);
+
+  color:
+    #ff7772;
+}
+
+
+/* =========================================================
+   CHECKED IN STATUS
+   ========================================================= */
+
+.admin-job-crew-card .status-in_progress {
+  background:
+    rgba(245, 158, 11, .13);
+
+  color:
+    #ffb94d;
+}
+
+
+/* =========================================================
+   CHECKED OUT STATUS
+   ========================================================= */
+
+.admin-job-crew-card .status-completed {
+  background:
+    rgba(34, 197, 94, .13);
+
+  color:
+    #69df8b;
+}
+
+
+/* =========================================================
+   NOT CHECKED IN STATUS
+   ========================================================= */
+
+.admin-job-crew-card .status-draft {
+  background:
+    rgba(120, 120, 120, .13);
+
+  color:
+    #aaa;
+}
+
+
+/* =========================================================
+   CREW CARD LAYOUT
+   ========================================================= */
+
+.admin-job-crew-card {
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+}
+
+
+.admin-job-crew-info {
+  min-width: 0;
+}
+
+
+.admin-job-crew-info h4 {
+  margin:
+    0 0 6px;
+
+  color:
+    #fff;
+
+  font-size:
+    13px;
+}
+
+
+.admin-job-crew-info p {
+  margin:
+    5px 0 0;
+
+  color:
+    #777;
+
+  font-size:
+    9px;
+
+  line-height:
+    1.5;
+}
+
+
+/* =========================================================
+   STATUS + ROLE ROW
+   ========================================================= */
+
+.admin-job-crew-info
+.admin-status {
+  min-height:
+    20px;
+
+  padding:
+    0 7px;
+
+  font-size:
+    7px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .admin-job-crew-card {
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+  }
+
+
+  .admin-crew-shift-actions {
+    grid-column:
+      1 / -1;
+
+    display:
+      grid;
+
+    grid-template-columns:
+      1fr;
+
+    width:
+      100%;
+
+    margin-top:
+      5px;
+  }
+
+
+  .admin-crew-shift-actions
+  .admin-table-action,
+  .admin-crew-shift-actions
+  .admin-job-crew-remove {
+    width:
+      100%;
+  }
+
+}/* =========================================================
+   METRO HAUL — CREW HOURS & LABOR COST
+   ========================================================= */
+
+
+/* =========================================================
+   CREW TABLE PERSON
+   ========================================================= */
+
+.admin-crew-table-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+
+.admin-crew-table-person > div:last-child {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   ASSIGNMENT BADGES
+   ========================================================= */
+
+.admin-crew-assignment-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+
+.admin-crew-assignment-badges .admin-status,
+.admin-crew-assignment-badges .admin-job-crew-role {
+  min-height: 20px;
+}
+
+
+/* =========================================================
+   TIME + COST SUMMARY
+   ========================================================= */
+
+.admin-crew-time-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  margin-right: 8px;
+  padding: 7px 9px;
+  border: 1px solid #2c2c2c;
+  border-radius: 8px;
+  background: #0c0c0c;
+}
+
+
+.admin-crew-time-summary span {
+  color: #707070;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+
+.admin-crew-time-summary strong {
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   HOURS EMPHASIS
+   ========================================================= */
+
+.admin-crew-time-summary:first-of-type strong {
+  color: #72a7ff;
+}
+
+
+/* =========================================================
+   COST EMPHASIS
+   ========================================================= */
+
+.admin-crew-time-summary:last-of-type strong {
+  color: #69df8b;
+}
+
+
+/* =========================================================
+   CREW PROFILE CONTACT BUTTONS
+   ========================================================= */
+
+.admin-crew-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: flex-start;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  border: 0;
+  background: transparent;
+}
+
+
+.admin-crew-contact-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   ASSIGNMENT CARD
+   ========================================================= */
+
+#crewAssignmentsList .admin-job-crew-card {
+  align-items: flex-start;
+}
+
+
+#crewAssignmentsList .admin-job-crew-info {
+  min-width: 0;
+}
+
+
+#crewAssignmentsList .admin-job-crew-info h4 {
+  margin-bottom: 7px;
+}
+
+
+#crewAssignmentsList .admin-job-crew-info p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   JOB STATUS BADGES INSIDE ASSIGNMENTS
+   ========================================================= */
+
+#crewAssignmentsList .status-scheduled {
+  background: rgba(59, 130, 246, .13);
+  color: #72a7ff;
+}
+
+
+#crewAssignmentsList .status-confirmed {
+  background: rgba(99, 102, 241, .13);
+  color: #9295ff;
+}
+
+
+#crewAssignmentsList .status-in_progress {
+  background: rgba(245, 158, 11, .13);
+  color: #ffb94d;
+}
+
+
+#crewAssignmentsList .status-completed {
+  background: rgba(34, 197, 94, .13);
+  color: #69df8b;
+}
+
+
+#crewAssignmentsList .status-cancelled {
+  background: rgba(239, 68, 68, .13);
+  color: #ff7772;
+}
+
+
+/* =========================================================
+   VIEW JOB BUTTON
+   ========================================================= */
+
+#crewAssignmentsList [data-open-job] {
+  align-self: center;
+  min-width: 84px;
+}
+
+
+/* =========================================================
+   PROFILE SUMMARY CARDS
+   ========================================================= */
+
+#viewCrewContent .admin-job-detail strong {
+  font-weight: 800;
+}
+
+
+#viewCrewContent .admin-job-detail:nth-child(9) strong {
+  color: #72a7ff;
+}
+
+
+#viewCrewContent .admin-job-detail:nth-child(10) strong {
+  color: #69df8b;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .admin-crew-time-summary {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-right: 0;
+  }
+
+
+  .admin-crew-contact-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  .admin-crew-contact-actions a {
+    width: 100%;
+  }
+
+
+  #crewAssignmentsList .admin-job-crew-card {
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+  }
+
+
+  #crewAssignmentsList [data-open-job] {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+}/* =========================================================
+   METRO HAUL ADMIN — PAYMENTS
+   ========================================================= */
+
+
+/* =========================================================
+   PAYMENT MODALS
+   ========================================================= */
+
+#paymentModal .admin-modal-card {
+  width: min(820px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+#viewPaymentModal .admin-modal-card {
+  width: min(760px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   PAYMENT HEADER TEXT
+   ========================================================= */
+
+#paymentModalSubtitle,
+#viewPaymentCustomer {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   PAYMENT TABLE
+   ========================================================= */
+
+#paymentsTableBody td {
+  vertical-align: middle;
+}
+
+
+#paymentsTableBody strong {
+  color: #fff;
+}
+
+
+#paymentsTableBody tr {
+  transition: background .15s ease;
+}
+
+
+#paymentsTableBody tr:hover {
+  background: #111;
+}
+
+
+/* =========================================================
+   PAYMENT STATUS BADGES
+   ========================================================= */
+
+#paymentsTableBody .status-pending {
+  background: rgba(245, 158, 11, .13);
+  color: #ffb94d;
+}
+
+
+#paymentsTableBody .status-paid {
+  background: rgba(34, 197, 94, .13);
+  color: #69df8b;
+}
+
+
+#paymentsTableBody .status-failed {
+  background: rgba(239, 68, 68, .13);
+  color: #ff7772;
+}
+
+
+#paymentsTableBody .status-refunded {
+  background: rgba(99, 102, 241, .13);
+  color: #9b9dff;
+}
+
+
+#paymentsTableBody .status-partially-refunded {
+  background: rgba(168, 85, 247, .13);
+  color: #c08bff;
+}
+
+
+/* =========================================================
+   PAYMENT FORM
+   ========================================================= */
+
+#paymentForm .admin-form-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+#paymentForm .admin-form-section h3::before {
+  content: "";
+  width: 3px;
+  height: 16px;
+  border-radius: 999px;
+  background: #db2424;
+}
+
+
+#paymentForm #amount {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   PAYMENT JOB SUMMARY
+   ========================================================= */
+
+#paymentJobSummary .admin-price-summary {
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+}
+
+
+#paymentJobSummary
+.admin-price-summary
+> div {
+  min-width: 0;
+}
+
+
+#paymentJobSummary
+.admin-price-summary
+span {
+  color: #777;
+}
+
+
+#paymentJobSummary
+.admin-price-summary
+strong {
+  color: #fff;
+}
+
+
+/* =========================================================
+   AFTER PAYMENT BALANCE
+   ========================================================= */
+
+#paymentNewBalance {
+  color: #69df8b !important;
+}
+
+
+/* =========================================================
+   CURRENT BALANCE
+   ========================================================= */
+
+#paymentJobBalance {
+  color: #ffb94d !important;
+}
+
+
+/* =========================================================
+   VIEW PAYMENT
+   ========================================================= */
+
+#viewPaymentContent {
+  padding: 22px;
+}
+
+
+#viewPaymentContent .admin-job-detail-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+
+#viewPaymentContent .admin-job-detail {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  background:
+    linear-gradient(
+      145deg,
+      #111,
+      #0d0d0d
+    );
+}
+
+
+#viewPaymentContent .admin-job-detail.full {
+  grid-column: 1 / -1;
+}
+
+
+#viewPaymentContent .admin-job-detail span {
+  display: block;
+  margin-bottom: 6px;
+  color: #717171;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+
+#viewPaymentContent .admin-job-detail strong {
+  display: block;
+  color: #eee;
+  font-size: 11px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   PAYMENT VIEW FOOTER
+   ========================================================= */
+
+#viewPaymentModal
+> .admin-modal-card
+> .admin-form-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  border-top: 1px solid #252525;
+  background:
+    rgba(10, 10, 10, .96);
+  backdrop-filter: blur(10px);
+}
+
+
+#editPaymentButton,
+#markPaymentPaidButton,
+#viewPaymentJobButton {
+  min-width: 120px;
+}
+
+
+/* =========================================================
+   PAYMENT METHOD EMPHASIS
+   ========================================================= */
+
+#paymentsTableBody td:nth-child(4) {
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PAYMENT AMOUNT EMPHASIS
+   ========================================================= */
+
+#paymentsTableBody td:nth-child(3) strong {
+  color: #69df8b;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+#paymentsTableBody td[colspan] {
+  padding: 30px 18px;
+  color: #777;
+  text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  #paymentModal .admin-modal-card,
+  #viewPaymentModal .admin-modal-card {
+    width: calc(100vw - 20px);
+  }
+
+
+  #paymentJobSummary .admin-price-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  #viewPaymentContent .admin-job-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  #viewPaymentContent .admin-job-detail.full {
+    grid-column: auto;
+  }
+
+
+  #viewPaymentModal
+  > .admin-modal-card
+  > .admin-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+
+  #viewPaymentModal
+  > .admin-modal-card
+  > .admin-form-actions
+  button {
+    width: 100%;
+  }
+
+
+  #editPaymentButton,
+  #markPaymentPaidButton,
+  #viewPaymentJobButton {
+    min-width: 0;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 460px) {
+
+  #paymentModal .admin-modal-card,
+  #viewPaymentModal .admin-modal-card {
+    width: calc(100vw - 14px);
+    max-height: 96vh;
+    border-radius: 12px;
+  }
+
+
+  #paymentJobSummary .admin-price-summary {
+    grid-template-columns: 1fr;
+  }
+
+
+  #paymentModal .admin-form-section,
+  #viewPaymentContent {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}
+/* =========================================================
+   METRO HAUL ADMIN — CALENDAR
+   ========================================================= */
+
+
+/* =========================================================
+   CALENDAR TOOLBAR
+   ========================================================= */
+
+.admin-calendar-toolbar {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+  gap: 18px;
+  align-items: center;
+}
+
+
+.admin-calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.admin-calendar-heading {
+  min-width: 0;
+}
+
+
+.admin-calendar-heading h2 {
+  margin: 0;
+  color: #fff;
+}
+
+
+.admin-calendar-heading p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 10px;
+}
+
+
+.admin-calendar-filters {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+
+.admin-calendar-filters .admin-input {
+  min-width: 165px;
+}
+
+
+/* =========================================================
+   CALENDAR PANEL
+   ========================================================= */
+
+.admin-calendar-panel {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   WEEKDAY HEADER
+   ========================================================= */
+
+.admin-calendar-weekdays {
+  display: grid;
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+  border-bottom: 1px solid #262626;
+  background: #0b0b0b;
+}
+
+
+.admin-calendar-weekdays > div {
+  padding: 11px 8px;
+  color: #6e6e6e;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   MONTH GRID
+   ========================================================= */
+
+.admin-calendar-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+}
+
+
+.admin-calendar-day {
+  min-width: 0;
+  min-height: 148px;
+  padding: 8px;
+  border-right: 1px solid #242424;
+  border-bottom: 1px solid #242424;
+  background: #0e0e0e;
+}
+
+
+.admin-calendar-day:nth-child(7n) {
+  border-right: 0;
+}
+
+
+.admin-calendar-day.outside-month {
+  background: #090909;
+}
+
+
+.admin-calendar-day.outside-month
+.admin-calendar-day-number {
+  color: #474747;
+}
+
+
+.admin-calendar-day.is-today {
+  box-shadow:
+    inset 0 0 0 1px rgba(219, 36, 36, .55);
+}
+
+
+/* =========================================================
+   DAY NUMBER
+   ========================================================= */
+
+.admin-calendar-day-number {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #bdbdbd;
+  font-size: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+
+.admin-calendar-day-number:hover {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+
+.admin-calendar-day.is-today
+.admin-calendar-day-number {
+  background: #d72424;
+  color: #fff;
+}
+
+
+/* =========================================================
+   DAY EVENTS
+   ========================================================= */
+
+.admin-calendar-events {
+  display: grid;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+
+.admin-calendar-event {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 8px;
+  border: 1px solid #2c2c2c;
+  border-radius: 8px;
+  background: #141414;
+  color: #ddd;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color .15s ease,
+    background .15s ease,
+    transform .15s ease;
+}
+
+
+.admin-calendar-event:hover {
+  border-color: #464646;
+  background: #181818;
+  transform: translateY(-1px);
+}
+
+
+.admin-calendar-event-time {
+  display: block;
+  margin-bottom: 3px;
+  color: #ff5e58;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .03em;
+}
+
+
+.admin-calendar-event strong {
+  display: block;
+  overflow: hidden;
+  color: #fff;
+  font-size: 9px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.admin-calendar-event > span:not(.admin-calendar-event-time) {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #777;
+  font-size: 7px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.admin-calendar-event small {
+  display: block;
+  margin-top: 4px;
+  color: #777;
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   EVENT STATUS COLORS
+   ========================================================= */
+
+.admin-calendar-event.calendar-status-scheduled {
+  border-left: 3px solid #4c83dc;
+}
+
+
+.admin-calendar-event.calendar-status-confirmed {
+  border-left: 3px solid #777cff;
+}
+
+
+.admin-calendar-event.calendar-status-in_progress {
+  border-left: 3px solid #e6a229;
+}
+
+
+.admin-calendar-event.calendar-status-completed {
+  border-left: 3px solid #3fc86b;
+}
+
+
+.admin-calendar-event.calendar-status-cancelled {
+  border-left: 3px solid #d34a4a;
+  opacity: .65;
+}
+
+
+/* =========================================================
+   MORE BUTTON
+   ========================================================= */
+
+.admin-calendar-more {
+  width: 100%;
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #777;
+  font-size: 8px;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+
+
+.admin-calendar-more:hover {
+  background: #151515;
+  color: #fff;
+}
+
+
+/* =========================================================
+   UPCOMING JOBS
+   ========================================================= */
+
+.admin-calendar-upcoming-list {
+  display: grid;
+  gap: 10px;
+}
+
+
+.admin-calendar-upcoming-card {
+  display: grid;
+  grid-template-columns:
+    58px
+    minmax(0, 1fr)
+    auto;
+  gap: 14px;
+  align-items: center;
+  padding: 13px;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  background: #101010;
+}
+
+
+.admin-calendar-upcoming-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  border: 1px solid rgba(220, 36, 36, .20);
+  border-radius: 10px;
+  background:
+    rgba(220, 36, 36, .06);
+}
+
+
+.admin-calendar-upcoming-date strong {
+  color: #fff;
+  font-size: 19px;
+  line-height: 1;
+}
+
+
+.admin-calendar-upcoming-date span {
+  margin-top: 4px;
+  color: #ff5a54;
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+
+.admin-calendar-upcoming-info {
+  min-width: 0;
+}
+
+
+.admin-calendar-upcoming-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+
+.admin-calendar-upcoming-top h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+}
+
+
+.admin-calendar-upcoming-top p,
+.admin-calendar-upcoming-info > p {
+  margin: 4px 0 0;
+  color: #777;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+
+.admin-calendar-upcoming-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 9px;
+}
+
+
+.admin-calendar-upcoming-meta span {
+  padding: 5px 7px;
+  border: 1px solid #282828;
+  border-radius: 7px;
+  background: #0b0b0b;
+  color: #aaa;
+  font-size: 7px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   DAY MODAL
+   ========================================================= */
+
+#calendarDayModal .admin-modal-card {
+  width: min(820px, calc(100vw - 30px));
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+
+#calendarDaySubtitle {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 10px;
+}
+
+
+.admin-calendar-day-jobs {
+  display: grid;
+  gap: 11px;
+  padding: 22px;
+}
+
+
+/* =========================================================
+   DAY JOB CARD
+   ========================================================= */
+
+.admin-calendar-day-job {
+  padding: 15px;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      145deg,
+      #111,
+      #0d0d0d
+    );
+}
+
+
+.admin-calendar-day-job-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+
+.admin-calendar-day-job-header h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 13px;
+}
+
+
+.admin-calendar-day-job-header p {
+  margin: 4px 0 0;
+  color: #777;
+  font-size: 9px;
+}
+
+
+.admin-calendar-day-job-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 13px;
+}
+
+
+.admin-calendar-day-job-grid > div {
+  padding: 10px;
+  border: 1px solid #282828;
+  border-radius: 9px;
+  background: #0b0b0b;
+}
+
+
+.admin-calendar-day-job-grid span {
+  display: block;
+  margin-bottom: 5px;
+  color: #6e6e6e;
+  font-size: 7px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+
+.admin-calendar-day-job-grid strong {
+  color: #fff;
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   DAY ROUTE
+   ========================================================= */
+
+.admin-calendar-day-route {
+  margin-top: 11px;
+  padding: 10px;
+  border: 1px solid #282828;
+  border-radius: 9px;
+  background: #0b0b0b;
+  color: #aaa;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   DAY CREW
+   ========================================================= */
+
+.admin-calendar-day-crew {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+
+.admin-calendar-day-crew span {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(220, 36, 36, .08);
+  color: #ff615b;
+  font-size: 7px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   DAY CARD BUTTON
+   ========================================================= */
+
+.admin-calendar-day-job
+.admin-primary-button {
+  margin-top: 12px;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.admin-calendar-upcoming-card .status-scheduled,
+.admin-calendar-day-job .status-scheduled {
+  background: rgba(59, 130, 246, .13);
+  color: #72a7ff;
+}
+
+
+.admin-calendar-upcoming-card .status-confirmed,
+.admin-calendar-day-job .status-confirmed {
+  background: rgba(99, 102, 241, .13);
+  color: #9699ff;
+}
+
+
+.admin-calendar-upcoming-card .status-in_progress,
+.admin-calendar-day-job .status-in_progress {
+  background: rgba(245, 158, 11, .13);
+  color: #ffb94d;
+}
+
+
+.admin-calendar-upcoming-card .status-completed,
+.admin-calendar-day-job .status-completed {
+  background: rgba(34, 197, 94, .13);
+  color: #69df8b;
+}
+
+
+.admin-calendar-upcoming-card .status-cancelled,
+.admin-calendar-day-job .status-cancelled {
+  background: rgba(239, 68, 68, .13);
+  color: #ff7772;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .admin-calendar-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-calendar-heading {
+    order: -1;
+  }
+
+
+  .admin-calendar-filters {
+    flex-wrap: wrap;
+  }
+
+
+  .admin-calendar-filters .admin-input {
+    flex: 1 1 180px;
+  }
+
+
+  .admin-calendar-day {
+    min-height: 130px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .admin-calendar-panel {
+    overflow-x: auto;
+  }
+
+
+  .admin-calendar-weekdays,
+  .admin-calendar-grid {
+    min-width: 760px;
+  }
+
+
+  .admin-calendar-upcoming-card {
+    grid-template-columns:
+      52px
+      minmax(0, 1fr);
+  }
+
+
+  .admin-calendar-upcoming-card
+  > .admin-table-action {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+
+  .admin-calendar-upcoming-top {
+    flex-direction: column;
+  }
+
+
+  #calendarDayModal .admin-modal-card {
+    width: calc(100vw - 20px);
+  }
+
+
+  .admin-calendar-day-job-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 460px) {
+
+  #calendarDayModal .admin-modal-card {
+    width: calc(100vw - 14px);
+    max-height: 96vh;
+    border-radius: 12px;
+  }
+
+
+  .admin-calendar-day-jobs {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+
+  .admin-calendar-day-job-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .admin-calendar-nav {
+    display: grid;
+    grid-template-columns:
+      auto
+      1fr
+      auto;
+  }
+
+
+  .admin-calendar-nav
+  .admin-secondary-button {
+    width: 100%;
+  }
+
+}/* =========================================================
+   METRO HAUL ADMIN — SETTINGS
+   ========================================================= */
+
+
+/* =========================================================
+   SETTINGS SECTIONS
+   ========================================================= */
+
+.admin-settings-section {
+  margin-bottom: 18px;
+}
+
+
+.admin-settings-section .admin-panel-header {
+  margin-bottom: 16px;
+}
+
+
+.admin-settings-section .admin-panel-header h2 {
+  margin: 0;
+}
+
+
+.admin-settings-section .admin-panel-header p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   SETTINGS MESSAGE
+   ========================================================= */
+
+.admin-settings-message {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+
+.admin-settings-message.success {
+  border: 1px solid rgba(34, 197, 94, .28);
+  background: rgba(34, 197, 94, .08);
+  color: #69df8b;
+}
+
+
+.admin-settings-message.error {
+  border: 1px solid rgba(239, 68, 68, .28);
+  background: rgba(239, 68, 68, .08);
+  color: #ff7772;
+}
+
+
+/* =========================================================
+   MONEY INPUT
+   ========================================================= */
+
+.admin-money-input {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+  border-radius: 9px;
+  background: #0b0b0b;
+}
+
+
+.admin-money-input:focus-within {
+  border-color: #555;
+}
+
+
+.admin-money-input > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  padding: 0 10px;
+  border-right: 1px solid #292929;
+  background: #111;
+  color: #777;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+.admin-money-input input {
+  width: 100%;
+  min-width: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
+.admin-money-input input:focus {
+  outline: 0;
+}
+
+
+/* =========================================================
+   PERCENT INPUT
+   ========================================================= */
+
+.admin-percent-input {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+  border-radius: 9px;
+  background: #0b0b0b;
+}
+
+
+.admin-percent-input:focus-within {
+  border-color: #555;
+}
+
+
+.admin-percent-input input {
+  width: 100%;
+  min-width: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
+.admin-percent-input input:focus {
+  outline: 0;
+}
+
+
+.admin-percent-input > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  padding: 0 10px;
+  border-left: 1px solid #292929;
+  background: #111;
+  color: #777;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   TEXTAREAS
+   ========================================================= */
+
+.admin-settings-section textarea {
+  min-height: 125px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   PRICING DEFAULT INPUTS
+   ========================================================= */
+
+#default_hourly_rate,
+#default_travel_fee,
+#default_truck_fee,
+#default_deposit_amount,
+#default_tax_rate {
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   SAVE BAR
+   ========================================================= */
+
+.admin-settings-save-bar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  background: rgba(12, 12, 12, .96);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .35);
+  backdrop-filter: blur(12px);
+}
+
+
+.admin-settings-save-bar strong {
+  display: block;
+  color: #fff;
+  font-size: 11px;
+}
+
+
+.admin-settings-save-bar p {
+  margin: 4px 0 0;
+  color: #777;
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   SAVE BUTTONS
+   ========================================================= */
+
+#saveSettingsButton,
+#saveSettingsTopButton {
+  min-width: 130px;
+}
+
+
+#saveSettingsButton:disabled,
+#saveSettingsTopButton:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+
+/* =========================================================
+   SETTINGS FORM VISUAL GROUPING
+   ========================================================= */
+
+#settingsForm .admin-field label {
+  color: #aaa;
+}
+
+
+#settingsForm .admin-field input,
+#settingsForm .admin-field select,
+#settingsForm .admin-field textarea {
+  transition:
+    border-color .15s ease,
+    background .15s ease;
+}
+
+
+#settingsForm .admin-field input:focus,
+#settingsForm .admin-field select:focus,
+#settingsForm .admin-field textarea:focus {
+  border-color: #555;
+  background: #0d0d0d;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .admin-settings-save-bar {
+    bottom: 8px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  .admin-settings-save-bar
+  #saveSettingsButton {
+    width: 100%;
+  }
+
+
+  #saveSettingsTopButton {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 460px) {
+
+  .admin-settings-save-bar {
+    margin-left: -3px;
+    margin-right: -3px;
+    padding: 12px;
+  }
+
+
+  .admin-money-input > span,
+  .admin-percent-input > span {
+    min-width: 34px;
+  }
+
+}
