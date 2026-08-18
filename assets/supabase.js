@@ -28,11 +28,6 @@
   ====================================================== */
 
   if (!window.supabase?.createClient) {
-
-    console.error(
-      "Supabase JavaScript library is not loaded."
-    );
-
     return;
   }
 

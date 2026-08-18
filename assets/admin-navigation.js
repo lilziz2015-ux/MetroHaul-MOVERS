@@ -9,6 +9,19 @@
 
     if (!sidebar || !main) return;
 
+    const menu = sidebar.querySelector(".admin-menu");
+    if (menu && !menu.querySelector('a[href="gallery.html"]')) {
+      const galleryLink = document.createElement("a");
+      galleryLink.href = "gallery.html";
+      galleryLink.textContent = "Gallery";
+      if (window.location.pathname.endsWith("/admin/gallery.html")) {
+        galleryLink.className = "active";
+        galleryLink.setAttribute("aria-current", "page");
+      }
+      const settingsLink = menu.querySelector('a[href="settings.html"]');
+      menu.insertBefore(galleryLink, settingsLink || null);
+    }
+
     sidebar.id = sidebar.id || "adminSidebar";
 
     const toggle = document.createElement("button");

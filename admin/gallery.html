@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#080808">
+  <title>Gallery | Metro Haul Admin</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/admin.css">
+</head>
+<body class="admin-body">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="index.html" class="admin-logo" aria-label="Metro Haul Admin Dashboard"><img src="../assets/metro-haul-logo.png" alt="Metro Haul Moving & Junk Removal"></a>
+      <nav class="admin-menu" aria-label="Admin navigation">
+        <a href="index.html">Dashboard</a><a href="leads.html">Leads</a><a href="customers.html">Customers</a><a href="estimates.html">Estimates</a><a href="jobs.html">Jobs</a><a href="calendar.html">Calendar</a><a href="payments.html">Payments</a><a href="crew.html">Crew</a><a href="gallery.html" class="active" aria-current="page">Gallery</a><a href="settings.html">Settings</a>
+      </nav>
+      <div class="admin-sidebar-bottom"><div id="adminName">Metro Haul Admin</div><button id="logoutButton" data-admin-logout type="button" class="admin-secondary-button">Log Out</button></div>
+    </aside>
+    <main class="admin-main">
+      <header class="admin-page-header"><div><div class="admin-eyebrow">WEBSITE CONTENT</div><h1>Gallery</h1><p>Upload and manage project photos shown on the public Metro Haul gallery.</p></div><a class="admin-secondary-button" href="../gallery.html" target="_blank" rel="noopener">View Public Gallery</a></header>
+      <section class="admin-panel gallery-upload-panel">
+        <div class="admin-panel-header"><div><h2>Add gallery photos</h2><p>JPG, PNG or WebP. Up to 10 MB per image.</p></div></div>
+        <form id="galleryUploadForm" class="admin-form-grid">
+          <div class="admin-field full"><label for="galleryFiles">Photos *</label><input id="galleryFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple required></div>
+          <div class="admin-field"><label for="galleryCaption">Caption</label><input id="galleryCaption" type="text" maxlength="140" placeholder="Apartment move completed safely"></div>
+          <div class="admin-field"><label for="galleryLocation">Location</label><input id="galleryLocation" type="text" maxlength="100" placeholder="Fairfax, VA"></div>
+          <div class="admin-field full"><label for="galleryAlt">Image description</label><input id="galleryAlt" type="text" maxlength="180" placeholder="Metro Haul crew loading wrapped furniture"></div>
+          <div class="admin-field gallery-admin-checks"><label><input id="galleryPublished" type="checkbox" checked> Publish immediately</label><label><input id="galleryFeatured" type="checkbox"> Feature first</label></div>
+          <div class="admin-form-actions full"><button id="galleryUploadButton" class="admin-primary-button" type="submit">Upload Photos</button></div>
+        </form>
+        <div id="galleryAdminMessage" class="admin-settings-message" role="status" aria-live="polite" hidden></div>
+      </section>
+      <section class="admin-panel">
+        <div class="admin-panel-header"><div><h2>Gallery photos</h2><p>Publish, feature, reorder, edit or remove website photos.</p></div><strong id="galleryAdminCount">0 photos</strong></div>
+        <div id="galleryAdminGrid" class="gallery-admin-grid"><p class="gallery-admin-empty">Loading gallery…</p></div>
+      </section>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/supabase.js"></script><script src="../assets/admin-auth.js"></script><script src="../assets/admin-navigation.js"></script><script src="../assets/admin-defaults.js"></script><script src="../assets/admin-gallery.js"></script>
+</body>
+</html>

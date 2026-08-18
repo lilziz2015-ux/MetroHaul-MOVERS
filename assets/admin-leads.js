@@ -303,6 +303,101 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
 
+  async function loadLeadPhotos(leadId) {
+    const section =
+      document.getElementById("adminLeadPhotos");
+
+    const grid =
+      document.getElementById("adminLeadPhotoGrid");
+
+    if (!section || !grid || !leadId) {
+      return;
+    }
+
+    const { data: files, error } =
+      await db
+        .from("customer_files")
+        .select(`
+          id,
+          storage_bucket,
+          storage_path,
+          file_name,
+          mime_type,
+          file_size,
+          created_at
+        `)
+        .eq("lead_id", leadId)
+        .eq("category", "quote_photo")
+        .order("created_at", { ascending: true });
+
+    if (error) {
+      console.error("Lead photo load error:", error);
+      grid.innerHTML = '<p class="admin-lead-photo-empty">Photos could not be loaded.</p>';
+      section.hidden = false;
+      return;
+    }
+
+    if (!files?.length) {
+      section.hidden = true;
+      return;
+    }
+
+    const bucketGroups = new Map();
+
+    files.forEach(file => {
+      const bucket = file.storage_bucket || "quote-photos";
+      if (!bucketGroups.has(bucket)) bucketGroups.set(bucket, []);
+      bucketGroups.get(bucket).push(file);
+    });
+
+    const signedFiles = [];
+
+    for (const [bucket, bucketFiles] of bucketGroups) {
+      const { data: signed, error: signedError } =
+        await db.storage
+          .from(bucket)
+          .createSignedUrls(
+            bucketFiles.map(file => file.storage_path),
+            300
+          );
+
+      if (signedError) {
+        console.error("Lead photo URL error:", signedError);
+        continue;
+      }
+
+      bucketFiles.forEach((file, index) => {
+        const signedUrl = signed?.[index]?.signedUrl;
+        if (signedUrl) signedFiles.push({ ...file, signedUrl });
+      });
+    }
+
+    if (!signedFiles.length) {
+      grid.innerHTML = '<p class="admin-lead-photo-empty">Photos could not be opened.</p>';
+      section.hidden = false;
+      return;
+    }
+
+    grid.innerHTML = signedFiles.map((file, index) => `
+      <a
+        class="admin-lead-photo"
+        href="${escapeHTML(file.signedUrl)}"
+        target="_blank"
+        rel="noopener"
+      >
+        <img
+          src="${escapeHTML(file.signedUrl)}"
+          alt="Customer quote photo ${index + 1}: ${escapeHTML(file.file_name)}"
+          loading="lazy"
+        >
+        <span>${escapeHTML(file.file_name)}</span>
+      </a>
+    `).join("");
+
+    section.hidden = false;
+  }
+
+
   function findCustomerByLeadId(
     leadId
   ) {
@@ -1096,6 +1191,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
 
 
+        <section
+          id="adminLeadPhotos"
+          class="admin-lead-photos"
+          hidden
+        >
+          <div class="admin-lead-photo-heading">
+            <div>
+              <span>QUOTE PHOTOS</span>
+              <h3>Items and access</h3>
+            </div>
+            <small>Private links expire after 5 minutes</small>
+          </div>
+          <div id="adminLeadPhotoGrid" class="admin-lead-photo-grid">
+            <p class="admin-lead-photo-empty">Loading photos…</p>
+          </div>
+        </section>
+
+
         <div
           class="
             admin-form-actions
@@ -1158,6 +1271,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     updateLeadActionButtons();
+
+    loadLeadPhotos(lead.id).catch(error => {
+      console.error("Lead photo rendering error:", error);
+    });
 
 
     if (viewLeadModal) {
