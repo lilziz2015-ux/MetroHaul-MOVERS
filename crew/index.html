@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#080808">
+  <title>My Jobs | Metro Haul Crew</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/crew.css">
+</head>
+<body class="crew-body">
+  <header class="crew-header">
+    <a href="index.html" class="crew-logo" aria-label="Crew dashboard">
+      <img src="../assets/metro-haul-logo.png" alt="Metro Haul Moving & Junk Removal">
+    </a>
+    <div class="crew-header-actions">
+      <span id="crewMemberName">Crew Member</span>
+      <button id="crewLogoutButton" class="crew-secondary-button" type="button">Log Out</button>
+    </div>
+  </header>
+  <main class="crew-main">
+    <section class="crew-hero">
+      <div>
+        <div class="crew-eyebrow">MY SCHEDULE</div>
+        <h1>Assigned jobs</h1>
+        <p>Review job details and keep your shift time accurate.</p>
+      </div>
+      <button id="crewRefreshButton" class="crew-secondary-button" type="button">Refresh</button>
+    </section>
+    <p id="crewPortalMessage" class="crew-message" role="status" hidden></p>
+    <section class="crew-stats" aria-label="Assignment summary">
+      <article><span>Upcoming</span><strong id="crewUpcomingCount">0</strong></article>
+      <article><span>In Progress</span><strong id="crewActiveCount">0</strong></article>
+      <article><span>Completed</span><strong id="crewCompletedCount">0</strong></article>
+    </section>
+    <section>
+      <div class="crew-section-heading">
+        <h2>Your assignments</h2>
+        <select id="crewAssignmentFilter" aria-label="Filter assignments">
+          <option value="current">Current & upcoming</option>
+          <option value="all">All assignments</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+      <div id="crewAssignments" class="crew-assignment-list">
+        <div class="crew-empty">Loading assignments…</div>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/crew-portal.js"></script>
+</body>
+</html>

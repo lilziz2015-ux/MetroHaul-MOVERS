@@ -251,6 +251,147 @@
 }
 
 
+/* ---------- Shared admin shell ---------- */
+
+/* The protected pages still use these legacy shell class names. */
+
+.admin-layout {
+  display: block;
+  min-height: 100vh;
+}
+
+.admin-main {
+  min-height: 100vh;
+  margin-left: 275px;
+}
+
+.admin-logo {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 20px 22px;
+}
+
+.admin-logo img {
+  display: block;
+  width: 185px;
+  max-width: 100%;
+  height: auto;
+}
+
+.admin-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px 18px;
+}
+
+.admin-menu a {
+  min-height: 47px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 11px;
+  color: #999;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: color .2s ease, background .2s ease;
+}
+
+.admin-menu a:hover,
+.admin-menu a:focus-visible {
+  color: #fff;
+  background: #151515;
+  outline: none;
+}
+
+.admin-menu a.active {
+  color: #ff4d47;
+  background: rgba(255, 27, 27, .12);
+}
+
+.admin-sidebar-bottom {
+  display: grid;
+  gap: 12px;
+  margin: auto 18px 20px;
+  padding-top: 20px;
+  border-top: 1px solid #222;
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.admin-sidebar-bottom .admin-secondary-button {
+  width: 100%;
+}
+
+.admin-menu-toggle,
+.admin-menu-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+
+.admin-menu-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 850;
+}
+
+.admin-menu-toggle-lines,
+.admin-menu-toggle-lines::before,
+.admin-menu-toggle-lines::after {
+  width: 20px;
+  height: 2px;
+  display: block;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.admin-menu-toggle-lines {
+  position: relative;
+}
+
+.admin-menu-toggle-lines::before,
+.admin-menu-toggle-lines::after {
+  position: absolute;
+  left: 0;
+  content: "";
+}
+
+.admin-menu-toggle-lines::before { top: -6px; }
+.admin-menu-toggle-lines::after { top: 6px; }
+
+.admin-menu-close {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.admin-sidebar-overlay[hidden] {
+  display: none;
+}
+
+body.admin-menu-open {
+  overflow: hidden;
+}
+
+
 /* ---------- Top bar ---------- */
 
 .admin-dashboard-topbar {
@@ -1027,6 +1168,20 @@
 
   .admin-sidebar.open {
     transform: translateX(0);
+  }
+
+  .admin-main {
+    margin-left: 0;
+    padding-top: 72px;
+  }
+
+  .admin-logo {
+    padding-right: 70px;
+  }
+
+  .admin-menu-toggle,
+  .admin-menu-close {
+    display: flex;
   }
 
 
@@ -3911,6 +4066,8 @@
   }
 
 }
+
+
 /* =========================================================
    METRO HAUL ADMIN — ESTIMATES
    ========================================================= */
@@ -7510,4 +7667,13 @@ strong {
     min-width: 34px;
   }
 
+}
+
+
+/* Final shared-shell override: page modules must not cover the menu button. */
+@media (max-width: 850px) {
+  .admin-main {
+    margin-left: 0;
+    padding-top: 72px;
+  }
 }
