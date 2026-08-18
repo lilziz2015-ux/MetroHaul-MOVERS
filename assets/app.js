@@ -1,3 +1,5 @@
-const toggle=document.querySelector('.mobile-toggle');const nav=document.querySelector('.navlinks');toggle?.addEventListener('click',()=>nav?.classList.toggle('open'));
-document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>nav?.classList.remove('open')));
+const toggle=document.querySelector('.mobile-toggle');const nav=document.querySelector('.navlinks');
+if(nav&&!nav.querySelector('a[href$="gallery.html"]')){const link=document.createElement('a');const nested=window.location.pathname.includes('/services/')||window.location.pathname.includes('/locations/');link.href=nested?'../gallery.html':'gallery.html';link.textContent='Gallery';const quote=Array.from(nav.querySelectorAll('a')).find(a=>a.textContent.trim()==='Free Quote');nav.insertBefore(link,quote||null);}
+toggle?.setAttribute('aria-label','Open navigation menu');toggle?.setAttribute('aria-expanded','false');toggle?.addEventListener('click',()=>{const open=nav?.classList.toggle('open')||false;toggle.setAttribute('aria-expanded',String(open));});
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>{nav?.classList.remove('open');toggle?.setAttribute('aria-expanded','false');}));
 const year=document.querySelector('[data-year]');if(year)year.textContent=new Date().getFullYear();
