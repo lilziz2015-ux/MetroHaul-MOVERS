@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#080808">
+  <title>Crew Login | Metro Haul</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/crew.css">
+</head>
+<body class="crew-body crew-login-body">
+  <main class="crew-login-shell">
+    <section class="crew-login-card" aria-labelledby="crewLoginTitle">
+      <a href="../index.html" class="crew-logo" aria-label="Metro Haul home">
+        <img src="../assets/metro-haul-logo.png" alt="Metro Haul Moving & Junk Removal">
+      </a>
+      <div class="crew-eyebrow">CREW PORTAL</div>
+      <h1 id="crewLoginTitle">Welcome back.</h1>
+      <p>Sign in to view your assignments and manage your shift.</p>
+      <form id="crewLoginForm">
+        <label for="crewEmail">Email</label>
+        <input id="crewEmail" name="email" type="email" autocomplete="username" required>
+        <label for="crewPassword">Password</label>
+        <input id="crewPassword" name="password" type="password" autocomplete="current-password" required>
+        <p id="crewLoginMessage" class="crew-message" role="alert" hidden></p>
+        <button id="crewLoginButton" class="crew-primary-button" type="submit">Sign In</button>
+      </form>
+      <p class="crew-login-help">Need access? Ask a Metro Haul administrator to connect your login to your crew profile.</p>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/supabase.js"></script>
+  <script src="../assets/crew-login.js"></script>
+</body>
+</html>
