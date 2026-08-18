@@ -27,3 +27,15 @@ Production-ready static starter for Metro Haul Moving & Junk Removal.
 - Add privacy policy, terms, licensing/insurance details as applicable.
 - Connect Search Console and submit sitemap.
 - Add analytics and conversion tracking.
+
+## Quote notification function
+Deploy `supabase/functions/send-lead-notification/index.ts` and configure these
+Supabase Edge Function secrets:
+
+- `RESEND_API_KEY` (required)
+- `OWNER_EMAIL` (defaults to `infometrohaulmovers@gmail.com`)
+- `FROM_EMAIL` (defaults to Resend's testing sender)
+
+Set a `google-analytics-id` meta value such as `G-XXXXXXXXXX` on public pages
+when the Metro Haul Google Analytics property is available. The shared site
+script automatically records successful quote requests as `generate_lead`.

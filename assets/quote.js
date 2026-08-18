@@ -16,6 +16,17 @@
   ]);
 
   let selectedPhotos = [];
+  const formLoadedAt = Date.now();
+
+  const honeypot = document.createElement("input");
+  honeypot.type = "text";
+  honeypot.name = "company_website";
+  honeypot.tabIndex = -1;
+  honeypot.autocomplete = "off";
+  honeypot.setAttribute("aria-hidden", "true");
+  honeypot.style.position = "absolute";
+  honeypot.style.left = "-10000px";
+  form.append(honeypot);
 
   const formGrid = form.querySelector(".form-grid");
   const formNotice = formGrid?.querySelector(".notice.full");
@@ -333,21 +344,28 @@
         )
       ),
 
-      pickup_elevator: toBoolean(
-        getFormValue(
-          formData,
-          "pickup_elevator",
-          "pickupElevator"
-        )
-      ),
+      pickup_elevator:
+        cleanText(getFormValue(formData, "pickup_stairs", "pickupStairs"))
+          ?.toLowerCase() === "elevator" ||
+        toBoolean(
+          getFormValue(
+            formData,
+            "pickup_elevator",
+            "pickupElevator"
+          )
+        ),
 
-      destination_elevator: toBoolean(
-        getFormValue(
-          formData,
-          "destination_elevator",
-          "destinationElevator"
-        )
-      ),
+      destination_elevator:
+        cleanText(
+          getFormValue(formData, "destination_stairs", "destinationStairs")
+        )?.toLowerCase() === "elevator" ||
+        toBoolean(
+          getFormValue(
+            formData,
+            "destination_elevator",
+            "destinationElevator"
+          )
+        ),
 
       packing_needed: toBoolean(
         getFormValue(formData, "packing_needed", "packingNeeded")
@@ -366,10 +384,41 @@
         getFormValue(formData, "notes", "inventory_notes")
       ),
 
-      lead_source: "website",
+      preferred_time: cleanText(
+        getFormValue(formData, "preferred_time", "preferredTime")
+      ),
+
+      lead_source: cleanText(
+        getFormValue(formData, "lead_source", "leadSource")
+      ) || "Website",
+
       status: "new",
       assigned_to: null
     };
+  }
+
+  async function sendLeadNotification(config, leadId) {
+    const response = await fetch(
+      `${config.url}/functions/v1/send-lead-notification`,
+      {
+        method: "POST",
+        headers: {
+          apikey: config.publishableKey,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ lead_id: leadId })
+      }
+    );
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || result.owner_email_sent !== true) {
+      throw new Error(
+        result.error ||
+        result.owner_email_error ||
+        "The quote notification email was not sent."
+      );
+    }
   }
 
   async function uploadQuotePhotos(config, leadId) {
@@ -455,6 +504,22 @@
     }
 
     try {
+      if (honeypot.value) {
+        throw new Error("Your request could not be submitted.");
+      }
+
+      if (Date.now() - formLoadedAt < 2500) {
+        throw new Error("Please review your quote details before submitting.");
+      }
+
+      const lastSubmission = Number(
+        window.localStorage.getItem("metro-haul-last-quote-submission") || 0
+      );
+
+      if (Date.now() - lastSubmission < 60000) {
+        throw new Error("Please wait a minute before submitting another request.");
+      }
+
       const config = window.METRO_HAUL_SUPABASE || {};
 
       if (!config.url || !config.publishableKey) {
@@ -496,6 +561,26 @@
           );
         }
       }
+
+      try {
+        await sendLeadNotification(config, leadId);
+      } catch (notificationError) {
+        console.error(
+          "Quote saved, but the owner notification failed:",
+          notificationError
+        );
+      }
+
+      window.localStorage.setItem(
+        "metro-haul-last-quote-submission",
+        String(Date.now())
+      );
+
+      window.dispatchEvent(
+        new CustomEvent("metrohaul:quote-submitted", {
+          detail: { leadId, serviceType: lead.service_type }
+        })
+      );
 
       form.reset();
       selectedPhotos = [];

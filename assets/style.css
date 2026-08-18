@@ -954,6 +954,18 @@ img {
   background: #040404;
 }
 
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.footer-legal a {
+  color: #c9c9c9;
+  font-size: .9rem;
+}
+
 .footer-grid {
   display: grid;
   grid-template-columns: 1.45fr 1fr 1fr 1fr;

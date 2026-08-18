@@ -1,5 +1,20 @@
 -- Optional customer photos for more accurate moving quotes.
 
+alter table public.customer_files
+  drop constraint if exists customer_files_category_check;
+
+alter table public.customer_files
+  add constraint customer_files_category_check
+  check (category = any (array[
+    'inventory_photo'::text,
+    'damage_photo'::text,
+    'document'::text,
+    'signed_agreement'::text,
+    'receipt'::text,
+    'quote_photo'::text,
+    'other'::text
+  ]));
+
 insert into storage.buckets (
   id,
   name,
